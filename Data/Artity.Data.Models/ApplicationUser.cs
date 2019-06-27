@@ -5,7 +5,7 @@ namespace Artity.Data.Models
     using System.Collections.Generic;
 
     using Artity.Data.Common.Models;
-
+    using Artity.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
@@ -33,5 +33,8 @@ namespace Artity.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+
+
     }
 }

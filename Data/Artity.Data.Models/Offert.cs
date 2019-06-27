@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Artity.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,10 @@ namespace Artity.Data.Models
 {
     public class Offert
     {
+        public Offert()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
         public string Id { get; set; }
 
         public decimal Price { get; set; }
@@ -16,7 +21,7 @@ namespace Artity.Data.Models
 
         public string Message { get; set; }
 
-        public OfertType Type { get; set; }
+        public OrderType Type { get; set; }
 
     }
 }

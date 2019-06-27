@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Artity.Data.Models.Enums
 {
-    class UserType
+    public enum UserType
     {
+        Artist=1,
+        User =2
     }
 }

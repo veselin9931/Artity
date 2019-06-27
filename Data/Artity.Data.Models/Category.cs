@@ -9,6 +9,7 @@ namespace Artity.Data.Models
         public Category()
         {
             this.Artists = new List<Artist>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public string Id { get; set; }

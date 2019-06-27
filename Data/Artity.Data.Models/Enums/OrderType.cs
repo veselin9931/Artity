@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Artity.Data.Models.Enums
 {
-    class OrderType
+    public enum OrderType
     {
+        Price=1, Contract=2, Charity=3, PerHour=4
     }
 }
