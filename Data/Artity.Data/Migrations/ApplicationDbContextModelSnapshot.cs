@@ -60,6 +60,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("ArtistId");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -92,6 +94,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("PofilePictureId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -99,7 +103,11 @@ namespace Artity.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<int>("UserType");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
 
                     b.HasIndex("IsDeleted");
 
@@ -111,7 +119,163 @@ namespace Artity.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("PofilePictureId");
+
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Artist", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AboutMe");
+
+                    b.Property<string>("CategoryId");
+
+                    b.Property<string>("Nikname");
+
+                    b.Property<string>("ProfilePictureId");
+
+                    b.Property<string>("WorkNumber");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProfilePictureId");
+
+                    b.ToTable("Artists");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Category", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoryType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PictureId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PictureId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Offert", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ArtistId");
+
+                    b.Property<string>("Features");
+
+                    b.Property<string>("Message");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("Type");
+
+                    b.Property<DateTime>("Еngagement");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("Offerts");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ArtistId");
+
+                    b.Property<DateTime>("IssuedOn");
+
+                    b.Property<string>("Message");
+
+                    b.Property<int>("Type");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Performence", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ArtistId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<double>("Rating");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("Performences");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Picture", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UploadDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Rating", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ArtistId");
+
+                    b.Property<string>("PerformenceId");
+
+                    b.Property<int>("RatingValue");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("PerformenceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Setting", b =>
@@ -137,6 +301,24 @@ namespace Artity.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Song", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UploadDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Songs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -223,6 +405,75 @@ namespace Artity.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId");
+
+                    b.HasOne("Artity.Data.Models.Picture", "PofilePicture")
+                        .WithMany()
+                        .HasForeignKey("PofilePictureId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Artist", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Category", "Category")
+                        .WithMany("Artists")
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("Artity.Data.Models.Picture", "ProfilePicture")
+                        .WithMany()
+                        .HasForeignKey("ProfilePictureId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Category", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Offert", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist")
+                        .WithMany("Offerts")
+                        .HasForeignKey("ArtistId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Order", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId");
+
+                    b.HasOne("Artity.Data.Models.ApplicationUser", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Performence", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist")
+                        .WithMany("Performences")
+                        .HasForeignKey("ArtistId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Rating", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ArtistId");
+
+                    b.HasOne("Artity.Data.Models.Performence")
+                        .WithMany("Ratings")
+                        .HasForeignKey("PerformenceId");
+
+                    b.HasOne("Artity.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

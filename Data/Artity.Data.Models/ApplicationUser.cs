@@ -16,6 +16,7 @@ namespace Artity.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Orders = new List<Order>();
         }
 
         // Audit info
@@ -34,7 +35,20 @@ namespace Artity.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
+        public string PhoneNumber { get; set; }
 
+
+        public UserType UserType { get; set; }
+
+        public string ArtistId { get; set; }
+
+        public Artist Artist { get; set; }
+
+        public string PofilePictureId { get; set; }
+
+        public Picture PofilePicture { get; set; }
+
+        public IList<Order> Orders { get; set; }
 
     }
 }

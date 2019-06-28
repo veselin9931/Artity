@@ -19,5 +19,9 @@ namespace Artity.Data.Models
         public string Link { get; set; }
 
         public DateTime UploadDate { get; set; }
+
+        public string ArtistId { get; set; }
+
+        public Artist Artist { get; set; }
     }
 }

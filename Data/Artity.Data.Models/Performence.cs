@@ -22,5 +22,9 @@ namespace Artity.Data.Models
         public double Rating { get; set; }
 
         public IList<Rating> Ratings { get; set; }
+
+        public string ArtistId { get; set; }
+
+        public Artist Artist { get; set; }
     }
 }

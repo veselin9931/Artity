@@ -19,19 +19,40 @@
                 nameof(SetIsDeletedQueryFilter),
                 BindingFlags.NonPublic | BindingFlags.Static);
 
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-           
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
+
             base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Artist> Artists { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Offert> Offerts { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Performence> Performences { get; set; }
+
+        public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Song> Songs { get; set; }
+
+        public DbSet<ApplicationUser> Users { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -54,6 +75,33 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            builder.Entity<Artist>()
+                .HasMany(p => p.Performences)
+                .WithOne(a=>a.Artist);
+
+            builder.Entity<Artist>()
+                .HasMany(p => p.Offerts)
+                .WithOne(p=>p.Artist);
+
+
+            builder.Entity<Rating>()
+              .HasOne(a => a.Artist)
+              .WithMany(b => b.Ratings);
+
+            builder.Entity<Rating>()
+              .HasOne(a => a.User);
+             
+
+
+
+
+            builder.Entity<ApplicationUser>()
+            .Property(p => p.UserType).IsRequired();
+
+            builder.Entity<ApplicationUser>()
+           .HasMany(a => a.Orders)
+           .WithOne(t => t.User);
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 
@@ -79,6 +127,8 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+
         }
 
         private static void ConfigureUserIdentityRelations(ModelBuilder builder)

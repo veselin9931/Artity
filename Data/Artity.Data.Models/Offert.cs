@@ -23,5 +23,9 @@ namespace Artity.Data.Models
 
         public OrderType Type { get; set; }
 
+        public string ArtistId { get; set; }
+
+        public Artist Artist { get; set; }
+
     }
 }
