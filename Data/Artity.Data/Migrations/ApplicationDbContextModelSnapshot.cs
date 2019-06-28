@@ -308,6 +308,8 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ArtistId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Link");
@@ -317,6 +319,8 @@ namespace Artity.Data.Migrations
                     b.Property<DateTime>("UploadDate");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Songs");
                 });
@@ -438,7 +442,7 @@ namespace Artity.Data.Migrations
 
             modelBuilder.Entity("Artity.Data.Models.Offert", b =>
                 {
-                    b.HasOne("Artity.Data.Models.Artist")
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany("Offerts")
                         .HasForeignKey("ArtistId");
                 });
@@ -456,7 +460,7 @@ namespace Artity.Data.Migrations
 
             modelBuilder.Entity("Artity.Data.Models.Performence", b =>
                 {
-                    b.HasOne("Artity.Data.Models.Artist")
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany("Performences")
                         .HasForeignKey("ArtistId");
                 });
@@ -474,6 +478,13 @@ namespace Artity.Data.Migrations
                     b.HasOne("Artity.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Song", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
