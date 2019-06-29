@@ -1,11 +1,12 @@
 ﻿namespace Artity.Web.Areas.Identity.Pages.Account
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
     using Artity.Data.Models;
-
+    using Artity.Data.Models.Enums;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -50,7 +51,14 @@
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Username, Email = this.Input.Email };
+                var user = new ApplicationUser { UserName = this.Input.Username,
+                    Email = this.Input.Email,
+                    PhoneNumber = this.Input.PhoneNumber,
+                    UserType = Enum.Parse<UserType>(this.Input.AccountType)};
+
+
+               
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
@@ -69,6 +77,11 @@
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await this.signInManager.SignInAsync(user, isPersistent: false);
+
+                    if (user.UserType == UserType.Artist)
+                    {
+                        return this.RedirectToPage("./ArtistRegister", user);
+                    }
                     return this.LocalRedirect(returnUrl);
                 }
 
@@ -101,6 +114,7 @@
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -111,6 +125,23 @@
             [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]           
             [Display(Name = "City")]
             public string City { get; set; }
+
+
+            [Required]
+            [Display(Name = "Account Type")]
+            public string AccountType { get; set; }
+
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            [RegularExpression(@"08[789]\d{7}", ErrorMessage = "Incorrect phone number.")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            public bool License { get; set; }
+
+            [Required]
+            public bool License2 { get; set; }
 
         }
     }
