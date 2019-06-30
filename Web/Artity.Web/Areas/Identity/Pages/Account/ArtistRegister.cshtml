@@ -1,0 +1,70 @@
+﻿@page
+@model Artity.Web.Areas.Identity.Pages.Account.ArtistRegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="mx-auto pb-2 text-center">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="col-md-12 col-lg-6 mx-lg-auto">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h4 class="text-center  ">create a new artist</h4>
+        <hr />
+        <div asp-validation-summary="All" class="rotext-danger text-danger"></div>
+        <div class="form-row">
+            <div class="form-group col-md-7">
+                <label asp-for="Input.Nikname"></label>
+                <input asp-for="Input.Nikname" class="form-control" />
+                <span asp-validation-for="Input.Nikname" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-5">
+                <label asp-for="Input.Category">Category type</label>
+                <select asp-for="Input.Category" class="form-control">
+                    <option selected disabled>Choose...</option>
+                    @foreach (var item in Model.Categories.Categories)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.Category" class="text-danger"></span>
+
+            </div>
+        </div>
+
+
+        <div class="form-row">
+
+
+            <div class="form-group col-md-12">
+                <label asp-for="Input.WorkNumber">Work number</label>
+                <input asp-for="Input.WorkNumber" type="tel" class="form-control" id="PhoneNumber">
+                <span asp-validation-for="Input.WorkNumber" class="text-danger"></span>
+            </div>
+
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label asp-for="Input.AboutMe">About me</label>
+                <textarea asp-for="Input.AboutMe" type="text" class="form-control" id="AboutMe">Write short description about us...</textarea>
+                <span asp-validation-for="Input.AboutMe" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="custom-file col-md-9 form-group">
+
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <div class="form-group col-md-2 "> 
+            <button type="submit" class="btn btn-primary ">Done</button>
+            </div>
+            
+        </div>
+            
+
+    </form>
+
+</div>

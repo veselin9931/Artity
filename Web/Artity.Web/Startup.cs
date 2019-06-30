@@ -8,6 +8,7 @@
     using Artity.Data.Models;
     using Artity.Data.Repositories;
     using Artity.Data.Seeding;
+    using Artity.Services;
     using Artity.Services.Data;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
@@ -99,6 +100,8 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

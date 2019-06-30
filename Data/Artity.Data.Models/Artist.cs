@@ -29,6 +29,8 @@ namespace Artity.Data.Models
 
         public Category Category { get; set; }
 
+    
+
         public string ProfilePictureId { get; set; }
 
         public Picture ProfilePicture { get; set; }
