@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Artity.Data.Models
@@ -21,6 +22,7 @@ namespace Artity.Data.Models
         public Artist Artist { get; set; }
 
         //TODO Range Attribute 0-5
+        [Range(1,5)]
         public int RatingValue { get; set; }
 
     }

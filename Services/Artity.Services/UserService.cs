@@ -30,7 +30,7 @@ namespace Artity.Services
         {
 
 
-          return   context.Users.FirstOrDefault(a=> a.Email == name);
+            return context.Users.FirstOrDefault(a => a.UserName.ToLower() == name.ToLower());
 
         }
     }

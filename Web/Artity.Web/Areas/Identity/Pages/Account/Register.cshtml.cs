@@ -80,7 +80,7 @@
 
                     if (user.UserType == UserType.Artist)
                     {
-                        return this.RedirectToPage("~/ArtistRegister");
+                        return this.RedirectToPage("./ArtistRegister");
                     }
 
                     return this.LocalRedirect(returnUrl);
