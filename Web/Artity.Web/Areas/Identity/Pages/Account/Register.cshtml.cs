@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using Artity.Common;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
     using Microsoft.AspNetCore.Authorization;
@@ -23,17 +23,21 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IdentityRole roles;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender
+           
+            )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+           
         }
 
         [BindProperty]
@@ -80,10 +84,18 @@
 
                     if (user.UserType == UserType.Artist)
                     {
+                        await this.userManager.AddToRoleAsync(user,GlobalConstants.ArtistRoleName);
                         return this.RedirectToPage("./ArtistRegister");
                     }
+                    else
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                        return this.LocalRedirect(returnUrl);
+                    }
 
-                    return this.LocalRedirect(returnUrl);
+                   
+
+                   
                 }
 
                 foreach (var error in result.Errors)
@@ -95,6 +107,8 @@
             // If we got this far, something failed, redisplay form
             return this.Page();
         }
+
+
 
         public class InputModel
         {
