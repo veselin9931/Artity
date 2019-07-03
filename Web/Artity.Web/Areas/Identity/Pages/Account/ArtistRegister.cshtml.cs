@@ -30,20 +30,27 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-  
-        
 
-        public void OnGet(string returnUrl = null)
+
+
+        public async Task<IActionResult> OnGet(string returnUrl = null)
         {
-            this.ReturnUrl = returnUrl;
+            if (this.User.IsInRole("Artist"))
+            {
+                returnUrl = "/";
+                return this.LocalRedirect(returnUrl);
+            }
+         
+           //TODO: Refactor Category new 
+            this.Categories = new Category(this.categoryService);
 
-            this.Categories = new Category(categoryService); 
-
-
-         }
+            return this.Page();
+        }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
+           
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {

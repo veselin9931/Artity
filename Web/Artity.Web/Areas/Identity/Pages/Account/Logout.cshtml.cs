@@ -24,8 +24,9 @@
             this.logger = logger;
         }
 
-        public void OnGet()
+        public async Task<IActionResult>  OnGet()
         {
+            return this.LocalRedirect("/");
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
@@ -38,7 +39,7 @@
             }
             else
             {
-                return this.Page();
+                return this.LocalRedirect("/");
             }
         }
     }

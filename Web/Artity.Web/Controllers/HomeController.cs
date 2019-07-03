@@ -9,7 +9,7 @@
             return this.View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contacts()
         {
             return this.View();
         }
