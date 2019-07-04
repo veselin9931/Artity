@@ -7,52 +7,113 @@
 
 @if (this.SignInManager.IsSignedIn(this.User))
 {
-    <ul class="navbar-nav pl-1" >
-        <li class="nav-item  mx-0 mx-lg-1">
 
-            <div class="col-xs-3 col-sm-1 avata">
-                <img src="~/img/portfolio/cake.png" alt="Profile Picture" class=" rounded-circle img-rounded"
-                     style="max-height: 50px; max-width: 50px;">
-                <span class="text-info">
-                    <strong>
-                        @this.User.Identity.Name.ToString()
-                    </strong>
-                    </span>
-            </div>
+    @if (this.User.IsInRole(GlobalConstants.ArtistRoleName))
+    {
+        <ul class="navbar-nav">
 
-        </li>
-    </ul>
+            <li class="nav-item dropdown mr-3">
+
+                <button class="btn btn-info dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Performences
+                </button>
 
 
-    <ul class="navbar-nav">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Create new</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">All</a>
+                    <a class="dropdown-item" asp-action="">Reservations</a>
+           
 
-        <li class="nav-item dropdown">
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-3">
+            <li class="nav-item dropdown">
 
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Profile
-            </button>
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Offerts
+                </button>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Personal data</a>
 
-                <a class="dropdown-item" asp-action="">Reservations</a>
-                <form asp-area="Identity" method="post" asp-page="/Account/Logout">
-                    <button class="dropdown-item" type="submit" typeof=" ">Logout</button>
-                </form>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Create new</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">All</a>
 
-            </div>
-        </li>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ">
 
-    </ul>
+            <li class="nav-item dropdown">
+
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </button>
+
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Personal data</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Artist data</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Portfolio</a>
+                    <a class="dropdown-item" asp-action="">Reservations</a>
+                    <form asp-area="Identity" method="post" asp-page="/Account/Logout">
+                        <button class="dropdown-item" type="submit" typeof=" ">Logout</button>
+                    </form>
+
+                </div>
+            </li>
+        </ul>
+
+
+    }
+    else
+    {
+        <ul class="navbar-nav">
+
+            <li class="nav-item dropdown">
+
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </button>
+
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Personal data</a>
+
+                    <a class="dropdown-item" asp-action="">Reservations</a>
+                    <form asp-area="Identity" method="post" asp-page="/Account/Logout">
+                        <button class="dropdown-item" type="submit" typeof=" ">Logout</button>
+                    </form>
+
+                </div>
+            </li>
+        </ul>
+    }
+
+
+
+
+    <div class="  mx-lg-2 mt-2 col-xs-1 col-sm-1 avata ">
+        <img  src="~/img/portfolio/profile.jpg" alt="Profile Picture" class=" rounded-circle img-rounded ml-2"
+             style="max-height: 40px; max-width: 40px;">
+        <span class="text-warning ">
+            <strong>
+                @this.User.Identity.Name.ToString()
+            </strong>
+        </span>
+    </div>
+
 }
 else
 {
-<ul class="navbar-nav">
-    <li class="nav-item mx-0 mx-lg-1">
-        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item mx-0 mx-lg-1">
-        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-</ul>
+    <ul class="navbar-nav">
+        <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    </ul>
 }
+

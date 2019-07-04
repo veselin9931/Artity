@@ -10400,6 +10400,10 @@ a.text-success:hover, a.text-success:focus {
   color: #17a2b8 !important;
 }
 
+.text-profile {
+  right: 15px;
+}
+
 a.text-info:hover, a.text-info:focus {
   color: #0f6674 !important;
 }
