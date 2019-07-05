@@ -7,6 +7,7 @@
     using Artity.Common;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
+    using Artity.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,13 +24,15 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IUserService userService;
         private readonly IdentityRole roles;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            IUserService userService
            
             )
         {
@@ -37,7 +40,7 @@
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
-           
+            this.userService = userService;
         }
 
         [BindProperty]
@@ -45,9 +48,16 @@
 
         public string ReturnUrl { get; set; }
 
-        public void OnGet(string returnUrl = null)
+        public async Task<IActionResult> OnGet(string returnUrl = null)
         {
+
+            if (this.User.Identity.IsAuthenticated)
+            {
+              return  this.Redirect(GlobalConstants.HomeUrl);
+            }
+        
             this.ReturnUrl = returnUrl;
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -59,9 +69,8 @@
                     Email = this.Input.Email,
                     PhoneNumber = this.Input.PhoneNumber,
                     UserType = Enum.Parse<UserType>(this.Input.AccountType)};
+                 
 
-
-               
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
@@ -81,6 +90,7 @@
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await this.signInManager.SignInAsync(user, isPersistent: false);
+                   
 
                     if (user.UserType == UserType.Artist)
                     {
@@ -90,6 +100,7 @@
                     else
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                        await this.userService.SetFirstLogin(user);
                         return this.LocalRedirect(returnUrl);
                     }
 

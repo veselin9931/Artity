@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Artity.Common;
     using Artity.Data.Models;
 
     using Microsoft.AspNetCore.Authentication;
@@ -38,21 +38,30 @@
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
-            if (!string.IsNullOrEmpty(this.ErrorMessage))
+            if (this.User.Identity.IsAuthenticated)
             {
-                this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
+              return  Redirect(GlobalConstants.HomeUrl);
             }
+           
+                if (!string.IsNullOrEmpty(this.ErrorMessage))
+                {
+                    this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
+                }
 
-            returnUrl = returnUrl ?? this.Url.Content("~/");
+                returnUrl = returnUrl ?? this.Url.Content("~/");
 
-            // Clear the existing external cookie to ensure a clean login process
-            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+                // Clear the existing external cookie to ensure a clean login process
+                await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            this.ReturnUrl = returnUrl;
+                this.ReturnUrl = returnUrl;
+                return this.Page();
+    
+
+            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

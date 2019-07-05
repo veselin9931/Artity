@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Artity.Data;
 using Artity.Data.Models;
 
@@ -31,6 +32,14 @@ namespace Artity.Services
 
 
             return context.Users.FirstOrDefault(a => a.UserName.ToLower() == name.ToLower());
+
+        }
+
+        public async Task SetFirstLogin(ApplicationUser user)
+        {
+            var dbuser = await this.context.Users.FindAsync(user.Id); 
+           user.FirstLogin = true;
+            await this.context.SaveChangesAsync();
 
         }
     }

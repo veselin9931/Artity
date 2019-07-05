@@ -50,5 +50,7 @@ namespace Artity.Data.Models
 
         public IList<Order> Orders { get; set; }
 
+        public bool FirstLogin { get; set; } = false;
+
     }
 }

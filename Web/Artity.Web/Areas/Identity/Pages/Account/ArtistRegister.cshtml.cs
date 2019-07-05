@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Artity.Common;
 using Artity.Data.Models;
 using Artity.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Artity.Web.Areas.Identity.Pages.Account
 {
+
     public class ArtistRegisterModel : PageModel
     {
         private readonly ICategoryService categoryService;
         private readonly IUserService userService;
+        public UserManager<ApplicationUser> UserManager { get; }
 
-
-        public ArtistRegisterModel(ICategoryService categoryService, IUserService userService)
+        public ArtistRegisterModel(
+            ICategoryService categoryService, 
+            IUserService userService,
+            UserManager<ApplicationUser> userManager
+            )
         {
             this.categoryService = categoryService;
             this.userService = userService;
+            this.UserManager = userManager;
         }
 
         [BindProperty]
@@ -30,23 +39,26 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-
-
-
+        [Authorize]
         public async Task<IActionResult> OnGet(string returnUrl = null)
         {
-            if (this.User.IsInRole("Artist"))
+            var user = await this.UserManager.GetUserAsync(this.User);
+            if (user.UserType.ToString() == GlobalConstants.ArtistRoleName && user.FirstLogin == false)
+            {
+                //TODO: Refactor Category new
+                await this.userService.SetFirstLogin(user);
+                this.Categories = new Category(this.categoryService);                   
+                return this.Page();
+            }
+            else
             {
                 returnUrl = "/";
                 return this.LocalRedirect(returnUrl);
             }
-         
-           //TODO: Refactor Category new 
-            this.Categories = new Category(this.categoryService);
-
-            return this.Page();
+           
         }
 
+        [Authorize]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
