@@ -39,4 +39,8 @@
     <ProjectReference Include="..\Artity.Web.Infrastructure\Artity.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\ProfilePicture\" />
+  </ItemGroup>
 </Project>

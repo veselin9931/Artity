@@ -4,6 +4,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@{
+   
+    
+
+    
+}
+
+
+
+
 
 @if (this.SignInManager.IsSignedIn(this.User))
 {
@@ -23,7 +33,7 @@
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Create new</a>
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">All</a>
                     <a class="dropdown-item" asp-action="">Reservations</a>
-           
+
 
                 </div>
             </li>
@@ -93,9 +103,21 @@
 
 
 
+    if (User.IsInRole(GlobalConstants.ArtistRoleName) || User.IsInRole(GlobalConstants.UserRoleName))
+    {
+
+         string ProfilePictureUrl = " ";
+        string AltText = " ";
+        var user = await this.UserManager.GetUserAsync(this.User);
+        if (user.PofilePicture != null)
+        {
+            ProfilePictureUrl = user.PofilePicture.Link;
+            AltText = user.PofilePicture.Description;
+          
+        }
 
     <div class="  mx-lg-2 mt-2 col-xs-1 col-sm-1 avata ">
-        <img  src="~/img/portfolio/profile.jpg" alt="Profile Picture" class=" rounded-circle img-rounded ml-2"
+        <img src="@ProfilePictureUrl" alt="@AltText" class=" rounded-circle img-rounded ml-2"
              style="max-height: 40px; max-width: 40px;">
         <span class="text-warning ">
             <strong>
@@ -103,7 +125,7 @@
             </strong>
         </span>
     </div>
-
+    }
 }
 else
 {

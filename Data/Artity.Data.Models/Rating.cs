@@ -15,11 +15,11 @@ namespace Artity.Data.Models
 
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public string ArtistId { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
         //TODO Range Attribute 0-5
         [Range(1,5)]

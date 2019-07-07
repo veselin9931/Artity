@@ -19,10 +19,10 @@ namespace Artity.Data.Models
 
         public CategoryType CategoryType { get; set; }
 
-        public Picture Picture { get; set; }
+        public virtual Picture Picture { get; set; }
 
         public string  PictureId { get; set; }
 
-        public IList<Artist> Artists { get; set; }
+        public virtual IList<Artist> Artists { get; set; }
     }
 }

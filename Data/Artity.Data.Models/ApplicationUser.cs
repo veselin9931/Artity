@@ -42,13 +42,13 @@ namespace Artity.Data.Models
 
         public string ArtistId { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
         public string PofilePictureId { get; set; }
 
-        public Picture PofilePicture { get; set; }
+        public  virtual Picture PofilePicture { get; set; }
 
-        public IList<Order> Orders { get; set; }
+        public virtual IList<Order> Orders { get; set; }
 
         public bool FirstLogin { get; set; } = false;
 

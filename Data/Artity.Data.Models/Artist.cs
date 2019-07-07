@@ -27,19 +27,19 @@ namespace Artity.Data.Models
 
         public string CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
     
 
         public string ProfilePictureId { get; set; }
 
-        public Picture ProfilePicture { get; set; }
+        public virtual Picture ProfilePicture { get; set; }
 
-        public IList<Offert> Offerts { get; set; }
+        public virtual IList<Offert> Offerts { get; set; }
 
-        public IList<Rating> Ratings { get; set; }
+        public virtual IList<Rating> Ratings { get; set; }
 
-        public IList<Performence> Performences { get; set; }
+        public virtual IList<Performence> Performences { get; set; }
 
 
     }

@@ -16,10 +16,10 @@ namespace Artity.Data.Models
         public DateTime IssuedOn { get; set; }
 
         public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public string ArtistId { get; set; }
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
         public OrderType Type { get; set; }
 

@@ -21,10 +21,10 @@ namespace Artity.Data.Models
 
         public double Rating { get; set; }
 
-        public IList<Rating> Ratings { get; set; }
+        public virtual IList<Rating> Ratings { get; set; }
 
         public string ArtistId { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
     }
 }

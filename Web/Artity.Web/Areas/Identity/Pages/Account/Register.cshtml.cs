@@ -90,11 +90,11 @@
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await this.signInManager.SignInAsync(user, isPersistent: false);
-                   
+
 
                     if (user.UserType == UserType.Artist)
                     {
-                        await this.userManager.AddToRoleAsync(user,GlobalConstants.ArtistRoleName);
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
                         return this.RedirectToPage("./ArtistRegister");
                     }
                     else
@@ -102,11 +102,7 @@
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
                         await this.userService.SetFirstLogin(user);
                         return this.LocalRedirect(returnUrl);
-                    }
-
-                   
-
-                   
+                    }  
                 }
 
                 foreach (var error in result.Errors)

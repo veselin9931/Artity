@@ -17,6 +17,7 @@
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Internal;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI;
@@ -25,7 +26,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
     public class Startup
     {
@@ -104,6 +107,7 @@
 
             services.AddSingleton(this.configuration);
 
+            
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, ApplicationRoleStore>();
@@ -125,10 +129,15 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
+
+            //Artity system services 
+            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IPicureService, PictureService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -149,6 +158,7 @@
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+               
             }
             else
             {
@@ -167,6 +177,7 @@
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
+            
             seeder.SeedAsync(context, serviceProvider);
 
         }

@@ -8,7 +8,9 @@
 
         public const string ArtistRoleName = "Artist";
 
-        public const string HomeUrl= "/";
-        
+        public const string HomeUrl = "/";
+
+        public const string ProfilePicture = "ProfilePicture";
+
     }
 }

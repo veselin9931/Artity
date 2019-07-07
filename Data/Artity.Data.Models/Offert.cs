@@ -25,7 +25,7 @@ namespace Artity.Data.Models
 
         public string ArtistId { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
     }
 }
