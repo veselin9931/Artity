@@ -7,14 +7,15 @@
     {
         public IActionResult Index()
         {
-            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            if (this.User.IsInRole(GlobalConstants.ArtistRoleName))
             {
-                return this.View("Ärtist");
+                return this.View("Artist");
             }
-            else if(this.User.IsInRole(GlobalConstants.UserRoleName))
+            else if (this.User.IsInRole(GlobalConstants.UserRoleName))
             {
-                return this.Redirect("");
+                return this.Redirect("Artist/All");
             }
+
             return this.View();
         }
 

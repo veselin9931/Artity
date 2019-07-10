@@ -14,8 +14,15 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\Artist.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Views\Home\Artist.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,5 +49,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\ProfilePicture\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\font-awesome\fonts\fontawesome-webfont.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\img\theme\index.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

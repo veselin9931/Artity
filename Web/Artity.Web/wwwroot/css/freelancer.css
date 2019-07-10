@@ -74,6 +74,7 @@ body {
   outline: 0 !important;
 }
 
+
 hr {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -2097,6 +2098,20 @@ select.form-control:focus::-ms-value {
   margin-bottom: 0;
   font-size: inherit;
   line-height: 1.5;
+}
+
+body, html {
+    height: 100%;
+}
+.bg {
+    /* The image used */
+    background-image: url("~/img/theme/photo-1505301533143-c9d575a61f5c.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .col-form-label-lg {
