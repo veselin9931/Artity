@@ -43,7 +43,7 @@ namespace Artity.Services.Data.Tests
         {
            new Category(){ Name = "Test1",
            CategoryType = 0,
-       
+
            },
             new Category(){ Name = "Test2",
            CategoryType = 0,

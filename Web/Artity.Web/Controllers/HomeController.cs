@@ -1,11 +1,20 @@
 ﻿namespace Artity.Web.Controllers
 {
+    using Artity.Common;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
         public IActionResult Index()
         {
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.View("Ärtist");
+            }
+            else if(this.User.IsInRole(GlobalConstants.UserRoleName))
+            {
+                return this.Redirect("");
+            }
             return this.View();
         }
 

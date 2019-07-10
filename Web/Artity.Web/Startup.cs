@@ -59,7 +59,7 @@
                     options.User.RequireUniqueEmail = true;
                     //  asd
                 
-                    options.SignIn.RequireConfirmedEmail = true;
+                
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                     options.Lockout.MaxFailedAccessAttempts = 10;
                     options.Lockout.AllowedForNewUsers = true;

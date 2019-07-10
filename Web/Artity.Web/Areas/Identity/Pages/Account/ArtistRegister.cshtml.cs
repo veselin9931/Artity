@@ -22,6 +22,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         private readonly IHostingEnvironment environment;
         private readonly IFileService fileService;
         private readonly IPicureService picureService;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
         public UserManager<ApplicationUser> UserManager { get; }
 
@@ -31,7 +32,8 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             IHostingEnvironment hostingEnvironment,
             IFileService fileService,
-            IPicureService picureService
+            IPicureService picureService,
+           SignInManager<ApplicationUser> signInManager
             )
         {
             this.categoryService = categoryService;
@@ -40,6 +42,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             this.environment = hostingEnvironment;
             this.fileService = fileService;
             this.picureService = picureService;
+            this.signInManager = signInManager;
         }
 
         [BindProperty]
@@ -64,7 +67,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             else
             {
                 returnUrl = "/";
-                return this.LocalRedirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
            
         }
@@ -105,8 +108,12 @@ namespace Artity.Web.Areas.Identity.Pages.Account
                 var picture = await this.PictureCreate();
 
                 var result = await this.picureService.GenerateProfilePicture(picture, GlobalConstants.ProfilePicture,user.Id.ToString(), user);
-          
-                return this.LocalRedirect(returnUrl);
+
+                await this.signInManager.SignOutAsync();
+
+                await this.signInManager.SignInAsync(user, isPersistent: false);
+
+                return this.Redirect(GlobalConstants.HomeUrl);
 
             }     
                 return this.Forbid();
