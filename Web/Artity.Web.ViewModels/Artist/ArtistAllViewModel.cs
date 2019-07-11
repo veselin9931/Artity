@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Web.ViewModels.Artist
+﻿namespace Artity.Web.ViewModels.Artist
 {
-    class ArtistAllViewModel
-    {
+    using Artity.Data.Models;
+    using Artity.Services.Mapping;
+
+    using AutoMapper;
+
+    public class ArtistAllViewModel : IMapFrom<Artist>
+    { 
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public PictureViewModel Picture { get; set; }
     }
 }

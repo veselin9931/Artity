@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Artity.Services.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Artity.Data.Models
 {
-    public class Artist
-    {
+    public class Artist 
+    { 
 
         public Artist()
         {

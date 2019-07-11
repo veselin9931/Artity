@@ -132,6 +132,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IArtistService, ArtistService>();
 
             //Artity system services 
             services.AddTransient<IFileService, FileService>();

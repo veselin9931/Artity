@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\Artity.Services.Mapping\Artity.Services.Mapping.csproj" />
     <ProjectReference Include="..\Artity.Data.Common\Artity.Data.Common.csproj" />
   </ItemGroup>
   

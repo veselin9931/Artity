@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Artity.Web.Controllers
+﻿namespace Artity.Web.Controllers
 {
+
+    using Artity.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ArtistController : Controller
     {
+        private readonly IArtistService artistService;
+
+        public ArtistController(IArtistService artistService)
+        {
+            this.artistService = artistService;
+        }
+
         public IActionResult All()
         {
-            return View();
+            var artist = this.artistService.GetAllArtists();
+            ;
+            return this.View(artist);
         }
     }
 }
