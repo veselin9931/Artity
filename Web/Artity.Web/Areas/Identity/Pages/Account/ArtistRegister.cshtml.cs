@@ -104,14 +104,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
                 };
 
                 this.userService.AddArtistSettings(user, artist);
-                
-                var picture = await this.PictureCreate();
-
-                var result = await this.picureService.GenerateProfilePicture(picture, GlobalConstants.ProfilePicture,user.Id.ToString(), user);
-
-                await this.signInManager.SignOutAsync();
-
-                await this.signInManager.SignInAsync(user, isPersistent: false);
 
                 return this.Redirect(GlobalConstants.HomeUrl);
 

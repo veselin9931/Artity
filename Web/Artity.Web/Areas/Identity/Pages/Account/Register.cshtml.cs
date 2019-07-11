@@ -25,6 +25,8 @@
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
         private readonly IUserService userService;
+        private readonly IPicureService picureService;
+        private readonly IFileService fileService;
         private readonly IdentityRole roles;
 
         public RegisterModel(
@@ -32,7 +34,9 @@
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUserService userService
+            IUserService userService,
+            IPicureService picureService,
+            IFileService fileService
            
             )
         {
@@ -41,6 +45,8 @@
             this.logger = logger;
             this.emailSender = emailSender;
             this.userService = userService;
+            this.picureService = picureService;
+            this.fileService = fileService;
         }
 
         [BindProperty]
@@ -69,8 +75,8 @@
                     Email = this.Input.Email,
                     PhoneNumber = this.Input.PhoneNumber,
                     UserType = Enum.Parse<UserType>(this.Input.AccountType)};
-                 
 
+                
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
@@ -89,19 +95,36 @@
                         "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+
+
+
                     await this.signInManager.SignInAsync(user, isPersistent: false);
 
 
                     if (user.UserType == UserType.Artist)
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
+
+                        var pictureCreate = await this.PictureCreate();
+
+                        var pictureToDb = await this.picureService.GenerateProfilePicture(pictureCreate, GlobalConstants.ProfilePicture, user.Id.ToString(), user);
+                        await this.signInManager.SignOutAsync();
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.RedirectToPage("./ArtistRegister");
+
                     }
                     else
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
                         await this.userService.SetFirstLogin(user);
+
+                        var pictureCreate = await this.PictureCreate();
+
+                        var pictureToDb = await this.picureService.GenerateProfilePicture(pictureCreate, GlobalConstants.ProfilePicture, user.Id.ToString(), user);
+                        await this.signInManager.SignOutAsync();
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
+
                     }  
                 }
 
@@ -116,6 +139,12 @@
         }
 
 
+        public async Task<string> PictureCreate()
+        {
+
+            return await this.fileService.UploadProfilePicture(this.HttpContext);
+
+        }
 
         public class InputModel
         {

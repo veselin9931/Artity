@@ -53,6 +53,47 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\js\contact_me.js" />
+    <None Include="wwwroot\js\contact_me.min.js" />
+    <None Include="wwwroot\js\freelancer.js" />
+    <None Include="wwwroot\js\freelancer.min.js" />
+    <None Include="wwwroot\js\jqBootstrapValidation.js" />
+    <None Include="wwwroot\js\jqBootstrapValidation.min.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\scss\base\_page.scss" />
+    <None Include="wwwroot\scss\base\_variables.scss" />
+    <None Include="wwwroot\scss\components\_buttons.scss" />
+    <None Include="wwwroot\scss\components\_divider.scss" />
+    <None Include="wwwroot\scss\freelancer.scss" />
+    <None Include="wwwroot\scss\layout\_contact.scss" />
+    <None Include="wwwroot\scss\layout\_footer.scss" />
+    <None Include="wwwroot\scss\layout\_masthead.scss" />
+    <None Include="wwwroot\scss\layout\_navbar.scss" />
+    <None Include="wwwroot\scss\layout\_portfolio.scss" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.compatibility.js" />
+    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.js" />
+    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
   <ItemGroup>
