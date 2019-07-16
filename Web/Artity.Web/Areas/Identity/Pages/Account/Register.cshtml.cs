@@ -37,7 +37,6 @@
             IUserService userService,
             IPicureService picureService,
             IFileService fileService
-           
             )
         {
             this.userManager = userManager;

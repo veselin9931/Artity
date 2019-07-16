@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Artity.Data.Models
+﻿namespace Artity.Data.Models
 {
-    public class Rating
+
+    using System;
+
+    using System.ComponentModel.DataAnnotations;
+
+    using Artity.Data.Common.Models;
+
+    public class Rating : BaseModel<string>, IDeletableEntity
     {
         public Rating()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-        public string Id { get; set; }
 
         public string UserId { get; set; }
 
@@ -21,9 +22,12 @@ namespace Artity.Data.Models
 
         public virtual Artist Artist { get; set; }
 
-        //TODO Range Attribute 0-5
-        [Range(1,5)]
+        [Range(1, 5)]
         public int RatingValue { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
 
     }
 }

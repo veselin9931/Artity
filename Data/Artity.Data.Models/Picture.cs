@@ -2,13 +2,14 @@
 {
     using System;
 
-    public class Picture
+    using Artity.Data.Common.Models;
+
+    public class Picture : BaseModel<string>, IDeletableEntity
     {
         public Picture()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-        public string Id { get; set; }
 
         public string Title { get; set; }
 
@@ -18,6 +19,8 @@
 
         public DateTime UploadDate { get; set; }
 
-       
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

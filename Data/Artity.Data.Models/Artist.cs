@@ -1,21 +1,21 @@
-﻿using Artity.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Artity.Data.Models
+﻿namespace Artity.Data.Models
 {
-    public class Artist 
-    { 
+    using System;
 
+    using System.Collections.Generic;
+
+    using System.Linq;
+
+    using Artity.Data.Common.Models;
+
+    public class Artist : BaseModel<string>, IDeletableEntity
+    {
         public Artist()
         {
             this.Id = Guid.NewGuid().ToString();
             this.Offerts = new List<Offert>();
             this.Ratings = new List<Rating>();
         }
-        public string Id { get; set; }
 
         public string Nikname { get; set; }
 
@@ -23,14 +23,12 @@ namespace Artity.Data.Models
 
         public string AboutMe { get; set; }
 
-        public double Rating => 
-            Ratings.Sum(r => r.RatingValue) / Ratings.Count();
+        public double Rating =>
+            this.Ratings.Sum(r => r.RatingValue) / this.Ratings.Count();
 
         public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
-
-    
 
         public string ProfilePictureId { get; set; }
 
@@ -42,6 +40,8 @@ namespace Artity.Data.Models
 
         public virtual IList<Performence> Performences { get; set; }
 
+        public bool IsDeleted { get; set; }
 
+        public DateTime? DeletedOn { get; set; }
     }
 }

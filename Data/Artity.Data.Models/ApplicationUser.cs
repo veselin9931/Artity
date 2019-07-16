@@ -35,9 +35,6 @@ namespace Artity.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public string PhoneNumber { get; set; }
-
-
         public UserType UserType { get; set; }
 
         public string ArtistId { get; set; }

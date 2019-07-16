@@ -24,14 +24,6 @@
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-
-            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Setting> Settings { get; set; }
@@ -52,8 +44,6 @@
 
         public DbSet<Song> Songs { get; set; }
 
-        public DbSet<ApplicationUser> Users { get; set; }
-
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -73,17 +63,23 @@
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
             builder.Entity<Artist>()
                 .HasMany(p => p.Performences)
-                .WithOne(a=>a.Artist);
+                .WithOne(a => a.Artist);
 
             builder.Entity<Artist>()
                 .HasMany(p => p.Offerts)
-                .WithOne(p=>p.Artist);
-
+                .WithOne(p => p.Artist);
 
             builder.Entity<Rating>()
               .HasOne(a => a.Artist)
@@ -91,10 +87,6 @@
 
             builder.Entity<Rating>()
               .HasOne(a => a.User);
-             
-
-
-
 
             builder.Entity<ApplicationUser>()
             .Property(p => p.UserType).IsRequired();
@@ -127,8 +119,6 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
-
         }
 
         private static void ConfigureUserIdentityRelations(ModelBuilder builder)

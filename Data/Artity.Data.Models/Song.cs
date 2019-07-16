@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Data.Models
+﻿namespace Artity.Data.Models
 {
-    public class Song
+    using System;
+
+    using Artity.Data.Common.Models;
+
+    public class Song : BaseDeletableModel<string>
     {
         public Song()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-        public string Id { get; set; }
 
         public string Title { get; set; }
 
