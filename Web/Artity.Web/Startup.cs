@@ -11,13 +11,13 @@
     using Artity.Data.Seeding;
     using Artity.Services;
     using Artity.Services.Data;
+    using Artity.Services.File;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
     using Artity.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Internal;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI;
@@ -28,12 +28,10 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
-    using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
     public class Startup
     {
         private readonly IConfiguration configuration;
-
 
         public Startup(IConfiguration configuration)
         {
@@ -48,6 +46,15 @@
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
+            Account cloudinaryCredentials = new Account(
+              this.configuration["Cloudinary:CloudName"],
+              this.configuration["Cloudinary:ApiKey"],
+              this.configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
             services
                 .AddIdentity<ApplicationUser, ApplicationRole>(options =>
                 {
@@ -57,14 +64,9 @@
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 6;
                     options.User.RequireUniqueEmail = true;
-                    //  asd
-                
-                
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                     options.Lockout.MaxFailedAccessAttempts = 10;
                     options.Lockout.AllowedForNewUsers = true;
-
-                    // User settings
                     options.User.RequireUniqueEmail = true;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -72,9 +74,6 @@
                 .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
-
-
-      
 
             services
                 .AddMvc()
@@ -102,22 +101,15 @@
                 {
                         // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                         options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
-                    options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
+                        options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                        options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
 
-
-
             services.AddSingleton(this.configuration);
-
-            
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, ApplicationRoleStore>();
             services.AddIdentityCore<ApplicationUser>();
-
-
-
 
             // Data repositories
            
@@ -133,9 +125,9 @@
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
 
             //Artity system services 
-            services.AddTransient<IFileService, FileService>();
             services.AddTransient<IPicureService, PictureService>();
 
         }

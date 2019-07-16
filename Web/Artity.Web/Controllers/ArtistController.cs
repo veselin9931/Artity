@@ -1,7 +1,7 @@
 ﻿namespace Artity.Web.Controllers
 {
+    using Artity.Services.File;
 
-    using Artity.Services;
     using Microsoft.AspNetCore.Mvc;
 
     public class ArtistController : Controller
@@ -15,9 +15,8 @@
 
         public IActionResult All()
         {
-            var artist = this.artistService.GetAllArtists();
-            ;
-            return this.View(artist);
+
+            return this.View();
         }
     }
 }

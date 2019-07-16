@@ -8,6 +8,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Artity.Common;
     using Artity.Data.Models;
     using Artity.Services;
+    using Artity.Services.File;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         private readonly ICategoryService categoryService;
         private readonly IUserService userService;
         private readonly IHostingEnvironment environment;
-        private readonly IFileService fileService;
         private readonly IPicureService picureService;
         private readonly SignInManager<ApplicationUser> signInManager;
 
@@ -31,7 +31,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             IUserService userService,
             UserManager<ApplicationUser> userManager,
             IHostingEnvironment hostingEnvironment,
-            IFileService fileService,
             IPicureService picureService,
            SignInManager<ApplicationUser> signInManager
             )
@@ -40,7 +39,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             this.userService = userService;
             this.UserManager = userManager;
             this.environment = hostingEnvironment;
-            this.fileService = fileService;
             this.picureService = picureService;
             this.signInManager = signInManager;
         }
@@ -71,17 +69,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             }
            
         }
-
-        [Authorize]
-        public async Task<string> PictureCreate()
-        {
-
-           return  await this.fileService.UploadProfilePicture(this.HttpContext);
-           
-        }
-
-
-
         [Authorize]
         public async Task<IActionResult> OnPostRegisterAsync(string returnUrl = null)
         {

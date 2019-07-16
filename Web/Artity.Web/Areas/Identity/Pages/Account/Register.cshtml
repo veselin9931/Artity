@@ -10,7 +10,7 @@
 
 
 <div class="col-md-12 col-lg-6 mx-lg-auto">
-    <form asp-route-returnUrl="@Model.ReturnUrl"  enctype="multipart/form-data"  method="post">
+    <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" method="post">
         <h4 class="text-center  ">create a new account</h4>
         <hr />
         <div asp-validation-summary="All" class="rotext-danger text-danger"></div>
@@ -59,16 +59,18 @@
             </div>
         </div>
 
-        <div class="form-group pt-1 pb-5">
-            <span>Upload your profile picture</span>
-            <div class="col-md-12">
-
-                <label class="custom-file-label pb-2">
-                    <input type="file" name="files" />
-                </label>
-
+        <div class="form-group ">
+            <div class="d-flex ">
+                <label asp-for="Input.ProfilePicture" >Picture</label>
             </div>
+            <input type="file"
+                   class="form-control text-primary text-center"
+                   id="picture"
+                   placeholder="Picture..."
+                   asp-for="Input.ProfilePicture">
+            <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
         </div>
+</div>
         <div class="form-group">
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

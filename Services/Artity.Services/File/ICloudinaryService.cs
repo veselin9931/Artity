@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Services.File
+﻿namespace Artity.Services.File
 {
-    class ICloudinaryService
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+
+    public interface ICloudinaryService
     {
+        Task<string> UploadPictureAsync(IFormFile pictureFile, string fileName);
     }
 }

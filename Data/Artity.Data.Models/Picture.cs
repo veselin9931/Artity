@@ -3,6 +3,8 @@
     using System;
 
     using Artity.Data.Common.Models;
+    using Artity.Services.Mapping;
+
 
     public class Picture : BaseModel<string>, IDeletableEntity
     {

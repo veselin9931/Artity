@@ -2,11 +2,10 @@
 {
     using Artity.Data.Models;
     using Artity.Services.Mapping;
-
-    using AutoMapper;
+    using Artity.Web.ViewModels.Picture;
 
     public class ArtistAllViewModel : IMapFrom<Artist>
-    { 
+    {
         public string Name { get; set; }
 
         public string Description { get; set; }

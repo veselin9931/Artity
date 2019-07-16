@@ -21,6 +21,8 @@
 
         public string WorkNumber { get; set; }
 
+        public string Description { get; set; }
+
         public string AboutMe { get; set; }
 
         public double Rating =>

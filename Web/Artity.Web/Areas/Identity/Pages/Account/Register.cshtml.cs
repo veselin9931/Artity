@@ -8,7 +8,10 @@
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
     using Artity.Services;
+    using Artity.Services.File;
+    using Artity.Web.ViewModels.Picture;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
@@ -26,7 +29,7 @@
         private readonly IEmailSender emailSender;
         private readonly IUserService userService;
         private readonly IPicureService picureService;
-        private readonly IFileService fileService;
+        private readonly ICloudinaryService cloudinaryService;
         private readonly IdentityRole roles;
 
         public RegisterModel(
@@ -36,7 +39,7 @@
             IEmailSender emailSender,
             IUserService userService,
             IPicureService picureService,
-            IFileService fileService
+            ICloudinaryService cloudinaryService
             )
         {
             this.userManager = userManager;
@@ -45,7 +48,7 @@
             this.emailSender = emailSender;
             this.userService = userService;
             this.picureService = picureService;
-            this.fileService = fileService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
@@ -70,12 +73,13 @@
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Username,
+                var user = new ApplicationUser
+                {
+                    UserName = this.Input.Username,
                     Email = this.Input.Email,
                     PhoneNumber = this.Input.PhoneNumber,
-                    UserType = Enum.Parse<UserType>(this.Input.AccountType)};
-
-                
+                    UserType = Enum.Parse<UserType>(this.Input.AccountType),
+                };
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
@@ -94,55 +98,38 @@
                         "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-
-
-
-                    await this.signInManager.SignInAsync(user, isPersistent: false);
-
-
-                    if (user.UserType == UserType.Artist)
-                    {
-                        await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
-
-                        var pictureCreate = await this.PictureCreate();
-
-                        var pictureToDb = await this.picureService.GenerateProfilePicture(pictureCreate, GlobalConstants.ProfilePicture, user.Id.ToString(), user);
-                        await this.signInManager.SignOutAsync();
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.RedirectToPage("./ArtistRegister");
-
-                    }
-                    else
-                    {
-                        await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
-                        await this.userService.SetFirstLogin(user);
-
-                        var pictureCreate = await this.PictureCreate();
-
-                        var pictureToDb = await this.picureService.GenerateProfilePicture(pictureCreate, GlobalConstants.ProfilePicture, user.Id.ToString(), user);
-                        await this.signInManager.SignOutAsync();
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.LocalRedirect(returnUrl);
-
-                    }  
                 }
 
                 foreach (var error in result.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                var pictureName = this.Input.Username + GlobalConstants.ProfilePicture;
+                string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.ProfilePicture, pictureName);
+                var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = user.UserName };
+                var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
+                bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
+
+                if (user.UserType == UserType.Artist)
+                {
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
+                    await this.signInManager.SignInAsync(user, isPersistent: false);
+                    return this.RedirectToPage("./ArtistRegister");
+
+                }
+                else
+                {
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                    await this.userService.SetFirstLogin(user);
+                    await this.signInManager.SignInAsync(user, isPersistent: false);
+                    return this.LocalRedirect(returnUrl);
+
+                }
             }
 
             // If we got this far, something failed, redisplay form
             return this.Page();
-        }
-
-
-        public async Task<string> PictureCreate()
-        {
-
-            return await this.fileService.UploadProfilePicture(this.HttpContext);
-
         }
 
         public class InputModel
@@ -176,6 +163,7 @@
             [Display(Name = "City")]
             public string City { get; set; }
 
+            public IFormFile ProfilePicture { get; set; }
 
             [Required]
             [Display(Name = "Account Type")]
