@@ -4,7 +4,7 @@
 
     using Artity.Services.Mapping;
 
-    public class PictureViewModel : IMapFrom<Picture>, IMapTo<Picture>
+    public class PictureViewModel : IMapFrom<Picture>
     {
         public string Link { get; set; }
     }

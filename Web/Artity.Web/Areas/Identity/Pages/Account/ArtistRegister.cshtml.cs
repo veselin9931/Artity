@@ -11,11 +11,13 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Artity.Services.File;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Net.Http.Headers;
-
+    using Artity.Web.ViewModels.Picture;
+         
     public class ArtistRegisterModel : PageModel
     {
         private readonly ICategoryService categoryService;
@@ -23,6 +25,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         private readonly IHostingEnvironment environment;
         private readonly IPicureService picureService;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ICloudinaryService cloudinaryService;
 
         public UserManager<ApplicationUser> UserManager { get; }
 
@@ -32,7 +35,8 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             IHostingEnvironment hostingEnvironment,
             IPicureService picureService,
-           SignInManager<ApplicationUser> signInManager
+            SignInManager<ApplicationUser> signInManager,
+            ICloudinaryService cloudinaryService
             )
         {
             this.categoryService = categoryService;
@@ -41,6 +45,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             this.environment = hostingEnvironment;
             this.picureService = picureService;
             this.signInManager = signInManager;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
@@ -67,13 +72,11 @@ namespace Artity.Web.Areas.Identity.Pages.Account
                 returnUrl = "/";
                 return this.Redirect(returnUrl);
             }
-           
         }
         [Authorize]
         public async Task<IActionResult> OnPostRegisterAsync(string returnUrl = null)
         {
 
-           
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {
@@ -90,7 +93,14 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
                 };
 
+
                 this.userService.AddArtistSettings(user, artist);
+
+                var pictureName = this.Input.Nikname + GlobalConstants.ProfilePicture;
+                string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.Picture, pictureName);
+                var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = this.Input.AboutMe };
+                var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
+                bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
 
                 return this.Redirect(GlobalConstants.HomeUrl);
 
@@ -108,17 +118,16 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             [Display(Name = "Nikname")]
             public string Nikname { get; set; }
 
-            [Required]         
+            [Required]
             [Display(Name = "Category")]
             public string Category { get; set; }
-
-
 
             [Required]
             [StringLength(200, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 30)]
             [Display(Name = "About Me")]
             public string AboutMe { get; set; }
 
+            public IFormFile Picture { get; set; }
 
             [Required]
             [Display(Name = "WorkNumber")]
@@ -135,7 +144,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
     }
 
-    public class Category 
+    public class Category
     {
         private ICategoryService service;
 

@@ -4,11 +4,29 @@
 
     using System.Collections.Generic;
 
+    using System.Linq;
+
+    using Artity.Data.Common.Repositories;
+
+    using Artity.Data.Models;
+
+    using Artity.Services.Mapping;
+
     public class ArtistService : IArtistService
     {
+        public ArtistService(IRepository<Artist> artistContext)
+        {
+            this.ArtistContext = artistContext;
+        }
+
+        public IRepository<Artist> ArtistContext { get; }
+
         public IEnumerable<TViewModel> GetAllArtists<TViewModel>()
         {
-            throw new NotImplementedException();
+          return this.ArtistContext
+                .All()
+                .OrderBy(a => a.CreatedOn)
+                .To<TViewModel>().ToList();
         }
 
         public IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter)

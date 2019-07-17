@@ -1,8 +1,30 @@
-﻿
-
+﻿@model IEnumerable<Artity.Web.ViewModels.Artist.ArtistAllViewModel>
 @{
     ViewData["Title"] = "All artist";
 }
 
-<h1>Artists</h1>
+<section class="container-fluid">
+    <h1>Artists</h1>
+    <div class="row col-md-10">
+        @foreach (var artist in Model)
+        {
 
+            <div class="card mr-5 ">
+                <img src="~/ProfilePicture/1e3a76dd-4a4e-4e1b-927c-c4b3d2fb6728.jpg" alt="@artist.Nikname" style="width:100%">
+                <h1>@artist.Nikname</h1>
+                <p class="title">CEO & Founder, Example</p>
+                <div class="mx-1">@artist.AboutMe</div>
+                <div class="col">
+                    <a class="a" href="#"><i class="fa fa-dribbble"></i></a>
+                    <a class="a" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="a" href="#"><i class="fa fa-linkedin"></i></a>
+                    <a class="a" href="#"><i class="fa fa-facebook"></i></a>
+                    <p><button class="btn btn-block btn-primary">Contact</button></p>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</section>
+<h1>Helooo</h1>
