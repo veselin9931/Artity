@@ -25,7 +25,7 @@
 
         public string AboutMe { get; set; }
 
-        public double Rating => this.Ratings.Count>0 ?
+        public double Rating => this.Ratings.Count> 0 ?
             this.Ratings.Average(a => a.RatingValue) : 0.0;
 
         public string CategoryId { get; set; }

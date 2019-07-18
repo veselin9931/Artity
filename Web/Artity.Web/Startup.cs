@@ -14,6 +14,7 @@
     using Artity.Services.File;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
+    using Artity.Services.Messaging.SendGrid;
     using Artity.Web.ViewModels;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,7 @@
         public Startup(IConfiguration configuration)
         {
             this.configuration = configuration;
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -105,6 +107,8 @@
                         options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
 
+  
+
             services.AddSingleton(this.configuration);
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
@@ -120,6 +124,7 @@
             // Application services
             services.AddTransient<ISeeder, RolesSeeder>();
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<ISendGrid, SendGridEmailSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
@@ -154,7 +159,6 @@
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-               
             }
             else
             {
@@ -169,17 +173,13 @@
 
             app.UseMvc(routes =>
             {
+            
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
-            
             seeder.SeedAsync(context, serviceProvider);
 
         }
-
-
-        
-        
     }
 }
