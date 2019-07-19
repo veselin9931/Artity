@@ -69,7 +69,7 @@
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                     options.Lockout.MaxFailedAccessAttempts = 10;
                     options.Lockout.AllowedForNewUsers = true;
-                    options.User.RequireUniqueEmail = true;
+                  
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserStore<ApplicationUserStore>()

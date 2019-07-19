@@ -9,6 +9,7 @@
     using Artity.Data.Models.Enums;
     using Artity.Services;
     using Artity.Services.File;
+    using Artity.Services.Messaging;
     using Artity.Web.ViewModels.Picture;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -26,7 +27,7 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
-        private readonly IEmailSender emailSender;
+        private readonly ISendGrid emailSender;
         private readonly IUserService userService;
         private readonly IPicureService picureService;
         private readonly ICloudinaryService cloudinaryService;
@@ -36,7 +37,7 @@
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            ISendGrid emailSender,
             IUserService userService,
             IPicureService picureService,
             ICloudinaryService cloudinaryService
@@ -61,9 +62,9 @@
 
             if (this.User.Identity.IsAuthenticated)
             {
-              return  this.Redirect(GlobalConstants.HomeUrl);
+              return this.Redirect(GlobalConstants.HomeUrl);
             }
-        
+
             this.ReturnUrl = returnUrl;
             return this.Page();
         }
@@ -81,8 +82,23 @@
                     UserType = Enum.Parse<UserType>(this.Input.AccountType),
                 };
 
+                if (this.Input.ProfilePicture != null)
+                {
+                    var pictureName = this.Input.Username + GlobalConstants.ProfilePicture;
+                    string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.ProfilePicture, pictureName);
+                    var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = user.UserName };
+                    var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
+                    bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
+                }
+
+                if (user.UserType == UserType.User)
+                {
+                    user.FirstLogin = true;
+                }
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
-                if (result.Succeeded)
+
+                if (result.Succeeded && user.UserType == UserType.User)
                 {
                     this.logger.LogInformation("User created a new account with password.");
 
@@ -98,36 +114,28 @@
                         "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                    await this.signInManager.SignInAsync(user, isPersistent: false);
+                    return this.Redirect(GlobalConstants.HomeUrl);
                 }
+                if (user.UserType == UserType.Artist && result.Succeeded)
+                {
+                    if (user.UserType == UserType.Artist)
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
+                        return this.RedirectToPage("./ArtistRegister");
+
+                    }
+                }
+
 
                 foreach (var error in result.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);
                 }
 
-                var pictureName = this.Input.Username + GlobalConstants.ProfilePicture;
-                string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.ProfilePicture, pictureName);
-                var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = user.UserName };
-                var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
-                bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
-
-                if (user.UserType == UserType.Artist)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
-                    await this.signInManager.SignInAsync(user, isPersistent: false);
-                    return this.RedirectToPage("./ArtistRegister");
-
-                }
-                else
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
-                    await this.userService.SetFirstLogin(user);
-                    await this.signInManager.SignInAsync(user, isPersistent: false);
-                    return this.LocalRedirect(returnUrl);
-
-                }
             }
-
             // If we got this far, something failed, redisplay form
             return this.Page();
         }
@@ -163,6 +171,7 @@
             [Display(Name = "City")]
             public string City { get; set; }
 
+            [Required]
             public IFormFile ProfilePicture { get; set; }
 
             [Required]

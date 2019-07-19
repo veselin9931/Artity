@@ -41,5 +41,20 @@
             return false;
 
         }
+
+        public async Task<bool> SetArtistPicture(PictureInputModel picture, ApplicationUser user)
+        {
+            var newPic = new Picture() { Link = picture.Link, Title = picture.Title, Description = picture.Description };
+            await this.context.AddAsync(newPic);
+            await this.context.SaveChangesAsync();
+            user.Artist.ProfilePicture = newPic;
+            int result = await this.userRepository.SaveChangesAsync();
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

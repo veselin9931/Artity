@@ -8,8 +8,13 @@
 
     public interface IPicureService
     {
+
+        //TODO add parametar username
+
         Task<bool> GenerateProfilePicture(PictureInputModel picture, ApplicationUser user);
 
         Task<Picture> AddPictureToDb(PictureInputModel picture, ApplicationUser user);
+
+        Task<bool> SetArtistPicture(PictureInputModel picture, ApplicationUser user);
     }
 }

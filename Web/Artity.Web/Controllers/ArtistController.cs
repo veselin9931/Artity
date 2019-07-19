@@ -5,9 +5,8 @@
     using Artity.Web.ViewModels.Artist;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
 
-    public class ArtistController : Controller
+    public class ArtistController : BaseController
     {
         private readonly IArtistService artistService;
         private readonly ISendGrid emailSender;
@@ -24,7 +23,6 @@
                 .GetAllArtists<ArtistAllViewModel>();
 
             var email = this.emailSender;
-            email.SendEmailAsync("ves.georgiev99@gmail.com", "Artity", "Ko pr we");
             return this.View(artists);
         }
     }

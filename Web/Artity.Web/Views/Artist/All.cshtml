@@ -10,16 +10,16 @@
         {
 
             <div class="card mr-5 ">
-                <img src="~/ProfilePicture/1e3a76dd-4a4e-4e1b-927c-c4b3d2fb6728.jpg" alt="@artist.Nikname" style="width:100%">
+                <img src="@artist.ProfilePicture.Link" alt="@artist.Nikname" style="width:100%">
                 <h1>@artist.Nikname</h1>
-                <p class="title">CEO & Founder, Example</p>
+                <p class="title">@artist.CategoryName</p>
                 <div class="mx-1">@artist.AboutMe</div>
                 <div class="col">
-                    <a class="a" href="#"><i class="fa fa-dribbble"></i></a>
-                    <a class="a" href="#"><i class="fa fa-twitter"></i></a>
-                    <a class="a" href="#"><i class="fa fa-linkedin"></i></a>
-                    <a class="a" href="#"><i class="fa fa-facebook"></i></a>
-                    <p><button class="btn btn-block btn-primary">Contact</button></p>
+                    <a class="a" href="@artist.Youtube"><i class="fa fa-dribbble"></i></a>
+                    <a class="a" href="@artist.Twiter"><i class="fa fa-twitter"></i></a>
+                    <a class="a" href="@artist.Facebook"><i class="fa fa-facebook"></i></a>
+                    <a class="a" href="@artist.LinkIn"><i class="fa fa-linkedin"></i></a>
+                    <p><button class="btn btn-block btn-primary">More</button></p>
                 </div>
 
             </div>

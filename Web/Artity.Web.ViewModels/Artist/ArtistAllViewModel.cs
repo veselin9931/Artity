@@ -10,7 +10,7 @@
 
         public string AboutMe { get; set; }
 
-        public PictureViewModel Picture { get; set; }
+        public PictureViewModel ProfilePicture { get; set; }
 
         public string Facebook { get; set; }
 
@@ -21,5 +21,7 @@
         public string Youtube { get; set; }
 
         public double Rating { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Net.Http.Headers;
     using Artity.Web.ViewModels.Picture;
-         
+
     public class ArtistRegisterModel : PageModel
     {
         private readonly ICategoryService categoryService;
@@ -30,7 +30,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         public UserManager<ApplicationUser> UserManager { get; }
 
         public ArtistRegisterModel(
-            ICategoryService categoryService, 
+            ICategoryService categoryService,
             IUserService userService,
             UserManager<ApplicationUser> userManager,
             IHostingEnvironment hostingEnvironment,
@@ -51,7 +51,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
-    
+
         public Category Categories { get; set; }
 
         public string ReturnUrl { get; set; }
@@ -62,9 +62,8 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             var user = await this.UserManager.GetUserAsync(this.User);
             if (user.UserType.ToString() == GlobalConstants.ArtistRoleName && user.FirstLogin == false)
             {
-                //TODO: Refactor Category new
                 await this.userService.SetFirstLogin(user);
-                this.Categories = new Category(this.categoryService);                   
+                this.Categories = new Category(this.categoryService);
                 return this.Page();
             }
             else
@@ -72,7 +71,9 @@ namespace Artity.Web.Areas.Identity.Pages.Account
                 returnUrl = "/";
                 return this.Redirect(returnUrl);
             }
+
         }
+
         [Authorize]
         public async Task<IActionResult> OnPostRegisterAsync(string returnUrl = null)
         {
@@ -80,9 +81,9 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? this.Url.Content("~/");
             if (this.ModelState.IsValid)
             {
-               var name = this.User.Identity.Name;
+                var name = this.User.Identity.Name;
 
-               var user = this.userService.GetApplicationUserByName(name);
+                var user = this.userService.GetApplicationUserByName(name);
 
                 var artist = new Artist()
                 {
@@ -96,16 +97,21 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
                 this.userService.AddArtistSettings(user, artist);
 
-                var pictureName = this.Input.Nikname + GlobalConstants.ProfilePicture;
-                string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.Picture, pictureName);
-                var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = this.Input.AboutMe };
-                var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
-                bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
+                if (this.Input.Picture != null)
+                {
+                    var pictureName = this.Input.Nikname + GlobalConstants.ProfilePicture;
+                    string pictureLink = await this.cloudinaryService.UploadPictureAsync(this.Input.Picture, pictureName);
+                    var picture = new PictureInputModel() { Link = pictureLink, Title = user.UserName, Description = this.Input.AboutMe };
+                    var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
+                    bool isGenerate = await this.picureService.SetArtistPicture(picture, user);
+                }
+          
 
                 return this.Redirect(GlobalConstants.HomeUrl);
 
-            }     
-                return this.Forbid();
+            }
+
+            return this.Forbid();
             //TODO: Iplement Logic
             // If we got this far, something failed, redisplay form        
         }
@@ -127,6 +133,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             [Display(Name = "About Me")]
             public string AboutMe { get; set; }
 
+            [Required]
             public IFormFile Picture { get; set; }
 
             [Required]
