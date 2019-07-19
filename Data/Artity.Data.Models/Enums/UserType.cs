@@ -6,7 +6,7 @@ namespace Artity.Data.Models.Enums
 {
     public enum UserType
     {
-        Artist=1,
-        User =2
+        Artist = 1,
+        User = 2
     }
 }

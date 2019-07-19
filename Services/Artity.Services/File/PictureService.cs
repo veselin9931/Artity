@@ -28,7 +28,10 @@
 
         public async Task<bool> GenerateProfilePicture(PictureInputModel picture, ApplicationUser user)
         {
-            this.userRepository.All().FirstOrDefault(a => a.Id == user.Id).PofilePicture = new Picture() { Link = picture.Link, Title = picture.Title, Description = picture.Description };
+            var newPic = new Picture() { Link = picture.Link, Title = picture.Title, Description = picture.Description };
+            await this.context.AddAsync(newPic);
+            await this.context.SaveChangesAsync();
+            user.PofilePicture = newPic;
             int result = await this.userRepository.SaveChangesAsync();
             if (result > 0)
             {
