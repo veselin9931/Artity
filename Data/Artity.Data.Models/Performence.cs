@@ -4,6 +4,7 @@
 
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Artity.Common;
     using Artity.Data.Common.Models;
 
     public class Performence : BaseModel<string>, IDeletableEntity
@@ -11,21 +12,35 @@
         public Performence()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Ratings = new List<Rating>();
+            this.Pictures = new List<Picture>();
+
         }
 
         [Required]
-        [MaxLength(50)]
+        [StringLength(50, ErrorMessage = PerformenceErrors.StringLenght, MinimumLength = 4)]
         public string Title { get; set; }
 
         [Required]
+        [StringLength(888, ErrorMessage = PerformenceErrors.StringLenght,MinimumLength =5)]
         public string Description { get; set; }
 
         [Required]
+        [Range(typeof(decimal), "0", "100000", ErrorMessage = PerformenceErrors.Price)]
+        [Display(Name = "Price")]
         public decimal Price { get; set; }
 
+        [Range(0,5)]
         public double Rating { get; set; }
 
         public virtual IList<Rating> Ratings { get; set; }
+
+        [Required]
+        public string PerformencePhotoId { get; set; }
+
+        public virtual Picture PerformencePhoto { get; set; }
+
+        public virtual IList<Picture> Pictures { get; set; }
 
         [Required]
         public string ArtistId { get; set; }

@@ -63,7 +63,7 @@
 
             if (this.User.Identity.IsAuthenticated)
             {
-              return this.Redirect(GlobalConstants.HomeUrl);
+                return this.Redirect(GlobalConstants.HomeUrl);
             }
 
             this.ReturnUrl = returnUrl;
@@ -97,114 +97,111 @@
                     user.FirstLogin = true;
                 }
 
+                var isRoot = !this.userManager.Users.Any();
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
-                if (result.Succeeded)
+                if (result.Succeeded && user.UserType == UserType.User)
                 {
-                    var isRoot = !this.userManager.Users.Any();
-
-                    if (result.Succeeded)
+                    if (isRoot)
                     {
-                        if (isRoot)
-                        {
-                            await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
-                        }
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
                     }
-
-                    if (result.Succeeded && user.UserType == UserType.User)
+                    else
                     {
-                        this.logger.LogInformation("User created a new account with password.");
-
-                        var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = this.Url.Page(
-                            "/Account/ConfirmEmail",
-                            pageHandler: null,
-                            values: new { userId = user.Id, code = code },
-                            protocol: this.Request.Scheme);
-
-                        await this.emailSender.SendEmailAsync(
-                            this.Input.Email,
-                            "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
-                        await this.signInManager.SignInAsync(user, isPersistent: false);
-                        return this.Redirect(GlobalConstants.HomeUrl);
                     }
 
-                    if (user.UserType == UserType.Artist && result.Succeeded)
-                    {
-                        if (user.UserType == UserType.Artist)
-                        {
-                            await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
-                            await this.signInManager.SignInAsync(user, isPersistent: false);
-                            return this.RedirectToPage("./ArtistRegister");
 
-                        }
-                    }
+                    this.logger.LogInformation("User created a new account with password.");
 
-                    foreach (var error in result.Errors)
-                    {
-                        this.ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = this.Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { userId = user.Id, code = code },
+                        protocol: this.Request.Scheme);
 
+                    await this.emailSender.SendEmailAsync(
+                        this.Input.Email,
+                        "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                    await this.signInManager.SignInAsync(user, isPersistent: false);
+                    return this.Redirect(GlobalConstants.HomeUrl);
                 }
-                // If we got this far, something failed, redisplay form
-                
+
+                if (user.UserType == UserType.Artist && result.Succeeded)
+                {
+                    if (user.UserType == UserType.Artist)
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.ArtistRoleName);
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
+                        return this.RedirectToPage("./ArtistRegister");
+                    }
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    this.ModelState.AddModelError(string.Empty, error.Description);
+                }
+
             }
             return this.Page();
         }
+    }
 
-        public class InputModel
-        {
+    public class InputModel
+    {
 
-            [Required]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
-            [Display(Name = "Username")]
-            public string Username { get; set; }
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
 
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-
-
-            [Required]
-            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]           
-            [Display(Name = "City")]
-            public string City { get; set; }
-
-            [Required]
-            public IFormFile ProfilePicture { get; set; }
-
-            [Required]
-            [Display(Name = "Account Type")]
-            public string AccountType { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
 
 
-            [Required]
-            [Display(Name = "Phone Number")]
-            [RegularExpression(@"08[789]\d{7}", ErrorMessage = "Incorrect phone number.")]
-            public string PhoneNumber { get; set; }
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
+        [Display(Name = "City")]
+        public string City { get; set; }
 
-            [Required]
-            public bool License { get; set; }
+        [Required]
+        public IFormFile ProfilePicture { get; set; }
 
-            [Required]
-            public bool License2 { get; set; }
+        [Required]
+        [Display(Name = "Account Type")]
+        public string AccountType { get; set; }
 
-        }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [RegularExpression(@"08[789]\d{7}", ErrorMessage = "Incorrect phone number.")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public bool License { get; set; }
+
+        [Required]
+        public bool License2 { get; set; }
+
     }
 }
+

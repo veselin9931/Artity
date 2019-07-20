@@ -280,11 +280,15 @@ namespace Artity.Data.Migrations
                     b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(888);
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("PerformencePhotoId")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -299,6 +303,8 @@ namespace Artity.Data.Migrations
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PerformencePhotoId");
 
                     b.ToTable("Performences");
                 });
@@ -321,6 +327,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
+                    b.Property<string>("PerformenceId");
+
                     b.Property<string>("Title");
 
                     b.Property<DateTime>("UploadDate");
@@ -328,6 +336,8 @@ namespace Artity.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PerformenceId");
 
                     b.ToTable("Pictures");
                 });
@@ -569,6 +579,18 @@ namespace Artity.Data.Migrations
                         .WithMany("Performences")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Artity.Data.Models.Picture", "PerformencePhoto")
+                        .WithMany()
+                        .HasForeignKey("PerformencePhotoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Artity.Data.Models.Picture", b =>
+                {
+                    b.HasOne("Artity.Data.Models.Performence")
+                        .WithMany("Pictures")
+                        .HasForeignKey("PerformenceId");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Rating", b =>

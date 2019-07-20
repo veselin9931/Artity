@@ -17,6 +17,7 @@
             this.emailSender = emailSender;
         }
 
+     
         public IActionResult All()
         {
             var artists = this.artistService

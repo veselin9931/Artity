@@ -4,16 +4,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@{
-   
-    
-
-    
-}
-
-
-
-
 
 @if (this.SignInManager.IsSignedIn(this.User))
 {
@@ -32,7 +22,6 @@
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Create new</a>
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">All</a>
-                    <a class="dropdown-item" asp-action="">Reservations</a>
 
 
                 </div>
@@ -103,7 +92,7 @@
 
 
 
-    if (User.IsInRole(GlobalConstants.ArtistRoleName) || User.IsInRole(GlobalConstants.UserRoleName))
+    if (User.IsInRole(GlobalConstants.ArtistRoleName) || User.IsInRole(GlobalConstants.UserRoleName) ||  User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
 
          string ProfilePictureUrl = " ";

@@ -94,6 +94,10 @@
             builder.Entity<ApplicationUser>()
            .HasMany(a => a.Orders)
            .WithOne(t => t.User);
+
+            builder.Entity<Performence>()
+            .HasMany(a => a.Pictures);
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 
