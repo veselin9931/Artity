@@ -1,0 +1,76 @@
+﻿@model Artity.Web.ViewModels.Performence.PerformenceCreateInputModel
+@{
+    ViewData["Title"] = "Create performence";
+}
+
+<div class="mx-auto pb-2 text-center">
+    <h1>@ViewData["Title"]</h1>
+    <h4>share your products</h4>
+    <hr />
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="md-form ">
+                <div class="file-field">
+                    <div class="z-depth-1-half mb-4" id="image-preview">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
+                             alt="example placeholder">
+                    </div>
+                    <label class="w-100 h-50" for="image-upload" id="image-label">Choose File</label>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded float-left" for="image-upload" id="image-label">
+                            <span>Choose file</span>
+                            <input type="file" id="image-upload">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+            <div asp-validation-summary="All" class="rotext-danger text-danger"></div>
+            <form enctype="multipart/form-data"  enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" type="number" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.uploadPreview.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.uploadPreview.min.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.uploadPreview({
+                input_field: "#image-upload",   // Default: .image-upload
+                preview_box: "#image-preview",  // Default: .image-preview
+                label_field: "#image-label",    // Default: .image-label
+                label_default: "Choose File",   // Default: Choose File
+                label_selected: "Change File",  // Default: Change File
+                no_label: false                 // Default: false
+            });
+        });
+    </script>
+}

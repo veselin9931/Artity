@@ -1,9 +1,8 @@
-﻿namespace Artity.Web.ViewModels.Picture
+﻿namespace Artity.Web.InputModels.Picture
 {
 
     using Artity.Services.Mapping;
     using Artity.Data.Models;
-
 
     public class PictureInputModel : IMapFrom<Picture>, IMapTo<Picture>
     {
