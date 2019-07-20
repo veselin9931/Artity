@@ -6,9 +6,14 @@ namespace Artity.Data.Models.Enums
 {
     public enum CategoryType
     {
-        Art = 1,
-        Singer = 2,
 
-       //TODO: Add Category
+        Theater = 1,
+        Cinema = 2,
+        WeddingParty = 3,
+        BirthdayParty = 4,
+        EventLeader = 5,
+        Painter = 6,
+        Handmade = 7,
+        Writer = 8,
     }
 }
