@@ -29,7 +29,6 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly ISendGrid emailSender;
-        private readonly IUserService userService;
         private readonly IPicureService picureService;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IdentityRole roles;
@@ -39,7 +38,6 @@
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             ISendGrid emailSender,
-            IUserService userService,
             IPicureService picureService,
             ICloudinaryService cloudinaryService
             )
@@ -48,7 +46,6 @@
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
-            this.userService = userService;
             this.picureService = picureService;
             this.cloudinaryService = cloudinaryService;
         }

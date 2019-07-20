@@ -131,7 +131,7 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-
+            services.AddTransient<Services.Performence.IPerformenceService, Services.Performence.PerformenceService>();
             //Artity system services 
             services.AddTransient<IPicureService, PictureService>();
 

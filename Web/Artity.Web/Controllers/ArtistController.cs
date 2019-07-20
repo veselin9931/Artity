@@ -26,5 +26,6 @@
             var email = this.emailSender;
             return this.View(artists);
         }
+
     }
 }
