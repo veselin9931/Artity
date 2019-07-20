@@ -1,7 +1,7 @@
 ﻿namespace Artity.Data.Models
 {
     using System;
-
+    using System.ComponentModel.DataAnnotations;
     using Artity.Data.Common.Models;
     using Artity.Services.Mapping;
 
@@ -17,6 +17,7 @@
 
         public string Description { get; set; }
 
+        [Required]
         public string Link { get; set; }
 
         public DateTime UploadDate { get; set; }

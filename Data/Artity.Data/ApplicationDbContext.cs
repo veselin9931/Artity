@@ -143,6 +143,18 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Artist>()
+                .Property(p => p.AboutMe)
+                .HasMaxLength(512);
+
+            builder.Entity<Artist>()
+                .Property(p => p.CategoryId)
+                .IsRequired();
+
+            builder.Entity<Artist>()
+               .Property(p => p.WorkNumber)
+               .IsRequired();
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

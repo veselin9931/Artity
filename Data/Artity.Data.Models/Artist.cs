@@ -3,7 +3,7 @@
     using System;
 
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using Artity.Data.Common.Models;
@@ -16,7 +16,8 @@
             this.Offerts = new List<Offert>();
             this.Ratings = new List<Rating>();
         }
-
+        [Required]
+        [MaxLength(30)]
         public string Nikname { get; set; }
 
         public string WorkNumber { get; set; }

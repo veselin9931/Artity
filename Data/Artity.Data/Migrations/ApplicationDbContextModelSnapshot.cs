@@ -131,9 +131,11 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AboutMe");
+                    b.Property<string>("AboutMe")
+                        .HasMaxLength(512);
 
-                    b.Property<string>("CategoryId");
+                    b.Property<string>("CategoryId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -145,11 +147,14 @@ namespace Artity.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("Nikname");
+                    b.Property<string>("Nikname")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
                     b.Property<string>("ProfilePictureId");
 
-                    b.Property<string>("WorkNumber");
+                    b.Property<string>("WorkNumber")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -177,7 +182,9 @@ namespace Artity.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
                     b.Property<string>("PictureId");
 
@@ -229,7 +236,8 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -245,7 +253,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<int>("Type");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -263,13 +272,15 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<bool>("IsDeleted");
 
@@ -279,7 +290,9 @@ namespace Artity.Data.Migrations
 
                     b.Property<double>("Rating");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -303,7 +316,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Link");
+                    b.Property<string>("Link")
+                        .IsRequired();
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -323,7 +337,8 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -337,7 +352,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<int>("RatingValue");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -382,7 +398,8 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -392,7 +409,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Link");
+                    b.Property<string>("Link")
+                        .IsRequired();
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -510,7 +528,8 @@ namespace Artity.Data.Migrations
                 {
                     b.HasOne("Artity.Data.Models.Category", "Category")
                         .WithMany("Artists")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Artity.Data.Models.Picture", "ProfilePicture")
                         .WithMany()
@@ -535,25 +554,29 @@ namespace Artity.Data.Migrations
                 {
                     b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Artity.Data.Models.ApplicationUser", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Performence", b =>
                 {
                     b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany("Performences")
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Rating", b =>
                 {
                     b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany("Ratings")
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Artity.Data.Models.Performence")
                         .WithMany("Ratings")
@@ -561,14 +584,16 @@ namespace Artity.Data.Migrations
 
                     b.HasOne("Artity.Data.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Song", b =>
                 {
                     b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
