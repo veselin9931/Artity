@@ -1,11 +1,11 @@
 ﻿using Artity.Common;
 using Artity.Services.Mapping;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-
 namespace Artity.Web.ViewModels.Performence
 {
-    public class PerformenceCreateInputModel : IMapTo<Data.Models.Performence>
+    public class PerformenceCreateInputModel : IMapTo<Data.Models.Performence>, IHaveCustomMappings
     {
         [Required]
         [StringLength(maximumLength: 40, ErrorMessage = PerformenceErrors.StringLenght, MinimumLength = 4)]
@@ -13,7 +13,7 @@ namespace Artity.Web.ViewModels.Performence
         public string Title { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = PerformenceErrors.StringLenght, MinimumLength = 4)]
+        [StringLength(5000, ErrorMessage = PerformenceErrors.StringLenght, MinimumLength = 4)]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
@@ -26,6 +26,13 @@ namespace Artity.Web.ViewModels.Performence
         [Display(Name = "Photos")]
         public IFormFile PerformencePhoto { get; set; }
 
-
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration
+                    .CreateMap<PerformenceCreateInputModel, Data.Models.Performence>()
+                    .ForMember(
+                destination => destination.PerformencePhoto,
+                opts => opts.MapFrom(origin => new Data.Models.Picture { Description = this.Description }));
+        }
     }
 }

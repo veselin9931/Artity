@@ -26,6 +26,14 @@
             return pic;
         }
 
+        public async Task<string> AddPictureToDb(PictureInputModel picture)
+        {
+            var pic = new Picture { Link = picture.Link, Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
+            await this.context.AddAsync(pic);
+            await this.context.SaveChangesAsync();
+            return pic.Id;
+        }
+
         public async Task<bool> GenerateProfilePicture(PictureInputModel picture, ApplicationUser user)
         {
             var newPic = new Picture() { Link = picture.Link, Title = picture.Title, Description = picture.Description };

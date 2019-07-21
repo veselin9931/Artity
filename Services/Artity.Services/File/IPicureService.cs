@@ -15,6 +15,8 @@
 
         Task<Picture> AddPictureToDb(PictureInputModel picture, ApplicationUser user);
 
+        Task<string> AddPictureToDb(PictureInputModel picture);
+
         Task<bool> SetArtistPicture(PictureInputModel picture, ApplicationUser user);
     }
 }

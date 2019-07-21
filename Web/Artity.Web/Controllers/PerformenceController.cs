@@ -36,7 +36,6 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = await this.performenceService.CreatePerformence(createInputModel, user);
-            
             return this.Redirect(Common.GlobalConstants.HomeUrl);
         }
 

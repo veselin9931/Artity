@@ -22,7 +22,7 @@
         public string Title { get; set; }
 
         [Required]
-        [StringLength(888, ErrorMessage = PerformenceErrors.StringLenght,MinimumLength =5)]
+        [StringLength(50000, ErrorMessage = PerformenceErrors.StringLenght,MinimumLength =5)]
         public string Description { get; set; }
 
         [Required]
