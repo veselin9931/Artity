@@ -12,5 +12,11 @@
 
         public const string ProfilePicture = "ProfilePicture";
 
+        public const string AdminArea = "Administration";
+
+        public const string Dashboard = "Dashboard";
+
+        public const string Index = "Index";
+
     }
 }

@@ -9,11 +9,15 @@
         {
             if (this.User.IsInRole(GlobalConstants.ArtistRoleName))
             {
-                return this.View("Artist");
+                return this.View("ArtistDashboard");
             }
             else if (this.User.IsInRole(GlobalConstants.UserRoleName))
             {
-                return this.Redirect("Artist/All");
+                return this.View("Artist/All");
+            }
+            else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.RedirectToAction(GlobalConstants.Index, GlobalConstants.Dashboard, new { area = GlobalConstants.AdminArea});
             }
 
             return this.View();

@@ -5,6 +5,7 @@
     using Artity.Web.ViewModels.Artist;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     public class ArtistController : BaseController
     {
@@ -18,13 +19,18 @@
         }
 
      
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
             var artists = this.artistService
                 .GetAllArtists<ArtistAllViewModel>();
 
             var email = this.emailSender;
             return this.View(artists);
+        }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            return this.View();
         }
 
     }

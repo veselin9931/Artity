@@ -27,7 +27,6 @@
 
         [Required]
         [Range(typeof(decimal), "0", "100000", ErrorMessage = PerformenceErrors.Price)]
-        [Display(Name = "Price")]
         public decimal Price { get; set; }
 
         [Range(0,5)]
