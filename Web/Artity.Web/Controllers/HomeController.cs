@@ -13,7 +13,7 @@
             }
             else if (this.User.IsInRole(GlobalConstants.UserRoleName))
             {
-                return this.View("Artist/All");
+                return this.RedirectToAction("All", "Artist");
             }
             else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {

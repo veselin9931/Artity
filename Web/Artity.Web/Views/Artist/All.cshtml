@@ -3,28 +3,138 @@
     ViewData["Title"] = "All artist";
 }
 
-<section class="container-fluid">
-    <h1>Artists</h1>
-    <div class="row col-md-10">
-        @foreach (var artist in Model)
-        {
 
-            <div class="card mr-5 ">
-                <img src="@artist.ProfilePicture.Link" alt="@artist.Nikname" style="width:100%">
-                <h1>@artist.Nikname</h1>
-                <p class="title">@artist.CategoryName</p>
-                <div class="mx-1">@artist.AboutMe</div>
-                <div class="col">
-                    <a class="a" href="@artist.Youtube"><i class="fa fa-dribbble"></i></a>
-                    <a class="a" href="@artist.Twiter"><i class="fa fa-twitter"></i></a>
-                    <a class="a" href="@artist.Facebook"><i class="fa fa-facebook"></i></a>
-                    <a class="a" href="@artist.LinkIn"><i class="fa fa-linkedin"></i></a>
-                    <p><button class="btn btn-block btn-primary">More</button></p>
-                </div>
 
+
+<div class="justify-content-between  row">
+
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="input-group">
+            <div class="input-group-btn search-panel">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span id="search_concept">Filter by</span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#contains">Contains</a></li>
+                    <li><a href="#its_equal">It's equal</a></li>
+                    <li><a href="#greather_than">Greather than ></a></li>
+                    <li><a href="#less_than">Less than < </a></li>
+                    <li class="divider"></li>
+                    <li><a href="#all">Anything</a></li>
+                </ul>
             </div>
+            <input type="hidden" name="search_param" value="all" id="search_param">
+            <input type="text" class="form-control" name="x" placeholder="Search term...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
 
-        }
+
+
+    <div class=" col-2 dropdown  pull-right ">
+        <button class="btn btn-dark dropdown-toggle " type="button" data-toggle="dropdown">
+            Category
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <li><a class="dropdown-item" href="#">HTML</a></li>
+            <li><a class="dropdown-item" href="#">CSS</a></li>
+            <li><a class="dropdown-item" href="#">JavaScript</a></li>
+            <li><a class="dropdown-item" href="#">jQuery</a></li>
+            <li><a class="dropdown-item" href="#">Bootstrap</a></li>
+            <li><a class="dropdown-item" href="#">Angular</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<section id="team" class="pb-5 mt-3 mb-3">
+    <div class="container">
+        <h5 class="section-title h1">@this.ViewData["Title"]</h5>
+        <div class="row">
+
+            @foreach (var artist in this.Model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src="@artist.ProfilePicture.Link" alt="card image"></p>
+                                        <h4 class="card-title">@artist.Nikname</h4>
+                                        <p class="card-text">@artist.AboutMe.Substring(0,90)</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">@artist.Nikname</h4>
+                                        <p class="card-text">@artist.AboutMe</p>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-facebook">@artist.Facebook</i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-twitter">@artist.Twiter</i>
+                                                </a>
+                                            </li>                                        
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-youtube">@artist.Youtube</i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-secondary ">Performences</button>
+                                        <button type="button" class="btn btn-secondary">Profile</button>
+                                        <button type="button" class="btn btn-secondary">Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- ./Team member -->
+
+
+        </div>
     </div>
 </section>
-<h1>Helooo</h1>
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".dropdown-menu li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function (e) {
+            $('.search-panel .dropdown-menu').find('a').click(function (e) {
+                e.preventDefault();
+                var param = $(this).attr("href").replace("#", "");
+                var concept = $(this).text();
+                $('.search-panel span#search_concept').text(concept);
+                $('.input-group #search_param').val(param);
+            });
+        });
+    </script>
+}
