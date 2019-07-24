@@ -19,15 +19,15 @@
             this.userManager = userManager;
         }
 
+        [HttpGet(Name = "Create")]
         public async Task<IActionResult> All()
         {
-            return this.Ok();
+            return this.View();
         }
 
         [HttpGet(Name = "Create")]
         public async Task<IActionResult> Create()
         {
-            
             return this.View();
         }
 

@@ -15,14 +15,14 @@
             <div class="col-md-6">
                 <div class="md-form ">
                     <div class="file-field">
-                        <div class="z-depth-1-half mb-4" id="image-preview">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
+                        <div class="z-depth-1-half mb-4" id="image-preview" heigt="100px" width="100px">
+                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" id="previewPic" class="img-thumbnail"
                                  alt="example placeholder">
                         </div>
                         <label class="w-100 h-50" for="image-upload" id="image-label">Choose File</label>
                         <div class="d-flex justify-content-center">
                             <div for="image-upload" id="image-label">
-                                <input type="file"
+                                <input onchange="loadFile(event)" type="file"
                                        class="btn btn-rounded float-left"
                                        id="picture"
                                        placeholder="Picture..."
@@ -62,16 +62,16 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.uploadPreview.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.uploadPreview.min.js" asp-append-version="true"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.uploadPreview({
-                input_field: "#image-upload",   // Default: .image-upload
-                preview_box: "#image-preview",  // Default: .image-preview
-                label_field: "#image-label",    // Default: .image-label
-                label_default: "Choose File",   // Default: Choose File
-                label_selected: "Change File",  // Default: Change File
-                no_label: false                 // Default: false
-            });
-        });
+    <script>
+        var loadFile = function (event) {
+            var img = document.getElementById('previewPic');
+            img.onload = function () {
+                if (img.height > img.width) {
+                    img.height = '100%';
+                    img.width = '100%';
+                }
+            };
+            img.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
 }

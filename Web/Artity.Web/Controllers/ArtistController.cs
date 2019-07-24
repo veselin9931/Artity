@@ -1,5 +1,6 @@
 ﻿namespace Artity.Web.Controllers
 {
+    using Artity.Services;
     using Artity.Services.File;
     using Artity.Services.Messaging;
     using Artity.Web.ViewModels.Artist;
@@ -11,11 +12,13 @@
     {
         private readonly IArtistService artistService;
         private readonly ISendGrid emailSender;
+        private readonly ICategoryService categoryService;
 
-        public ArtistController(IArtistService artistService, ISendGrid emailSender)
+        public ArtistController(IArtistService artistService,ICategoryService categoryService)
         {
             this.artistService = artistService;
             this.emailSender = emailSender;
+            this.categoryService = categoryService;
         }
 
      
@@ -24,8 +27,16 @@
             var artists = this.artistService
                 .GetAllArtists<ArtistAllViewModel>();
 
-            var email = this.emailSender;
-            return this.View(artists);
+            var categories = this.categoryService
+                .GetAllCategories();
+
+            var artitView = new ArtistViewModel()
+            {
+                ArtistAlls = artists,
+                Categories = categories,
+            };
+
+            return this.View(artitView);
         }
 
         public async Task<IActionResult> Dashboard()

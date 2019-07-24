@@ -16,12 +16,12 @@ namespace Artity.Services
 
         public IList<string> GetAllCategories()
         {
-            return context.Categories.Select(a => a.Name).ToList();
+            return this.context.Categories.Select(a => a.Name).ToList();
         }
 
         public string GetCategoryId(string name)
         {
-           var category = context.Categories.FirstOrDefault(a => a.Name == name);
+           var category = this.context.Categories.FirstOrDefault(a => a.Name == name);
            return category.Id;
         }
     }
