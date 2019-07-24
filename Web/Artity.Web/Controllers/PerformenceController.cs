@@ -1,28 +1,47 @@
 ﻿namespace Artity.Web.Controllers
 {
-    using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Mvc;
-
     using Artity.Web.ViewModels.Performence;
 
     using Artity.Services.Performence;
+
+    using Artity.Services;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using System.Threading.Tasks;
 
     public class PerformenceController : BaseArtistController
     {
         private readonly IPerformenceService performenceService;
         private readonly Microsoft.AspNetCore.Identity.UserManager<Data.Models.ApplicationUser> userManager;
+        private readonly ICategoryService categoryService;
 
-        public PerformenceController(IPerformenceService performenceService, Microsoft.AspNetCore.Identity.UserManager<Data.Models.ApplicationUser> userManager)
+        public PerformenceController(IPerformenceService performenceService,
+            Microsoft.AspNetCore.Identity.UserManager<Data.Models.ApplicationUser> userManager,
+            ICategoryService categoryService)
         {
             this.performenceService = performenceService;
             this.userManager = userManager;
+            this.categoryService = categoryService;
         }
 
-        [HttpGet(Name = "Create")]
+
+        [HttpGet(Name = "/All")]
         public async Task<IActionResult> All()
         {
-            return this.View();
+            var performences = this.performenceService
+                .GetAll<PerformenceAllViewModel>();
+
+            var categories = this.categoryService
+                .GetAllCategories();
+
+            var artitView = new PerformenceViewModel()
+            {
+                 Performences = performences,
+                 Categories = categories,
+            };
+
+            return this.View(artitView);
         }
 
         [HttpGet(Name = "Create")]

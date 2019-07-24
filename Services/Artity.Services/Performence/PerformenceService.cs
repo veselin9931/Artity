@@ -13,8 +13,13 @@
     using Microsoft.AspNetCore.Identity;
 
     using System.Linq;
+
     using Artity.Services.File;
+
     using Artity.Web.ViewModels.Picture;
+
+    using Artity.Services.Mapping;
+    using System.Collections.Generic;
 
     public class PerformenceService : IPerformenceService
     {
@@ -74,6 +79,23 @@
             await this.repositoryArtists.SaveChangesAsync();
 
             return true;
+        }
+
+        public IEnumerable<TViewModel> GetAll<TViewModel>()
+        {
+            return this.repository
+                .All()
+                .OrderBy(a => a.CreatedOn)
+                .To<TViewModel>().ToList();
+        }
+
+        public IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category)
+        {
+            return this.repository
+                 .All()
+                 .Where(a => a.Category.Name == category)
+                 .OrderBy(a => a.CreatedOn)
+                 .To<TViewModel>().ToList();
         }
     }
 }

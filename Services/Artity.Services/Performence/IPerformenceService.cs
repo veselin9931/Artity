@@ -1,5 +1,6 @@
 ﻿namespace Artity.Services.Performence
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Artity.Data.Models;
@@ -8,6 +9,10 @@
     public interface IPerformenceService
     {
         Task<bool> CreatePerformence(PerformenceCreateInputModel inputModel, ApplicationUser user);
+
+        IEnumerable<TViewModel> GetAll<TViewModel>();
+
+        IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category);
 
     }
 }

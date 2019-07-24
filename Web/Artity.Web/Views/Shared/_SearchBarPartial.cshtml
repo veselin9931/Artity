@@ -1,4 +1,6 @@
-﻿@model IEnumerable<string>
+﻿
+@model IEnumerable<string>
+
 
 <div class="justify-content-between  row">
 
@@ -36,7 +38,7 @@
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
             @foreach (var category in Model)
             {
-                <li><a class="dropdown-item" href="#">@category</a></li>
+                <li><a class="dropdown-item" href="/Artist/All/@((int)Enum.Parse(typeof(Artity.Data.Models.Enums.CategoryType), category))">@category</a></li>
             }
         </ul>
     </div>

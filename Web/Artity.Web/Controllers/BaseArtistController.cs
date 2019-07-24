@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize(Roles = GlobalConstants.ArtistRoleName)]
-    public class BaseArtistController : Controller
+    public abstract class BaseArtistController : Controller
     {
     }
 }

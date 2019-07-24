@@ -6,6 +6,9 @@ namespace Artity.Web.ViewModels.Performence
 {
     public class PerformenceViewModel
     {
+        public IEnumerable<PerformenceAllViewModel> Performences { get; set; }
+
+        public IEnumerable<string> Categories { get; set; }
 
     }
 }

@@ -41,6 +41,10 @@
 
         public virtual IList<Picture> Pictures { get; set; }
 
+        public string CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
         [Required]
         public string ArtistId { get; set; }
 

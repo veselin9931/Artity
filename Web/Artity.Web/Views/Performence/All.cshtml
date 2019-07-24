@@ -1,199 +1,62 @@
-﻿
+﻿@model Artity.Web.ViewModels.Performence.PerformenceViewModel
 
-
-
+    <partial name="_SearchBarPartial" model="this.Model.Categories" />
 
 <section id="team" class="pb-5 mt-3 mb-3">
     <div class="container">
-        <h5 class="section-title h1">All artist</h5>
+        <h5 class="section-title h2">All performence</h5>
         <div class="row">
 
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://res.cloudinary.com/artity/image/upload/v1563614489/profile_images/fevovmnwvzli9dfeouxi.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Shekerova</h4>
-                                    <p class="card-text">It&#x2019;s a sentiment you don&#x2019;t hear very often, and yet it&#x2019;s what we found ourselves saying af</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+            @foreach (var performence in @Model.Performences)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src="@performence.PerformencePhotoLink" alt="card image"></p>
+                                        <h4 class="card-title">@performence.Title</h4>
+                                        <p class="card-text">@performence.Description</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Shekerova</h4>
-                                    <p class="card-text">It&#x2019;s a sentiment you don&#x2019;t hear very often, and yet it&#x2019;s what we found ourselves saying after reading the statements below. Artist statements don&#x2019;t have to be a source of fear (for the writer) and bor</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-youtube"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary ">Performences</button>
-                                    <button type="button" class="btn btn-secondary">Profile</button>
-                                    <button type="button" class="btn btn-secondary">Request</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://res.cloudinary.com/artity/image/upload/v1563711464/profile_images/yspefltbkmogspxhhp34.jpg" alt="card image"></p>
-                                    <h4 class="card-title">S.Cirkov</h4>
-                                    <p class="card-text">&#x421;&#x442;&#x435;&#x444;&#x430;&#x43D; &#x426;&#x438;&#x440;&#x43A;&#x43E;&#x432; &#x435; &#x440;&#x43E;&#x434;&#x435;&#x43D; &#x43D;&#x430; 7 &#x44F;&#x43D;&#x443;&#x430;&#x440;&#x438; 1957 &#x433;. &#x432; &#x433;&#x440;&#x430;&#x434; &#x41F;&#x430;&#x437;&#x430;&#x440;&#x434;&#x436;&#x438;&#x43A;. &#x417;&#x430;&#x432;&#x44A;&#x440;&#x448;&#x432;&#x430; &#x430;&#x43A;&#x442;&#x44C;&#x43E;&#x440;&#x441;&#x43A;&#x43E; &#x43C;&#x430;&#x439;&#x441;&#x442;&#x43E;&#x440;&#x441;&#x442;&#x432;&#x43E;</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">S.Cirkov</h4>
-                                    <p class="card-text">&#x421;&#x442;&#x435;&#x444;&#x430;&#x43D; &#x426;&#x438;&#x440;&#x43A;&#x43E;&#x432; &#x435; &#x440;&#x43E;&#x434;&#x435;&#x43D; &#x43D;&#x430; 7 &#x44F;&#x43D;&#x443;&#x430;&#x440;&#x438; 1957 &#x433;. &#x432; &#x433;&#x440;&#x430;&#x434; &#x41F;&#x430;&#x437;&#x430;&#x440;&#x434;&#x436;&#x438;&#x43A;. &#x417;&#x430;&#x432;&#x44A;&#x440;&#x448;&#x432;&#x430; &#x430;&#x43A;&#x442;&#x44C;&#x43E;&#x440;&#x441;&#x43A;&#x43E; &#x43C;&#x430;&#x439;&#x441;&#x442;&#x43E;&#x440;&#x441;&#x442;&#x432;&#x43E; &#x432;&#x44A;&#x432; &#x412;&#x418;&#x422;&#x418;&#x417;&#x201C;&#x41A;&#x440;. &#x421;&#x430;&#x440;&#x430;&#x444;&#x43E;&#x432;&#x201C; &#x432; &#x43A;&#x43B;&#x430;&#x441;&#x430; &#x43D;&#x430; &#x43F;&#x440;&#x43E;&#x444;. &#x415;&#x43B;&#x43A;&#x430; &#x41C;&#x438;&#x445;&#x430;&#x439;&#x43B;&#x43E;&#x432;&#x430;. &#x421;&#x43B;&#x435;&#x434; &#x410;&#x43A;&#x430;&#x434;&#x435;&#x43C;&#x438;&#x44F;&#x442;&#x430; &#x43E;&#x442;&#x438;&#x432;&#x430; &#x434;&#x430; &#x436;&#x438;&#x432;&#x435;&#x435; &#x438; &#x440;&#x430;&#x431;&#x43E;&#x442;&#x438; &#x432; &#x425;&#x430;&#x441;&#x43A;&#x43E;&#x432;&#x43E;.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-youtube"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary ">Performences</button>
-                                    <button type="button" class="btn btn-secondary">Profile</button>
-                                    <button type="button" class="btn btn-secondary">Request</button>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">@performence.Title</h4>
+                                        <p class="card-text">@performence.Title</p>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                    <i class="fa fa-youtube"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-secondary ">@performence.Rating</button>
+                                        <button type="button" class="btn btn-secondary">Request</button>
+                                        <button type="button" class="btn btn-secondary">@performence.АrtistsNikname</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://res.cloudinary.com/artity/image/upload/v1563907289/profile_images/qzhuakbnj1bg4wzkc5fv.jpg" alt="card image"></p>
-                                    <h4 class="card-title">&#x419;&#x43E;&#x430;&#x43D;&#x430; &#x411;&#x443;&#x43A;&#x43E;&#x432;&#x441;&#x43A;&#x430;</h4>
-                                    <p class="card-text">&#x41C;&#x430;&#x439;&#x43A;&#x430; &#x45D;, &#x412;&#x435;&#x43B;&#x438;&#x43D;&#x430; &#x41C;&#x438;&#x43B;&#x447;&#x435;&#x432;&#x430;, &#x435; &#x436;&#x443;&#x440;&#x43D;&#x430;&#x43B;&#x438;&#x441;&#x442; &#x438; &#x43A;&#x438;&#x43D;&#x43E;&#x43F;&#x435;&#x434;&#x430;&#x433;&#x43E;&#x433;, &#x430; &#x432;&#x442;&#x43E;&#x440;&#x438;&#x44F;&#x442; &#x45D; &#x431;&#x430;&#x449;&#x430;, &#x425;&#x440;&#x438;&#x441;&#x442;&#x43E; &#x411;&#x443;&#x43A;&#x43E;&#x432;&#x441;&#x43A;&#x438;, &#x435; &#x436;</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">&#x419;&#x43E;&#x430;&#x43D;&#x430; &#x411;&#x443;&#x43A;&#x43E;&#x432;&#x441;&#x43A;&#x430;</h4>
-                                    <p class="card-text">&#x41C;&#x430;&#x439;&#x43A;&#x430; &#x45D;, &#x412;&#x435;&#x43B;&#x438;&#x43D;&#x430; &#x41C;&#x438;&#x43B;&#x447;&#x435;&#x432;&#x430;, &#x435; &#x436;&#x443;&#x440;&#x43D;&#x430;&#x43B;&#x438;&#x441;&#x442; &#x438; &#x43A;&#x438;&#x43D;&#x43E;&#x43F;&#x435;&#x434;&#x430;&#x433;&#x43E;&#x433;, &#x430; &#x432;&#x442;&#x43E;&#x440;&#x438;&#x44F;&#x442; &#x45D; &#x431;&#x430;&#x449;&#x430;, &#x425;&#x440;&#x438;&#x441;&#x442;&#x43E; &#x411;&#x443;&#x43A;&#x43E;&#x432;&#x441;&#x43A;&#x438;, &#x435; &#x436;&#x443;&#x440;&#x43D;&#x430;&#x43B;&#x438;&#x441;&#x442; &#x438; &#x43F;&#x438;&#x441;&#x430;&#x442;&#x435;&#x43B;. &#x419;&#x43E;&#x430;&#x43D;&#x430; &#x437;&#x430;&#x432;&#x44A;&#x440;&#x448;&#x432;&#x430; 9-&#x442;&#x430; &#x444;&#x440;&#x435;&#x43D;&#x441;&#x43A;&#x430; &#x435;&#x437;&#x438;&#x43A;&#x43E;&#x432;&#x430; &#x433;&#x438;&#x43C;&#x43D;&#x430;&#x437;&#x438;&#x44F; &quot;&#x410;&#x43B;&#x444;&#x43E;&#x43D;&#x441; &#x434;&#x44C;&#x43E; &#x41B;&#x430;&#x43C;&#x430;&#x440;&#x442;&#x438;&#x43D;&quot; &#x432; &#x421;&#x43E;&#x444;&#x438;&#x44F;.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-youtube"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary ">Performences</button>
-                                    <button type="button" class="btn btn-secondary">Profile</button>
-                                    <button type="button" class="btn btn-secondary">Request</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://res.cloudinary.com/artity/image/upload/v1563907426/profile_images/xdrapbeclev6tduptk3n.jpg" alt="card image"></p>
-                                    <h4 class="card-title">&#x410;&#x441;&#x435;&#x43D; &#x411;&#x43B;&#x430;&#x442;&#x435;&#x447;&#x43A;&#x438;</h4>
-                                    <p class="card-text">&#x410;&#x441;&#x435;&#x43D; &#x411;&#x43B;&#x430;&#x442;&#x435;&#x447;&#x43A;&#x438; &#x435; &#x440;&#x43E;&#x434;&#x435;&#x43D; &#x43D;&#x430; 22 &#x43C;&#x430;&#x440;&#x442; 1971 &#x433;. &#x432; &#x421;&#x43E;&#x444;&#x438;&#x44F;.&#xD;&#xA;&#xD;&#xA;&#x423;&#x432;&#x43B;&#x435;&#x447;&#x435;&#x43D; &#x43E;&#x442; &#x440;&#x438;&#x441;&#x443;&#x432;&#x430;&#x43D;&#x435;&#x442;&#x43E; &#x438; &#x43E;&#x442; &#x441;&#x43F;&#x43E;&#x440;&#x442;&#x430;. &#x422;&#x440;</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">&#x410;&#x441;&#x435;&#x43D; &#x411;&#x43B;&#x430;&#x442;&#x435;&#x447;&#x43A;&#x438;</h4>
-                                    <p class="card-text">&#x410;&#x441;&#x435;&#x43D; &#x411;&#x43B;&#x430;&#x442;&#x435;&#x447;&#x43A;&#x438; &#x435; &#x440;&#x43E;&#x434;&#x435;&#x43D; &#x43D;&#x430; 22 &#x43C;&#x430;&#x440;&#x442; 1971 &#x433;. &#x432; &#x421;&#x43E;&#x444;&#x438;&#x44F;.&#xD;&#xA;&#xD;&#xA;&#x423;&#x432;&#x43B;&#x435;&#x447;&#x435;&#x43D; &#x43E;&#x442; &#x440;&#x438;&#x441;&#x443;&#x432;&#x430;&#x43D;&#x435;&#x442;&#x43E; &#x438; &#x43E;&#x442; &#x441;&#x43F;&#x43E;&#x440;&#x442;&#x430;. &#x422;&#x440;&#x435;&#x43D;&#x438;&#x440;&#x430; &#x43F;&#x43B;&#x443;&#x432;&#x430;&#x43D;&#x435;, &#x444;&#x443;&#x442;&#x431;&#x43E;&#x43B;, &#x433;&#x440;&#x435;&#x431;&#x430;&#x43D;&#x435; &#x438; &#x445;&#x430;&#x43D;&#x434;&#x431;&#x430;&#x43B;. &#x428;&#x430;&#x43C;&#x43F;&#x438;&#x43E;&#x43D; &#x43D;&#x430; &#x411;&#x44A;&#x43B;&#x433;&#x430;&#x440;&#x438;&#x44F; &#x43D;&#x430; &#x424;&#x435;&#x434;&#x435;&#x440;&#x430;&#x446;&#x438;&#x44F;&#x442;&#x430;.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-youtube"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-secondary ">Performences</button>
-                                    <button type="button" class="btn btn-secondary">Profile</button>
-                                    <button type="button" class="btn btn-secondary">Request</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- ./Team member -->
+            }
 
 
         </div>

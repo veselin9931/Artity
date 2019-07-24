@@ -202,13 +202,18 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
+                    b.Property<string>("ArtistId")
+                        .IsRequired();
+
+                    b.Property<bool>("Contract");
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
 
-                    b.Property<string>("Features");
+                    b.Property<string>("Features")
+                        .IsRequired()
+                        .HasMaxLength(800);
 
                     b.Property<bool>("IsDeleted");
 
@@ -218,9 +223,19 @@ namespace Artity.Data.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int>("Type");
+                    b.Property<string>("Review");
 
-                    b.Property<DateTime>("Еngagement");
+                    b.Property<string>("Tel")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Town")
+                        .IsRequired();
+
+                    b.Property<int>("Type");
 
                     b.HasKey("Id");
 
@@ -275,13 +290,15 @@ namespace Artity.Data.Migrations
                     b.Property<string>("ArtistId")
                         .IsRequired();
 
+                    b.Property<string>("CategoryId");
+
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(888);
+                        .HasMaxLength(50000);
 
                     b.Property<bool>("IsDeleted");
 
@@ -301,6 +318,8 @@ namespace Artity.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
 
@@ -557,7 +576,8 @@ namespace Artity.Data.Migrations
                 {
                     b.HasOne("Artity.Data.Models.Artist", "Artist")
                         .WithMany("Offerts")
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Order", b =>
@@ -579,6 +599,10 @@ namespace Artity.Data.Migrations
                         .WithMany("Performences")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Artity.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Artity.Data.Models.Picture", "PerformencePhoto")
                         .WithMany()

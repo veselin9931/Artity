@@ -33,5 +33,14 @@
         {
             throw new NotImplementedException();
         }
+
+        public IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category)
+        {
+            return this.ArtistContext
+                 .All()
+                 .Where(a => (int)a.Category.CategoryType == (int)category)
+                 .OrderBy(a => a.CreatedOn)
+                 .To<TViewModel>().ToList();
+        }
     }
 }

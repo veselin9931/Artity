@@ -7,5 +7,7 @@
         IEnumerable<TViewModel> GetAllArtists<TViewModel>();
 
         IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter);
+
+        IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category);
     }
 }
