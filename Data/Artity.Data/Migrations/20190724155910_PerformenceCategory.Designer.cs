@@ -4,14 +4,16 @@ using Artity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Artity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190724155910_PerformenceCategory")]
+    partial class PerformenceCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,8 +155,6 @@ namespace Artity.Data.Migrations
 
                     b.Property<string>("ProfilePictureId");
 
-                    b.Property<string>("SocialMediaId");
-
                     b.Property<string>("WorkNumber")
                         .IsRequired();
 
@@ -165,8 +165,6 @@ namespace Artity.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("ProfilePictureId");
-
-                    b.HasIndex("SocialMediaId");
 
                     b.ToTable("Artists");
                 });
@@ -426,32 +424,6 @@ namespace Artity.Data.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Artity.Data.Models.SocialMedia", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime?>("DeletedOn");
-
-                    b.Property<string>("Facebook");
-
-                    b.Property<string>("Instagram");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Twitter");
-
-                    b.Property<string>("Website");
-
-                    b.Property<string>("Youtube");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SocialMedias");
-                });
-
             modelBuilder.Entity("Artity.Data.Models.Song", b =>
                 {
                     b.Property<string>("Id")
@@ -593,10 +565,6 @@ namespace Artity.Data.Migrations
                     b.HasOne("Artity.Data.Models.Picture", "ProfilePicture")
                         .WithMany()
                         .HasForeignKey("ProfilePictureId");
-
-                    b.HasOne("Artity.Data.Models.SocialMedia", "SocialMedia")
-                        .WithMany()
-                        .HasForeignKey("SocialMediaId");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Category", b =>

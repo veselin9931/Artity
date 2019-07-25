@@ -16,6 +16,7 @@
             this.Offerts = new List<Offert>();
             this.Ratings = new List<Rating>();
         }
+
         [Required]
         [MaxLength(30)]
         public string Nikname { get; set; }
@@ -44,6 +45,10 @@
         public virtual IList<Performence> Performences { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string SocialMediaId { get; set; }
+
+        public virtual SocialMedia SocialMedia { get; set; }
 
         public DateTime? DeletedOn { get; set; }
     }

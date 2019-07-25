@@ -43,6 +43,8 @@
 
         public DbSet<Song> Songs { get; set; }
 
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
