@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Artiy.Web.InputModels\Artiy.Web.InputModels.csproj" />
+
     <ProjectReference Include="..\..\Data\Artity.Data.Models\Artity.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\Artity.Data\Artity.Data.csproj" />
     <ProjectReference Include="..\..\Services\Artity.Services.Data\Artity.Services.Data.csproj" />
