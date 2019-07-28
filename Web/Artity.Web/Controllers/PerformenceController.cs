@@ -58,9 +58,9 @@
             return this.Redirect(Common.GlobalConstants.HomeUrl);
         }
 
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Profile()
         {
-            return this.Ok();
+            return this.View();
         }
 
         public async Task<IActionResult> Delete()

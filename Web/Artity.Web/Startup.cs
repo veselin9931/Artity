@@ -69,7 +69,6 @@
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                     options.Lockout.MaxFailedAccessAttempts = 10;
                     options.Lockout.AllowedForNewUsers = true;
-                  
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserStore<ApplicationUserStore>()
@@ -116,7 +115,6 @@
             services.AddIdentityCore<ApplicationUser>();
 
             // Data repositories
-           
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
@@ -132,6 +130,8 @@
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<Services.Performence.IPerformenceService, Services.Performence.PerformenceService>();
+            services.AddTransient<Services.Rating.IRatingService, Services.Rating.RatingService>();
+
             //Artity system services 
             services.AddTransient<IPicureService, PictureService>();
 

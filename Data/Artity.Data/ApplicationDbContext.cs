@@ -43,7 +43,7 @@
 
         public DbSet<Song> Songs { get; set; }
 
-        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Social> Socials { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -75,9 +75,19 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
+            // Needed for Identity models configuration
+            base.OnModelCreating(builder);
+
+            builder.Entity<Social>()
+              .HasKey(p => p.Id);
+
             builder.Entity<Artist>()
                 .HasMany(p => p.Performences)
                 .WithOne(a => a.Artist);
+
+            builder.Entity<Artist>()
+                .HasOne(p => p.Social)
+                ;
 
             builder.Entity<Artist>()
                 .HasMany(p => p.Offerts)
@@ -99,9 +109,6 @@
 
             builder.Entity<Performence>()
             .HasMany(a => a.Pictures);
-
-            // Needed for Identity models configuration
-            base.OnModelCreating(builder);
 
             ConfigureUserIdentityRelations(builder);
 
@@ -190,5 +197,7 @@
                 }
             }
         }
+
+              
     }
 }

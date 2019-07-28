@@ -46,9 +46,9 @@
 
         public bool IsDeleted { get; set; }
 
-        public string SocialMediaId { get; set; }
+        public string SocialId { get; set; }
 
-        public virtual SocialMedia SocialMedia { get; set; }
+        public virtual Social Social { get; set; }
 
         public DateTime? DeletedOn { get; set; }
     }

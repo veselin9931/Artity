@@ -153,7 +153,7 @@ namespace Artity.Data.Migrations
 
                     b.Property<string>("ProfilePictureId");
 
-                    b.Property<string>("SocialMediaId");
+                    b.Property<string>("SocialId");
 
                     b.Property<string>("WorkNumber")
                         .IsRequired();
@@ -166,7 +166,7 @@ namespace Artity.Data.Migrations
 
                     b.HasIndex("ProfilePictureId");
 
-                    b.HasIndex("SocialMediaId");
+                    b.HasIndex("SocialId");
 
                     b.ToTable("Artists");
                 });
@@ -315,6 +315,8 @@ namespace Artity.Data.Migrations
 
                     b.Property<double>("Rating");
 
+                    b.Property<string>("SocialId");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -328,6 +330,8 @@ namespace Artity.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("PerformencePhotoId");
+
+                    b.HasIndex("SocialId");
 
                     b.ToTable("Performences");
                 });
@@ -426,30 +430,30 @@ namespace Artity.Data.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Artity.Data.Models.SocialMedia", b =>
+            modelBuilder.Entity("Artity.Data.Models.Social", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("Facebook");
 
-                    b.Property<string>("Instagram");
-
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Phone");
+                    b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("Twitter");
-
-                    b.Property<string>("Website");
+                    b.Property<string>("WebSite");
 
                     b.Property<string>("Youtube");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SocialMedias");
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Socials");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Song", b =>
@@ -594,9 +598,9 @@ namespace Artity.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProfilePictureId");
 
-                    b.HasOne("Artity.Data.Models.SocialMedia", "SocialMedia")
+                    b.HasOne("Artity.Data.Models.Social", "Social")
                         .WithMany()
-                        .HasForeignKey("SocialMediaId");
+                        .HasForeignKey("SocialId");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Category", b =>
@@ -642,6 +646,10 @@ namespace Artity.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PerformencePhotoId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Artity.Data.Models.Social", "Social")
+                        .WithMany()
+                        .HasForeignKey("SocialId");
                 });
 
             modelBuilder.Entity("Artity.Data.Models.Picture", b =>

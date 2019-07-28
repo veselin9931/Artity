@@ -50,10 +50,10 @@
 
         public virtual Artist Artist { get; set; }
 
-        [Required]
-        public string SocialMediaId { get; set; }
 
-        public virtual SocialMedia SocialMedia { get; set; }
+        public string SocialId { get; set; }
+
+        public virtual Social Social { get; set; }
 
         public bool IsDeleted { get; set; }
 

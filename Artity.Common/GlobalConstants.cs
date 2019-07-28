@@ -18,5 +18,9 @@
 
         public const string Index = "Index";
 
+        public const string Performence = "Performence";
+
+        public const string Artist = "Artist";
+
     }
 }
