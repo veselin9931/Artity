@@ -10,6 +10,9 @@
 
     using System.Threading.Tasks;
 
+    using Artity.Services.Mapping;
+    using System.Linq;
+
     public class PerformenceController : BaseArtistController
     {
         private readonly IPerformenceService performenceService;
@@ -58,9 +61,12 @@
             return this.Redirect(Common.GlobalConstants.HomeUrl);
         }
 
-        public async Task<IActionResult> Profile()
+       
+        public async Task<IActionResult> Profile(string id)
         {
-            return this.View();
+            var performence = this.performenceService.GetPerformence(id).To<PerformneceProfileViewModel>().ToList().First();
+            
+            return this.View(performence);
         }
 
         public async Task<IActionResult> Delete()

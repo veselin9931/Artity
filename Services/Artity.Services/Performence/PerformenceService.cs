@@ -97,5 +97,14 @@
                  .OrderBy(a => a.CreatedOn)
                  .To<TViewModel>().ToList();
         }
+
+        public IQueryable GetPerformence(string id)
+        {
+           return this.repository
+                 .All()
+                 .Where(a => a.Id == id);
+        }
+
+      
     }
 }

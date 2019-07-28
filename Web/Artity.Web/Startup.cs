@@ -147,7 +147,7 @@
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                if (env.IsDevelopment())
+                if (env.IsDevelopment() || env.IsProduction())
                 {
                     dbContext.Database.Migrate();
                 }

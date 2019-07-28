@@ -6,8 +6,10 @@ using System.Text;
 
 namespace Artity.Web.ViewModels.Performence
 {
-    public class PerformenceAllViewModel : IMapFrom<Artity.Data.Models.Performence> , IHaveCustomMappings
+    public class PerformenceAllViewModel : IMapFrom<Artity.Data.Models.Performence>, IHaveCustomMappings
     {
+        public string Id { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }

@@ -17,7 +17,7 @@
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="@performence.PerformencePhotoLink" alt="card image"></p>
                                         <h4 class="card-title">@performence.Title</h4>
-                                        <p class="card-text">@performence.SmallDescription...</p>
+                                        <p class="card-text">@performence.SmallDescription</p>
                   
                                     </div>
                                 </div>
@@ -26,8 +26,8 @@
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">@performence.Title</h4>
-                                        <p class="card-text">@performence.Description.Substring(0,200)..</p>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus text-white "></i></a>
+                                        <p class="card-text">@performence.SmallDescription</p>
+                                        <a asp-controller="Performence" asp-action="Profile" asp-route-id="@performence.Id" class="btn btn-primary btn-sm"><i class="fa fa-plus text-white "></i></a>
                                         <ul class="list-inline mt-3">
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">

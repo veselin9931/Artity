@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image" content="https://res.cloudinary.com/artity/image/upload/v1564323993/profile_images/s541q0zltgugxnhmg3pu.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
     <title>@this.ViewData["Title"] - Artity</title>
 
     <environment names="Development">
@@ -12,11 +16,15 @@
         <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" asp-append-version="true">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  asp-append-version="true">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true">
     </environment>
     <environment names="Staging,Production">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />   
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/freelancer.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" asp-append-version="true">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" asp-append-version="true">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true">
     </environment>
 </head>
 <body class="page-section-heading pt-3">
@@ -34,15 +42,13 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-controller="Artist" asp-action="All"><i class="fas fa-paint-brush pr-2"></i>Artists</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-controller="Artist" asp-action="All">Artists <i class="fas fa-paint-brush pr-2"></i></a>
                 </li>
 
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-controller="Performence" asp-action="All"> <i class="fas fa-users pr-2"></i>Performences</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-controller="Performence" asp-action="All"> Performences <i class="fas fa-users pr-2"></i></a>
                 </li>
-                <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact"><i class="fas fa-phone pr-2"></i>Contacts</a>
-                </li>
+                
 
 
 
@@ -126,10 +132,14 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/vendor/jquery/jquery.js" asp-append-version="true"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/jquery-easing/jquery.easing.js" asp-append-version="true"></script>
+        <script src="~/js/jqBootstrapValidation.js" asp-append-version="true"></script>
+        <script src="~/js/contact_me.js" asp-append-version="true"></script>
+        <script src="~/js/freelancer.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
 

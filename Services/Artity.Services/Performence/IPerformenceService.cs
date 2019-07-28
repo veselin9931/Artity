@@ -1,6 +1,7 @@
 ﻿namespace Artity.Services.Performence
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Artity.Data.Models;
@@ -13,6 +14,8 @@
         IEnumerable<TViewModel> GetAll<TViewModel>();
 
         IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category);
+
+        IQueryable GetPerformence(string id);
 
     }
 }
