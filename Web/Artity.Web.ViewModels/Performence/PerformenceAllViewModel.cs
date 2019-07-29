@@ -12,8 +12,6 @@ namespace Artity.Web.ViewModels.Performence
 
         public string Title { get; set; }
 
-        public string Description { get; set; }
-
         public string SmallDescription { get; set; }
 
         public virtual string АrtistNikname { get; set; }
@@ -28,12 +26,10 @@ namespace Artity.Web.ViewModels.Performence
         {
             configuration
                     .CreateMap<Data.Models.Performence, PerformenceAllViewModel>()
-                    .ForMember(
-                destination => destination.АrtistNikname,
-                opts => opts.MapFrom(origin => origin.Artist.Nikname))
-                .ForMember(
+                      .ForMember(
                destination => destination.SmallDescription,
-               opts => opts.MapFrom(origin => origin.Description.Length < 90 ? origin.Description : origin.Description.Substring(0, 88)));
+               opts => opts.MapFrom(origin => origin.Description.Length <= 85 ? origin.Description : origin.Description.Substring(0, 85)))
+                ;
 
         }
     }

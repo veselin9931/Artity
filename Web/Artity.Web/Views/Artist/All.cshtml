@@ -5,7 +5,7 @@
 
 <partial name="_SearchBarPartial"  model="this.Model.Categories"/>
 
-<section id="team" class="pb-5 mt-3 mb-3">
+<section id="team" class="pb-5 mt-3 mb-5">
     <div class="container">
         <h5 class="section-title h1">@this.ViewData["Title"]</h5>
         <div class="row">
@@ -20,30 +20,33 @@
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="@artist.ProfilePicture.Link" alt="card image"></p>
                                         <h4 class="card-title">@artist.Nikname</h4>
-                                        <p class="card-text">@artist.AboutMe </p>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                        <p class="card-text"> </p>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <div class="backside">
+                            <div class="backside mb-5">
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">@artist.Nikname</h4>
-                                        <p class="card-text">@artist.AboutMe</p>
+                                        <p class="card-text">@artist.AboutMe ...</p>
+                                        <a class="btn btn-primary btn-sm mt-3 mb-5"><i class="fa fa-plus text-white "></i></a>
+
+
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-facebook">@artist.Facebook</i>
+                                                    <i class="fa fa-facebook" style="font-size:1.5em">@artist.Facebook</i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-twitter">@artist.Twiter</i>
+                                                    <i class="fa fa-twitter " style="font-size:1.5em">@artist.Twiter</i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-youtube">@artist.Youtube</i>
+                                                    <i class="fa fa-youtube" style="font-size:1.5em">@artist.Youtube</i>
                                                 </a>
                                             </li>
                                         </ul>

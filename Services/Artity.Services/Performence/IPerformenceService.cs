@@ -17,5 +17,8 @@
 
         IQueryable GetPerformence(string id);
 
+        IEnumerable<TViewModel> GetAll<TViewModel>(string userId);
+
+
     }
 }

@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
-    public class ArtistController : BaseArtistController
+    public class ArtistController : BaseController
     {
         private readonly IArtistService artistService;
         private readonly ISendGrid emailSender;

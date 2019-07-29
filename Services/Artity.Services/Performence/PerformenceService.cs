@@ -89,6 +89,16 @@
                 .To<TViewModel>().ToList();
         }
 
+        public IEnumerable<TViewModel> GetAll<TViewModel>(string artistId)
+        {
+            return this.repositoryArtists
+               .All()
+               .FirstOrDefault(a => a.Id == artistId)
+               .Performences
+               .AsQueryable()
+               .To<TViewModel>().ToList();
+        }
+
         public IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category)
         {
             return this.repository
@@ -103,8 +113,6 @@
            return this.repository
                  .All()
                  .Where(a => a.Id == id);
-        }
-
-      
+        } 
     }
 }

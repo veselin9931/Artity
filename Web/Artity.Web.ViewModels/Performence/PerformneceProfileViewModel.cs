@@ -25,13 +25,23 @@ namespace Artity.Web.ViewModels.Performence
 
         public virtual double Rating { get; set; }
 
+        public string SocialFacebook { get; set; }
+
+        public string SocialTwiter { get; set; }
+
+        public string SocialYoutube { get; set; }
+
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration
-                     .CreateMap<Data.Models.Performence, PerformenceAllViewModel>()
-                     .ForMember(
-                 destination => destination.АrtistNikname,
-                 opts => opts.MapFrom(origin => origin.Artist.Nikname));
+               .CreateMap<Data.Models.Performence, PerformenceAllViewModel>()
+               .ForMember(
+           destination => destination.АrtistNikname,
+           opts => opts.MapFrom(origin => origin.Artist.Nikname))
+           .ForMember(
+          destination => destination.SmallDescription,
+          opts => opts.MapFrom(origin => origin.Description.Length < 90 ? origin.Description : origin.Description.Substring(0, 88)));
         }
     }
 }

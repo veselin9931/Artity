@@ -13,7 +13,7 @@
     using Artity.Services.Mapping;
     using System.Linq;
 
-    public class PerformenceController : BaseArtistController
+    public class PerformenceController : BaseController
     {
         private readonly IPerformenceService performenceService;
         private readonly Microsoft.AspNetCore.Identity.UserManager<Data.Models.ApplicationUser> userManager;

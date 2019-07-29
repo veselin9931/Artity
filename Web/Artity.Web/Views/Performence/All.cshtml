@@ -17,40 +17,36 @@
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="@performence.PerformencePhotoLink" alt="card image"></p>
                                         <h4 class="card-title">@performence.Title</h4>
-                                        <p class="card-text">@performence.SmallDescription</p>
+                                       
                   
                                     </div>
                                 </div>
                             </div>
-                            <div class="backside">
+                            <div class="backside" >
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">@performence.Title</h4>
-                                        <p class="card-text">@performence.SmallDescription</p>
-                                        <a asp-controller="Performence" asp-action="Profile" asp-route-id="@performence.Id" class="btn btn-primary btn-sm"><i class="fa fa-plus text-white "></i></a>
-                                        <ul class="list-inline mt-3">
+                                        <p class="card-text">@performence.SmallDescription ...</p>
+                                        <a asp-controller="Performence" asp-action="Profile" asp-route-id="@performence.Id" class="btn btn-primary btn-sm mt-3 mb-5"><i class="fa fa-plus text-white "></i></a>
+                                        <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-facebook"></i>
+                                                    <i class="fa fa-facebook" style="font-size:1.5em"></i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-twitter"></i>
+                                                    <i class="fa fa-twitter " style="font-size:1.5em"></i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-youtube"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                    <i class="fa fa-phone"></i>
+                                                    <i class="fa fa-youtube" style="font-size:1.5em"></i>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
+                                    
                                     <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-secondary ">Rating: @performence.Rating</button>                                     
                                         <button type="button" class="btn btn-secondary">Creator: @performence.АrtistNikname</button>
