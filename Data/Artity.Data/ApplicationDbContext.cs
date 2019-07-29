@@ -93,9 +93,6 @@
                 .HasMany(p => p.Offerts)
                 .WithOne(p => p.Artist);
 
-            builder.Entity<Rating>()
-              .HasOne(a => a.Artist)
-              .WithMany(b => b.Ratings);
 
             builder.Entity<Rating>()
               .HasOne(a => a.User);

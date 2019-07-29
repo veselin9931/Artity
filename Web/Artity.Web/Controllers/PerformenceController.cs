@@ -60,12 +60,9 @@
             var viewModel = await this.performenceService.CreatePerformence(createInputModel, user);
             return this.Redirect(Common.GlobalConstants.HomeUrl);
         }
-
-       
         public async Task<IActionResult> Profile(string id)
         {
             var performence = this.performenceService.GetPerformence(id).To<PerformneceProfileViewModel>().ToList().First();
-            
             return this.View(performence);
         }
 

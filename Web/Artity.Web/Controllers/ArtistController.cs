@@ -4,9 +4,10 @@
     using Artity.Services.File;
     using Artity.Services.Messaging;
     using Artity.Web.ViewModels.Artist;
-    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Artity.Services.Mapping;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+    using System.Linq;
 
     public class ArtistController : BaseController
     {
@@ -57,6 +58,13 @@
             };
 
             return this.View(artitView);
+        }
+
+        public async Task<IActionResult> Profile(string id)
+        {
+            var artist = this.artistService.GetArtist(id).To<ArtistProfileViewModel>().ToList().First();
+
+            return this.View(artist);
         }
 
         public async Task<IActionResult> Dashboard()

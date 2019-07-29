@@ -20,9 +20,10 @@
         public virtual ApplicationUser User { get; set; }
 
         [Required]
-        public string ArtistId { get; set; }
+        public string RatedId { get; set; }
 
-        public virtual Artist Artist { get; set; }
+        [Required]
+        public Enums.RatingType Type { get; set; }
 
         [Range(1, 5)]
         public int RatingValue { get; set; }

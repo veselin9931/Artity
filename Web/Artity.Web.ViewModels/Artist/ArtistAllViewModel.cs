@@ -6,9 +6,11 @@
     using Artity.Web.ViewModels.Picture;
     using AutoMapper;
 
-    public class ArtistAllViewModel : IMapFrom<Artist>, IHaveCustomMappings
+    public class ArtistAllViewModel : IMapFrom<Artist>, IHaveCustomMappings, IMapTo<ArtistProfileViewModel>
 
     {
+        public string Id { get; set; }
+
         public string Nikname { get; set; }
 
         public string AboutMe { get; set; }

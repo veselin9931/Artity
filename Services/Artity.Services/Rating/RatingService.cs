@@ -4,6 +4,7 @@ using Artity.Data.Models;
 using System.Threading.Tasks;
 using Artity.Common;
 using System.Linq;
+using Artity.Data.Models.Enums;
 
 namespace Artity.Services.Rating
 {
@@ -28,7 +29,7 @@ namespace Artity.Services.Rating
         {
 
             var artist = this.artistRepo.All().FirstOrDefault(a => a.Nikname == ratedName);
-            return this.ratingRepo.All().Any(a => a.UserId == userId && a.ArtistId == artist.Id);
+            return this.ratingRepo.All().Any(a => a.UserId == userId && a.RatedId == artist.Id);
         }
 
         public async Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue)
@@ -43,7 +44,7 @@ namespace Artity.Services.Rating
             {
                 if (!this.IsRated(userId, ratedId))
                 {
-                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, ArtistId = ratedArtist.Id, UserId = userId };
+                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId,  Type = RatingType.Artist };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
                     ratedArtist.Ratings.Add(rating);

@@ -1,6 +1,7 @@
 ﻿namespace Artity.Services.File
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     public interface IArtistService
     {
@@ -9,5 +10,9 @@
         IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter);
 
         IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category);
+
+        IQueryable GetArtist(string id);
+
+
     }
 }

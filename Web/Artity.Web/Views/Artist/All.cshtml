@@ -30,8 +30,9 @@
                                     <div class="card-body text-center mt-4">
                                         <h4 class="card-title">@artist.Nikname</h4>
                                         <p class="card-text">@artist.AboutMe ...</p>
-                                        <a class="btn btn-primary btn-sm mt-3 mb-5"><i class="fa fa-plus text-white "></i></a>
 
+                                        <a asp-controller="Artist" asp-action="Profile" asp-route-id="@artist.Id" class="btn btn-primary btn-sm mt-3 mb-5">
+                                        <i class="fa fa-plus text-white "></i></a>
 
                                         <ul class="list-inline">
                                             <li class="list-inline-item">

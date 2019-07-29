@@ -14,16 +14,18 @@
 
     public class ArtistService : IArtistService
     {
+        private readonly IRepository<Artist> artistContext;
+
         public ArtistService(IRepository<Artist> artistContext)
         {
-            this.ArtistContext = artistContext;
+            this.artistContext = artistContext;
         }
 
-        public IRepository<Artist> ArtistContext { get; }
+
 
         public IEnumerable<TViewModel> GetAllArtists<TViewModel>()
         {
-          return this.ArtistContext
+          return this.artistContext
                 .All()
                 .OrderBy(a => a.CreatedOn)
                 .To<TViewModel>().ToList();
@@ -36,11 +38,19 @@
 
         public IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category)
         {
-            return this.ArtistContext
+            return this.artistContext
                  .All()
                  .Where(a => (int)a.Category.CategoryType == (int)category)
                  .OrderBy(a => a.CreatedOn)
                  .To<TViewModel>().ToList();
         }
+
+        public IQueryable GetArtist(string id)
+        {
+            return this.artistContext
+                  .All()
+                  .Where(a => a.Id == id);
+        }
+
     }
 }
