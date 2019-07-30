@@ -8,20 +8,24 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using System.Linq;
+    using Artity.Services.Rating;
 
     public class ArtistController : BaseController
     {
         private readonly IArtistService artistService;
         private readonly ISendGrid emailSender;
         private readonly ICategoryService categoryService;
+        private readonly IRatingService ratingService;
 
         public ArtistController(
             IArtistService artistService
-            , ICategoryService categoryService
+            , ICategoryService categoryService,
+            IRatingService ratingService
             )
         {
             this.artistService = artistService;
             this.categoryService = categoryService;
+            this.ratingService = ratingService;
         }
 
         [HttpGet(Name = "/All")]
@@ -63,7 +67,7 @@
         public async Task<IActionResult> Profile(string id)
         {
             var artist = this.artistService.GetArtist(id).To<ArtistProfileViewModel>().ToList().First();
-
+            
             return this.View(artist);
         }
 

@@ -25,9 +25,18 @@ namespace Artity.Services.Rating
             this.ratingRepo = ratingRepo;
         }
 
+        public double GetRate(RatingType type, string rateId)
+        {
+            return this.ratingRepo.All()
+                      .Where(a => a.RatedId == rateId && a.Type == type)
+                      .Select(a => a.RatingValue)
+                      .Average();
+        }
+
         public bool IsRated(string userId, string ratedId)
         {
-            return this.ratingRepo.All().Any(a => a.UserId == userId && a.RatedId == ratedId);
+            return this.ratingRepo.All()
+                .Any(a => a.UserId == userId && a.RatedId == ratedId);
         }
 
         public async Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue)
@@ -36,19 +45,21 @@ namespace Artity.Services.Rating
 
             var model = new RatingModel();
 
-            model.RatedId = ratedId;
-
             if (ratedArtist != null)
             {
+                model.RatedId = ratedArtist.Id;
+
                 if (!this.IsRated(userId, ratedArtist.Id))
                 {
-                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId,  Type = RatingType.Artist };
+                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId, Type = RatingType.Artist };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
-                    model.Rating = ratingValue;
+                    model.Rating = this.GetRate(rating.Type, model.RatedId);
+
                 }
                 else
                 {
+                    model.Rating = this.GetRate(RatingType.Artist, model.RatedId);
                     model.Error = "Alrady rated";
                 }
             }
@@ -63,28 +74,30 @@ namespace Artity.Services.Rating
 
         public async Task<RatingModel> RatePerformence(string userId, string performenceName, int ratingValue)
         {
-            var ratedId = this.perfomenceRepo.All().FirstOrDefault(p => p.Title == performenceName);
+            var performence = this.perfomenceRepo.All().FirstOrDefault(p => p.Title == performenceName);
 
             var model = new RatingModel();
 
-            model.RatedId = performenceName;
-
-            if (ratedId != null)
+            if (performence != null)
             {
-                if (!this.IsRated(userId, ratedId.Id))
+                model.RatedId = performence.Id;
+
+                if (!this.IsRated(userId, performence.Id))
                 {
-                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedId.Id, UserId = userId, Type = RatingType.Performence };
+                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = performence.Id, UserId = userId, Type = RatingType.Performence };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
-                    model.Rating = ratingValue;
+                    model.Rating = this.GetRate(rating.Type, performence.Id);
                 }
                 else
                 {
+                    model.Rating = this.GetRate(RatingType.Performence, model.RatedId);
                     model.Error = "Alrady rated";
                 }
             }
             else
             {
+
                 model.Error = "Incorect performence";
             }
 
