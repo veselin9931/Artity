@@ -19,7 +19,7 @@
         }
 
         [Route("Rate/{rateValue}/Artist/{artist}/")]
-        public async Task<JsonResult> Up([FromRoute]int rateValue, [FromRoute]string artist)
+        public async Task<JsonResult> RateArtist([FromRoute]int rateValue, [FromRoute]string artist)
         {
             var userId = this.userManager.GetUserId(this.User);
 
@@ -27,11 +27,16 @@
             return this.Json(rate);
         }
 
-        [Route("/{type}/{id}/Up")]
-        public async Task<IActionResult> Down(string type, string id)
+        [Route("Rate/{rateValue}/Performence/{performence}/")]
+        public async Task<JsonResult> RatePerformence([FromRoute]int rateValue, [FromRoute]string performence)
         {
-            return this.View();
+            var userId = this.userManager.GetUserId(this.User);
+
+            var rate = await this.ratingService.RatePerformence(userId, performence, rateValue);
+            return this.Json(rate);
         }
+
+        
 
     }
 }

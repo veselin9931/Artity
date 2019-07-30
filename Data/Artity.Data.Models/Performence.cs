@@ -4,6 +4,7 @@
 
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Artity.Common;
     using Artity.Data.Common.Models;
 
@@ -30,7 +31,8 @@
         public decimal Price { get; set; }
 
         [Range(0,5)]
-        public double Rating { get; set; }
+        public double Rating => this.Ratings.Count > 0 ?
+            this.Ratings.Average(a => a.RatingValue) : 0.0;
 
         public virtual IList<Rating> Ratings { get; set; }
 

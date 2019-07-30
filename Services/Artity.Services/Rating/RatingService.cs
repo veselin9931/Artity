@@ -25,11 +25,9 @@ namespace Artity.Services.Rating
             this.ratingRepo = ratingRepo;
         }
 
-        public bool IsRated(string userId, string ratedName)
+        public bool IsRated(string userId, string ratedId)
         {
-
-            var artist = this.artistRepo.All().FirstOrDefault(a => a.Nikname == ratedName);
-            return this.ratingRepo.All().Any(a => a.UserId == userId && a.RatedId == artist.Id);
+            return this.ratingRepo.All().Any(a => a.UserId == userId && a.RatedId == ratedId);
         }
 
         public async Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue)
@@ -42,7 +40,7 @@ namespace Artity.Services.Rating
 
             if (ratedArtist != null)
             {
-                if (!this.IsRated(userId, ratedId))
+                if (!this.IsRated(userId, ratedArtist.Id))
                 {
                     var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId,  Type = RatingType.Artist };
                     await this.ratingRepo.AddAsync(rating);
@@ -66,6 +64,38 @@ namespace Artity.Services.Rating
 
         }
 
+        public async Task<RatingModel> RatePerformence(string userId, string performenceName, int ratingValue)
+        {
+            var ratedId = this.perfomenceRepo.All().FirstOrDefault(p => p.Title == performenceName);
+
+            var model = new RatingModel();
+
+            model.RatedId = performenceName;
+
+            if (ratedId != null)
+            {
+                if (!this.IsRated(userId, ratedId.Id))
+                {
+                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedId.Id, UserId = userId, Type = RatingType.Performence };
+                    await this.ratingRepo.AddAsync(rating);
+                    await this.ratingRepo.SaveChangesAsync();
+                    ratedId.Ratings.Add(rating);
+                    this.perfomenceRepo.Update(ratedId);
+                    await this.perfomenceRepo.SaveChangesAsync();
+                    model.Rating = ratedId.Rating;
+                }
+                else
+                {
+                    model.Error = "Alrady rated";
+                }
+            }
+            else
+            {
+                model.Error = "Incorect performence";
+            }
+
+            return model;
+        }
     }
 
 }

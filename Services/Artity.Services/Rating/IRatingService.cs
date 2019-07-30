@@ -8,8 +8,9 @@ namespace Artity.Services.Rating
     public interface IRatingService
     {
          Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue);
-
         // Task<bool> RatePerformence(string userId, string ratedId, int ratingValue);
         bool IsRated(string userId, string ratedName);
+
+        Task<RatingModel> RatePerformence(string userId, string performenceName, int ratingValue);
     }
 }
