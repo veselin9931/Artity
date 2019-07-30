@@ -3,7 +3,7 @@
     ViewData["Title"] = "All artist";
 }
 
-<partial name="_SearchBarPartial"  model="this.Model.Categories"/>
+<partial name="_SearchBarPartial" model="this.Model.Categories" />
 
 <section id="team" class="pb-5 mt-3 mb-5">
     <div class="container">
@@ -13,14 +13,15 @@
             @foreach (var artist in this.Model.ArtistAlls)
             {
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="image-flip"  onmouseover="this.classList.toggle('hover');">
                         <div class="mainflip">
                             <div class="frontside">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <p><img class=" img-fluid" src="@artist.ProfilePicture.Link" alt="card image"></p>
                                         <h4 class="card-title">@artist.Nikname</h4>
-                                        <h6 class="card-text pt-2 "><i class="fas fa-star"></i> @artist.Rating %</h6>
+                                        <h6 class="card-text  pt-2 "><i class="fas fa-star"></i> @artist.Rating %</h6>
+
 
                                     </div>
                                 </div>
@@ -32,7 +33,10 @@
                                         <p class="card-text">@artist.AboutMe ...</p>
 
                                         <a asp-controller="Artist" asp-action="Profile" asp-route-id="@artist.Id" class="btn btn-primary btn-sm mt-3 mb-5">
-                                        <i class="fa fa-plus text-white "></i></a>
+                                            <i class="fa fa-plus text-white "></i>
+                                        </a>
+
+                                       
 
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
@@ -65,7 +69,7 @@
             }
 
             <!-- ./Team member -->
-
+           
 
         </div>
     </div>
@@ -73,6 +77,7 @@
 
 
 @section Scripts {
+  
 
     <script>
         $(document).ready(function () {

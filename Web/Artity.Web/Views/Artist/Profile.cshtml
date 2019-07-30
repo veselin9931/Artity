@@ -7,21 +7,21 @@
 
 <section id="team" class="pb-5 mt-3 mb-3 ">
     <div class="container">
-        <h5 class="section-title h2">@Model.Nikname</h5>
+        <h5 class="section-title h2" id="artist-name">@Model.Nikname</h5>
         <div class="row mx-auto ">
             <img class="col-md-3 img-fluid mr-md-3 " src="@Model.ProfilePictureLink" alt="...">
 
             <div class=" bg-gradient-primary col-md-8 pt-4"><p class="text-justify"> @Model.AboutMe</p></div>
-
+            
         </div>
 
 
 
         <div class="row mx-auto">
             <div class="btn-group col-12   pt-3 pb-3" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">
-                    <i class="fas fa-star-half-alt"></i> Rating: @Model.Rating
-                </button>
+                <partial name="_RatePartial" model="this.Model" />
+                  
+               
                 <button type="button" class="btn btn-secondary">
                     <i class="fas fa-dollar-sign"></i> Category: @Model.CategoryName
                 </button>
