@@ -2,11 +2,12 @@
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Artity.Web.ViewModels.Performence
 {
-    public class PerformenceAllViewModel : IMapFrom<Artity.Data.Models.Performence>, IHaveCustomMappings
+    public class PerformenceAllViewModel : IMapFrom<Artity.Data.Models.Performence>
     {
         public string Id { get; set; }
 
@@ -20,17 +21,10 @@ namespace Artity.Web.ViewModels.Performence
 
         public virtual string PerformencePhotoLink { get; set; }
 
-        public virtual double Rating { get; set; }
+        public double Rating { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                    .CreateMap<Data.Models.Performence, PerformenceAllViewModel>()
-                      .ForMember(
-               destination => destination.SmallDescription,
-               opts => opts.MapFrom(origin => origin.Description.Length <= 85 ? origin.Description : origin.Description.Substring(0, 85)))
-                ;
+        
 
-        }
+
     }
 }

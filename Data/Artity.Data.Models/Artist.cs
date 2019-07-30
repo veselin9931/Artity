@@ -14,7 +14,6 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Offerts = new List<Offert>();
-            this.Ratings = new List<Rating>();
         }
 
         [Required]
@@ -27,9 +26,6 @@
 
         public string AboutMe { get; set; }
 
-        public double Rating => this.Ratings.Count> 0 ?
-            this.Ratings.Average(a => a.RatingValue) : 0.0;
-
         public string CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
@@ -39,9 +35,7 @@
         public virtual Picture ProfilePicture { get; set; }
 
         public virtual IList<Offert> Offerts { get; set; }
-
-        public virtual IList<Rating> Ratings { get; set; }
-
+    
         public virtual IList<Performence> Performences { get; set; }
 
         public bool IsDeleted { get; set; }

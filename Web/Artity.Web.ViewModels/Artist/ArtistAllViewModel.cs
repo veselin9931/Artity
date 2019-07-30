@@ -1,5 +1,6 @@
 ﻿namespace Artity.Web.ViewModels.Artist
 {
+    using System.Linq;
     using System.Text;
     using Artity.Data.Models;
     using Artity.Services.Mapping;
@@ -35,8 +36,8 @@
                     .CreateMap<Data.Models.Artist, ArtistAllViewModel>()
                       .ForMember(
                destination => destination.AboutMe,
-               opts => opts.MapFrom(origin => origin.AboutMe.Length <= 85 ? origin.Description : origin.AboutMe.Substring(0, 85)))
-                ;
+               opts => opts.MapFrom(origin => origin.AboutMe.Length <= 85 ? origin.Description : origin.AboutMe.Substring(0, 85)));
+               
         }
     }
 }

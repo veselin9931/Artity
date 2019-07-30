@@ -1,13 +1,15 @@
 ﻿using Artity.Services.Mapping;
 using Artity.Web.ViewModels.Picture;
 using Artity.Web.ViewModels.Social;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Artity.Web.ViewModels.Artist
 {
-    public class ArtistProfileViewModel : IMapFrom<Data.Models.Artist>
+    public class ArtistProfileViewModel : IMapFrom<Data.Models.Artist>, IHaveCustomMappings
     {
 
         public string Nikname { get; set; }
@@ -21,5 +23,9 @@ namespace Artity.Web.ViewModels.Artist
         public string ProfilePictureLink { get; set; }
 
         public string CategoryName { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+        }
     }
 }

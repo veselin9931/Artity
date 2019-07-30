@@ -313,8 +313,6 @@ namespace Artity.Data.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<double>("Rating");
-
                     b.Property<string>("SocialId");
 
                     b.Property<string>("Title")
@@ -374,8 +372,6 @@ namespace Artity.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ArtistId");
-
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
@@ -383,8 +379,6 @@ namespace Artity.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("PerformenceId");
 
                     b.Property<string>("RatedId")
                         .IsRequired();
@@ -398,11 +392,7 @@ namespace Artity.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId");
-
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PerformenceId");
 
                     b.HasIndex("UserId");
 
@@ -665,14 +655,6 @@ namespace Artity.Data.Migrations
 
             modelBuilder.Entity("Artity.Data.Models.Rating", b =>
                 {
-                    b.HasOne("Artity.Data.Models.Artist")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ArtistId");
-
-                    b.HasOne("Artity.Data.Models.Performence")
-                        .WithMany("Ratings")
-                        .HasForeignKey("PerformenceId");
-
                     b.HasOne("Artity.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

@@ -45,10 +45,7 @@ namespace Artity.Services.Rating
                     var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId,  Type = RatingType.Artist };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
-                    ratedArtist.Ratings.Add(rating);
-                    this.artistRepo.Update(ratedArtist);
-                    await this.artistRepo.SaveChangesAsync();
-                    model.Rating = ratedArtist.Rating;
+                    model.Rating = ratingValue;
                 }
                 else
                 {
@@ -79,10 +76,7 @@ namespace Artity.Services.Rating
                     var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedId.Id, UserId = userId, Type = RatingType.Performence };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
-                    ratedId.Ratings.Add(rating);
-                    this.perfomenceRepo.Update(ratedId);
-                    await this.perfomenceRepo.SaveChangesAsync();
-                    model.Rating = ratedId.Rating;
+                    model.Rating = ratingValue;
                 }
                 else
                 {

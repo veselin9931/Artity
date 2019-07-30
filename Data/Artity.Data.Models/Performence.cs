@@ -13,7 +13,6 @@
         public Performence()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Ratings = new List<Rating>();
             this.Pictures = new List<Picture>();
 
         }
@@ -29,12 +28,6 @@
         [Required]
         [Range(typeof(decimal), "0", "100000", ErrorMessage = PerformenceErrors.Price)]
         public decimal Price { get; set; }
-
-        [Range(0,5)]
-        public double Rating => this.Ratings.Count > 0 ?
-            this.Ratings.Average(a => a.RatingValue) : 0.0;
-
-        public virtual IList<Rating> Ratings { get; set; }
 
         [Required]
         public string PerformencePhotoId { get; set; }
@@ -60,5 +53,6 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
     }
 }
