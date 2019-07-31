@@ -4,14 +4,16 @@ using Artity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Artity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190731140600_AddUniqueConstraintOnArtistNikname")]
+    partial class AddUniqueConstraintOnArtistNikname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,8 +278,6 @@ namespace Artity.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Place");
-
-                    b.Property<int>("Stauts");
 
                     b.Property<int>("Type");
 

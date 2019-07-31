@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public interface IArtistService
     {
@@ -12,6 +13,8 @@
         IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category);
 
         IQueryable GetArtist(string id);
+
+        Task<string> GetArtistIdByName(string name);
 
 
     }

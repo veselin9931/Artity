@@ -5,7 +5,7 @@
     using System.Collections.Generic;
 
     using System.Linq;
-
+    using System.Threading.Tasks;
     using Artity.Data.Common.Repositories;
 
     using Artity.Data.Models;
@@ -52,5 +52,11 @@
                   .Where(a => a.Id == id);
         }
 
+        public async Task<string> GetArtistIdByName(string name)
+        {
+            return this.artistContext
+                  .All()?
+                  .FirstOrDefault(a => a.Nikname == name).Id;
+        }
     }
 }

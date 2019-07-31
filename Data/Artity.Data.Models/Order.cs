@@ -29,6 +29,9 @@
         [Required]
         public OrderType Type { get; set; }
 
+        [Required]
+        public OrderStatus Stauts { get; set; }
+
         public string Place { get; set; }
 
         public DateTime Duration { get; set; }

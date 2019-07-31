@@ -13,26 +13,43 @@
     public class OrderService : IOrderService
     {
         private readonly IRepository<Data.Models.Order> repositoryOrder;
-        private readonly IUserService user;
+        private readonly IUserService userService;
         private readonly IArtistService artistService;
 
         public OrderService(
             IRepository<Data.Models.Order> repositoryOrder,
-            IUserService user,
+            IUserService userService,
             IArtistService artistService)
         {
             this.repositoryOrder = repositoryOrder;
-            this.user = user;
+            this.userService = userService;
             this.artistService = artistService;
         }
 
-        public Task<bool> CreateOrder(OrderCreateInputModel inputModel)
+        public async Task<bool> CreateOrder(OrderCreateInputModel inputModel)
         {
             var order = AutoMapper.Mapper.Map<Data.Models.Order>(inputModel);
 
-            
+            var user = this.userService.GetApplicationUserByName(inputModel.Username);
 
-            throw new NotImplementedException();
+            var artist = await this.artistService.GetArtistIdByName(inputModel.ArtistNikname);
+
+            if (user == null || artist == null)
+            {
+                // TODO: Refactor
+                throw new ArgumentNullException("Artist or User is invalid");
+            }
+
+            order.User = user;
+
+            order.ArtistId = artist;
+
+            order.Stauts = Data.Models.Enums.OrderStatus.Sent;
+
+            await this.repositoryOrder.AddAsync(order);
+            var result = await this.repositoryOrder.SaveChangesAsync();
+
+            return result > 0;
         }
     }
 }

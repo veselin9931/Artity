@@ -93,6 +93,9 @@
                 .HasMany(p => p.Offerts)
                 .WithOne(p => p.Artist);
 
+            builder.Entity<Artist>()
+                .HasIndex(u => u.Nikname)
+                .IsUnique();
 
             builder.Entity<Rating>()
               .HasOne(a => a.User);
@@ -195,6 +198,6 @@
             }
         }
 
-              
+
     }
 }
