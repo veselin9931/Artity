@@ -1,4 +1,4 @@
-﻿namespace Artity.Services.File
+﻿namespace Artity.Services.Artists
 {
     using System;
 

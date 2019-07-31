@@ -27,11 +27,10 @@ namespace Artity.Services
             this.context.SaveChanges();
         }
 
-        public  ApplicationUser GetApplicationUserByName(string name)
+        public ApplicationUser GetApplicationUserByName(string name)
         {
-
-
-            return context.Users.FirstOrDefault(a => a.UserName.ToLower() == name.ToLower());
+            return context.Users.
+                FirstOrDefault(a => a.UserName.ToLower() == name.ToLower());
 
         }
 

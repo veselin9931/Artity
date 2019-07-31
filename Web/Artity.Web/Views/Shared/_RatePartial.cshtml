@@ -1,7 +1,7 @@
 ﻿@model Artity.Web.ViewModels.Artist.ArtistProfileViewModel
 
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" id="rating"><i class="fas fa-star-half-alt"></i> Rating: @Model.Rating</button>
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" ><i class="fas fa-star-half-alt"></i><span id="rating">Rating: @Model.Rating</span></button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">

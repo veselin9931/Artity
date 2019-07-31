@@ -10,7 +10,7 @@ namespace Artity.Services
     {
          ApplicationUser GetApplicationUserByName(string name);
 
-        void AddArtistSettings(ApplicationUser user, Artist artist);
+        void AddArtistSettings(ApplicationUser user, Data.Models.Artist artist);
 
          Task SetFirstLogin(ApplicationUser user);
 

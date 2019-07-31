@@ -56,9 +56,14 @@
         [HttpPost]
         public async Task<IActionResult> Create(PerformenceCreateInputModel createInputModel)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            var viewModel = await this.performenceService.CreatePerformence(createInputModel, user);
-            return this.Redirect(Common.GlobalConstants.HomeUrl);
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userManager.GetUserAsync(this.User);
+                var viewModel = await this.performenceService.CreatePerformence(createInputModel, user);
+                return this.Redirect(Common.GlobalConstants.HomeUrl);
+            }
+
+            return View();
         }
         public async Task<IActionResult> Profile(string id)
         {

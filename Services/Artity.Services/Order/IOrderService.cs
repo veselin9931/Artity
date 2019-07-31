@@ -2,12 +2,12 @@
 {
     using Artity.Data.Models;
 
-    using Artity.Web.ViewModels.Order;
+    using Artity.Web.InputModels.Order;
 
     using System.Threading.Tasks;
 
     public interface IOrderService
     {
-        Task<bool> CreateOrder(OrderCreateInputModel inputModel, ApplicationUser user);
+        Task<bool> CreateOrder(OrderCreateInputModel inputModel);
     }
 }

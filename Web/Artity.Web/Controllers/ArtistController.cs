@@ -1,7 +1,7 @@
 ﻿namespace Artity.Web.Controllers
 {
     using Artity.Services;
-    using Artity.Services.File;
+    using Artity.Services.Artists;
     using Artity.Services.Messaging;
     using Artity.Web.ViewModels.Artist;
     using Artity.Services.Mapping;

@@ -12,6 +12,7 @@
     using Artity.Services;
     using Artity.Services.Data;
     using Artity.Services.File;
+    using Artity.Services.Artists;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
     using Artity.Services.Messaging.SendGrid;
@@ -29,6 +30,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using Artity.Services.Order;
+    using Artity.Web.InputModels.Order;
 
     public class Startup
     {
@@ -131,6 +134,8 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<Services.Performence.IPerformenceService, Services.Performence.PerformenceService>();
             services.AddTransient<Services.Rating.IRatingService, Services.Rating.RatingService>();
+            services.AddTransient<IOrderService, OrderService>();
+
 
             //Artity system services 
             services.AddTransient<IPicureService, PictureService>();
@@ -140,7 +145,7 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly, typeof(OrderCreateInputModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

@@ -14,7 +14,7 @@
         }
 
         [Required]
-        public DateTime IssuedOn { get; set; }
+        public DateTime EventDate { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -28,6 +28,10 @@
 
         [Required]
         public OrderType Type { get; set; }
+
+        public string Place { get; set; }
+
+        public DateTime Duration { get; set; }
 
         public string Message { get; set; }
 
