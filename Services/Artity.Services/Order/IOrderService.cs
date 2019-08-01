@@ -8,6 +8,8 @@
 
     public interface IOrderService
     {
-        Task<bool> CreateOrder(OrderCreateInputModel inputModel);
+        Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel);
+
+        Task<bool> CreatePerformenceOrder(PerformenceOrderCreateInputModel inputModel);
     }
 }

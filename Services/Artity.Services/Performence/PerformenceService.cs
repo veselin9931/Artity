@@ -19,6 +19,7 @@
     using Artity.Web.ViewModels.Picture;
 
     using Artity.Services.Mapping;
+
     using System.Collections.Generic;
 
     public class PerformenceService : IPerformenceService
@@ -113,6 +114,13 @@
            return this.repository
                  .All()
                  .Where(a => a.Id == id);
-        } 
+        }
+
+        public string GetPerformenceByName(string name)
+        {
+            return this.repository
+                .All()
+                .FirstOrDefault(a => a.Title == name).Id;
+        }
     }
 }

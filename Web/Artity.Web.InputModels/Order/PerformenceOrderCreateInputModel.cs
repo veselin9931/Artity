@@ -1,21 +1,18 @@
 ﻿namespace Artity.Web.InputModels.Order
 {
     using Artity.Services.Mapping;
-
     using System;
-
-    using Artity.Data.Models;
     using System.ComponentModel.DataAnnotations;
-    using AutoMapper;
 
-    public class OrderCreateInputModel : IMapTo<Order>, IMapFrom<Order>
+    public class PerformenceOrderCreateInputModel : IMapTo<Data.Models.Order>, IMapFrom<Data.Models.Order>
     {
         [Required]
         [Display(Name = "Event date")]
         public DateTime EventDate { get; set; }
 
         [Required]
-        public DateTime Duration { get; set; }
+        [Display(Name = "Performence")]
+        public string PerformenceName { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 4)]
@@ -29,11 +26,7 @@
         public string ArtistNikname { get; set; }
 
         [Required]
-        public string Type { get; set; }
-
-        [Required]
         [StringLength(300, MinimumLength = 4)]
         public string Message { get; set; }
-
     }
 }

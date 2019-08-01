@@ -25,7 +25,7 @@ namespace Artity.Web.Controllers
         [Authorize(Roles = GlobalConstants.UserRoleName)]
         [Route("/Order/Create/{ArtistNikname}")]
         [HttpPost]
-        public async Task<IActionResult> Create([FromRoute]string ArtistNikname, OrderCreateInputModel model)
+        public async Task<IActionResult> Create([FromRoute]string ArtistNikname, ArtistOrderCreateInputModel model)
         {
             model.ArtistNikname = ArtistNikname;
             model.Username = this.User.Identity.Name;
@@ -34,7 +34,7 @@ namespace Artity.Web.Controllers
             {
                 try
                 {
-                    bool result = await this.OrderService.CreateOrder(model);
+                    bool result = await this.OrderService.CreateArtistOrder(model);
                     if (result)
                     {
                         return this.Redirect(GlobalConstants.HomeUrl);
@@ -61,7 +61,7 @@ namespace Artity.Web.Controllers
                 this.ModelState.AddModelError(string.Empty, error.ErrorMessage);
             }
 
-            var iputModel = new OrderCreateInputModel() { ArtistNikname = ArtistNikname };
+            var iputModel = new ArtistOrderCreateInputModel() { ArtistNikname = ArtistNikname };
 
             return this.View(iputModel);
         }
@@ -80,7 +80,7 @@ namespace Artity.Web.Controllers
               new SelectListItem {Text = OrderType.Contract.ToString(), Value = "2"},
             };
 
-            var iputModel = new OrderCreateInputModel() { ArtistNikname = ArtistNikname };
+            var iputModel = new ArtistOrderCreateInputModel() { ArtistNikname = ArtistNikname };
 
             return this.View(iputModel);
         }

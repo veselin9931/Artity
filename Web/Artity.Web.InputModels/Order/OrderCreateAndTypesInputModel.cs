@@ -8,6 +8,6 @@ namespace Artity.Web.InputModels.Order
     {
         public IEnumerable<string> Types { get; set; }
 
-        public OrderCreateInputModel Input { get; set; }
+        public ArtistOrderCreateInputModel Input { get; set; }
     }
 }

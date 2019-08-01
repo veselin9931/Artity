@@ -1,4 +1,5 @@
 ﻿using Artity.Services.Order;
+using Artity.Web.InputModels.Order;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,6 @@ namespace Artity.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            this.orderService.CreateOrder(new InputModels.Order.OrderCreateInputModel { Duration = DateTime.UtcNow, EventDate = DateTime.Today, Message = "bashkdajksdjas", Username = " Gosho", Place = "Rim ", Type = "1" });
             return this.View();
         }
 

@@ -42,5 +42,9 @@
 
         public DateTime? DeletedOn { get; set; }
 
+        public string PerformenceId { get; set; }
+
+        public virtual Performence Performence { get; set; }
+
     }
 }
