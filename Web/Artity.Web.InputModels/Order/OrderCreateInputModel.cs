@@ -11,6 +11,7 @@
     public class OrderCreateInputModel : IMapTo<Order>, IMapFrom<Order>
     {
         [Required]
+        [Display(Name = "Event date")]
         public DateTime EventDate { get; set; }
 
         [Required]
@@ -20,12 +21,11 @@
         [StringLength(100, MinimumLength = 4)]
         public string Place { get; set; }
 
-        [Required]
-        [StringLength(30, MinimumLength = 4)]
         public string Username { get; set; }
 
         [StringLength(30, MinimumLength = 4)]
         [Required]
+        [Display(Name = "To")]
         public string ArtistNikname { get; set; }
 
         [Required]

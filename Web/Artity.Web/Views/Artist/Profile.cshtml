@@ -21,13 +21,12 @@
             <div class="btn-group col-12   pt-3 pb-3" role="group" aria-label="Basic example">
                 <partial name="_RatePartial" model="this.Model" />
                   
-               
-                <button type="button" class="btn btn-secondary">
+                <button type="submit" class="btn btn-secondary">
                     <i class="fas fa-dollar-sign"></i> Category: @Model.CategoryName
                 </button>
-                <button type="button" class="btn btn-secondary">
-                    <i class="fas fa-reply-all"></i> Request 
-                </button>
+                <a asp-action="Create" asp-controller="OrderArtist" asp-route-ArtistNikname="@this.Model.Nikname" class="btn btn-secondary">
+                    <i class="fas fa-reply-all" ></i> Request 
+                </a>
             </div>
 
         </div>
