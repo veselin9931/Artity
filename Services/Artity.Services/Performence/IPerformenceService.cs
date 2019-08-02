@@ -19,6 +19,8 @@
 
         IEnumerable<TViewModel> GetAll<TViewModel>(string userId);
 
+        string GetPerformenceByName(string name);
+
 
     }
 }
