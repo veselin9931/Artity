@@ -31,6 +31,8 @@ namespace Artity.Web.ViewModels.Performence
 
         public string SocialYoutube { get; set; }
 
+        public string ArtistNikname { get; set; }
+
 
         public void CreateMappings(IProfileExpression configuration)
         {

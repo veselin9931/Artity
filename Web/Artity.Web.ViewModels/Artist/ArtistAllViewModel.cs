@@ -14,7 +14,6 @@
 
         public string Nikname { get; set; }
 
-        public string CategoryName { get; set; }
 
         public string AboutMe { get; set; }
 

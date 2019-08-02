@@ -1,7 +1,8 @@
 ﻿namespace Artity.Services.Order
 {
     using System;
-
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Artity.Data.Common.Repositories;
@@ -9,6 +10,7 @@
     using Artity.Services.Artists;
     using Artity.Services.Performence;
     using Artity.Web.InputModels.Order;
+    using Artity.Services.Mapping;
 
     public class OrderService : IOrderService
     {
@@ -28,6 +30,33 @@
             this.userService = userService;
             this.artistService = artistService;
             this.performenceService = performenceService;
+        }
+
+        public IEnumerable<TViewModel> AllOrders<TViewModel>(string artistId)
+        {
+            return
+                 this.repositoryOrder.All()
+                 .Where(a => a.ArtistId == artistId)
+                 .OrderBy(a => a.CreatedOn)
+                 .To<TViewModel>();
+        }
+
+        public IEnumerable<TViewModel> AllPerformenceOrders<TViewModel>(string artistId)
+        {
+            return
+             this.repositoryOrder.All()
+             .Where(a => a.ArtistId == artistId && a.Performence != null)
+             .OrderBy(a => a.CreatedOn)
+             .To<TViewModel>();
+        }
+
+        public IEnumerable<TViewModel> AllPrivateOrders<TViewModel>(string artistId)
+        {
+            return
+             this.repositoryOrder.All()
+             .Where(a => a.ArtistId == artistId && a.Performence == null)
+             .OrderBy(a => a.CreatedOn)
+             .To<TViewModel>();
         }
 
         public async Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel)
