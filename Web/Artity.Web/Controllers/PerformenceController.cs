@@ -2,6 +2,9 @@
 {
     using Artity.Web.ViewModels.Performence;
 
+    using Artity.Web.InputModels.Performence;
+
+
     using Artity.Services.Performence;
 
     using Artity.Services;

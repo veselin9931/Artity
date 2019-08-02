@@ -4,7 +4,7 @@
 
     using Artity.Data.Models;
 
-    using Artity.Web.ViewModels.Picture;
+    using Artity.Web.InputModels.Picture;
 
     public interface IPicureService
     {

@@ -11,7 +11,7 @@
     using Artity.Services;
     using Artity.Services.File;
     using Artity.Services.Messaging;
-    using Artity.Web.ViewModels.Picture;
+    using Artity.Web.InputModels.Picture;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;

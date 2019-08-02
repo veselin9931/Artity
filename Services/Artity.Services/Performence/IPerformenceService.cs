@@ -1,11 +1,14 @@
 ﻿namespace Artity.Services.Performence
 {
     using System.Collections.Generic;
+
     using System.Linq;
+
     using System.Threading.Tasks;
 
     using Artity.Data.Models;
-    using Artity.Web.ViewModels.Performence;
+
+    using Artity.Web.InputModels.Performence;
 
     public interface IPerformenceService
     {

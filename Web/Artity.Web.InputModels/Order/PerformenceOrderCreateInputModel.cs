@@ -10,14 +10,15 @@
         [Display(Name = "Event date")]
         public DateTime EventDate { get; set; }
 
-        [Required]
         [Display(Name = "Performence")]
+        [Required]
         public string PerformenceName { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 4)]
         public string Place { get; set; }
 
+        
         public string Username { get; set; }
 
         [StringLength(30, MinimumLength = 4)]

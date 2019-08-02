@@ -1,14 +1,12 @@
 ﻿namespace Artity.Services.Performence
-{
-    using System;
-
+{ 
     using System.Threading.Tasks;
 
     using Artity.Data.Common.Repositories;
 
     using Artity.Data.Models;
 
-    using Artity.Web.ViewModels.Performence;
+    using Artity.Web.InputModels.Performence;
 
     using Microsoft.AspNetCore.Identity;
 
@@ -16,7 +14,7 @@
 
     using Artity.Services.File;
 
-    using Artity.Web.ViewModels.Picture;
+    using Artity.Web.InputModels.Picture;
 
     using Artity.Services.Mapping;
 

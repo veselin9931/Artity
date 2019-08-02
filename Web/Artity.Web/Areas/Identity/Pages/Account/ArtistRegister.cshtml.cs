@@ -16,7 +16,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Net.Http.Headers;
-    using Artity.Web.ViewModels.Picture;
+    using Artity.Web.InputModels.Picture;
 
     public class ArtistRegisterModel : PageModel
     {

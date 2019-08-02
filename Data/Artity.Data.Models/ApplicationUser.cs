@@ -43,7 +43,7 @@ namespace Artity.Data.Models
 
         public string PofilePictureId { get; set; }
 
-        public  virtual Picture PofilePicture { get; set; }
+        public virtual Picture PofilePicture { get; set; }
 
         public virtual IList<Order> Orders { get; set; }
 

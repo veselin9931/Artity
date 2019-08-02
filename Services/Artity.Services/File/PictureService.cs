@@ -5,7 +5,7 @@
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using System.Linq;
-    using Artity.Web.ViewModels.Picture;
+    using Artity.Web.InputModels.Picture;
 
     public class PictureService : IPicureService
     {

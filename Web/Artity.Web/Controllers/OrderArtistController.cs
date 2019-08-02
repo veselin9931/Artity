@@ -120,9 +120,11 @@ namespace Artity.Web.Controllers
         public async Task<IActionResult> CreatePerformenceOrder([FromRoute]string id, string artistNikname, PerformenceOrderCreateInputModel model)
         {
             model.ArtistNikname = artistNikname;
-            model.PerformenceName = id;
 
+            
             model.Username = this.User.Identity.Name;
+
+            model.PerformenceName = this.PerformenceService.GetPerformence(id).To<PerformneceProfileViewModel>().ToList().First().Title;
 
             if (this.ModelState.IsValid)
             {
