@@ -1,0 +1,39 @@
+﻿@model Artity.Web.ViewModels.Order.UserOrdersViewModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h1 class="text-center mt-1 mb-3">Reserved artist</h1>
+
+<table class="table  table-bordered table-hover">
+    <thead class="text-center bg-secondary table-borderless text-uppercase text-white">
+        <tr>
+            <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+            <th scope="col">Artist nikname</th>
+            <th scope="col" alt="Status"><i class="fas fa-hourglass-half"></i></th>
+            <th scope="col"><i class="fas fa-map-marker-alt"></i></th>
+            <th scope="col"><i class="far fa-clock"></i></th>
+            <th scope="col"><i class="fas fa-calendar-alt"></i></th>
+        </tr>
+    </thead>
+    <tbody class="bg-info text-center table-bordered text-white">
+
+        @{
+            int i = 0;
+        }
+        @foreach(var artistOrder in Model.UserArtistOrder)
+        {
+            i++;
+        <tr>
+            <th scope="row">@i</th>
+            <td>@artistOrder.ArtistNikname</td>
+            <td>@artistOrder.Status</td>
+            <td>@artistOrder.Place</td>
+            <td>@artistOrder.Duration</td>
+            <td>@artistOrder.EventDate</td>
+
+            
+        </tr>
+        }
+    </tbody>
+</table>
