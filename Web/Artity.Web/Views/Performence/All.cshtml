@@ -18,7 +18,7 @@
                                         <p><img class=" img-fluid" src="@performence.PerformencePhotoLink" alt="card image"></p>
                                         <h4 class="card-title">@performence.Title</h4>
 
-                                        <h6 class="card-text pt-2"><i class="fas fa-star"></i> @performence.Rating %</h6>
+                                        <h6 class="card-text pt-2"><i class="fas fa-star"></i><span id="rating">Rating: </span></h6>
                   
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     </div>
                                     
                                     <div class="btn-group r" id="n-radiusn" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-secondary "><i class="fas fa-star"></i> @performence.Rating %</button>                                     
+                                        <button type="button" class="btn btn-secondary" id="sendInfo"><i class="fas fa-star"></i> @performence.Rating %</button>                                     
                                         <button type="button" class="btn btn-secondary"> <i class="fas fa-theater-masks"></i>  @performence.АrtistNikname</button>
                                     </div>
                                 </div>
@@ -64,3 +64,4 @@
         </div>
     </div>
 </section>
+

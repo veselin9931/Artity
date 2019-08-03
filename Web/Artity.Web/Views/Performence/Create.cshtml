@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 <div class="md-form ">
                     <div class="file-field">
-                        <div class="z-depth-1-half mb-4" id="image-preview" heigt="100px" width="100px">
+                        <div class="z-depth-1-half mb-4" id="image-preview" >
                             <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" id="previewPic" class="img-thumbnail"
                                  alt="example placeholder">
                         </div>
@@ -67,11 +67,9 @@
     <script>
         var loadFile = function (event) {
             var img = document.getElementById('previewPic');
+            debugger;
             img.onload = function () {
-                if (img.height > img.width) {
-                    img.height = '100%';
-                    img.width = '100%';
-                }
+                
             };
             img.src = URL.createObjectURL(event.target.files[0]);
         };

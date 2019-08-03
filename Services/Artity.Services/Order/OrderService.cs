@@ -59,6 +59,24 @@
              .To<TViewModel>();
         }
 
+        public IEnumerable<TViewModel> GetAllUserArtistOrders<TViewModel>(string userId)
+        {
+            return
+             this.repositoryOrder.All()
+             .Where(a => a.UserId == userId && a.Performence == null)
+             .OrderBy(a => a.CreatedOn)
+             .To<TViewModel>();
+        }
+
+        public IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId)
+        {
+            return
+             this.repositoryOrder.All()
+             .Where(a => a.UserId == userId && a.Performence != null)
+             .OrderBy(a => a.CreatedOn)
+             .To<TViewModel>();
+        }
+
         public async Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel)
         {
             var order = AutoMapper.Mapper.Map<Data.Models.Order>(inputModel);
@@ -77,7 +95,7 @@
 
             order.ArtistId = artist;
 
-            order.Stauts = Data.Models.Enums.OrderStatus.Sent;
+            order.Status = Data.Models.Enums.OrderStatus.Sent;
 
             await this.repositoryOrder.AddAsync(order);
             var result = await this.repositoryOrder.SaveChangesAsync();
@@ -109,7 +127,7 @@
 
             order.PerformenceId = performence;
 
-            order.Stauts = Data.Models.Enums.OrderStatus.Sent;
+            order.Status = Data.Models.Enums.OrderStatus.Sent;
 
             await this.repositoryOrder.AddAsync(order);
             var result = await this.repositoryOrder.SaveChangesAsync();

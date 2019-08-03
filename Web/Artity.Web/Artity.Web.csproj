@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\User\" />
     <Folder Include="wwwroot\ProfilePicture\" />
   </ItemGroup>
 

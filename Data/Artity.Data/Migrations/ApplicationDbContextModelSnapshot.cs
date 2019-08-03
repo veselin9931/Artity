@@ -279,7 +279,7 @@ namespace Artity.Data.Migrations
 
                     b.Property<string>("Place");
 
-                    b.Property<int>("Stauts");
+                    b.Property<int>("Status");
 
                     b.Property<int>("Type");
 

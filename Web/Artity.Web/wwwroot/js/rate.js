@@ -64,6 +64,27 @@ function sendInfo(ratingValue) {
         })
 }
 
+function sendInfoToPerformence() {
+    let artistName = document.getElementById("artist-name").textContent;
+    let url = `/Rate/${ratingValue}/Performence/${artistName}`;
+    let calculatedRating = 0;
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            calculatedRating = data.rating;
+            if (calculatedRating) {
+                let ratingElement = document.querySelector("#rating");
+                ratingElement.innerHTML = ''
+                let innerI = document.createElement("I");
+                innerI.className = "fas fa-star-half-alt";
+
+                ratingElement.appendChild(innerI);
+                ratingElement.textContent = `Rating: ${calculatedRating}`;
+
+            }
+        })
+}
+
 function responseMessage(msg) {
     $('.success-box').fadeIn(200);
     $('.success-box div.text-message').html("<span>" + msg + "</span>");

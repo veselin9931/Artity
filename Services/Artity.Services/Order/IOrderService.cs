@@ -7,7 +7,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-     
+
     public interface IOrderService
     {
         Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel);
@@ -19,5 +19,10 @@
         IEnumerable<TViewModel> AllPerformenceOrders<TViewModel>(string artistId);
 
         IEnumerable<TViewModel> AllPrivateOrders<TViewModel>(string artistId);
+
+        IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId);
+
+        IEnumerable<TViewModel> GetAllUserArtistOrders<TViewModel>(string userId);
+
     }
 }
