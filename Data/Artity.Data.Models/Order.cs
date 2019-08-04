@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
     using Artity.Data.Common.Models;
 
     using Artity.Data.Models.Enums;
@@ -29,7 +30,7 @@
         [Required]
         public OrderType Type { get; set; }
 
-        [Required]
+        [Required]   
         public OrderStatus Status { get; set; }
 
         public string Place { get; set; }

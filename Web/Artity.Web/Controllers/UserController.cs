@@ -38,5 +38,22 @@
             var model = new UserOrdersViewModel() { UserArtistOrder = artistOrderViewModels };
             return this.View(model);
         }
+
+        [Authorize(Roles = GlobalConstants.UserRoleName)]
+        [Route("/Reservations/Delete/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> DeleteReservation(string id)
+        {
+            //TODO : Check exeptions
+            var result = await this.orderService.DeleteOrderById(id);
+            if (result)
+            {
+                var userId = this.userService.GetApplicationUserByName(this.User.Identity.Name).Id;
+                var artistOrderViewModels = this.orderService.GetAllUserArtistOrders<UserArtistOrderViewModel>(userId);
+                var model = new UserOrdersViewModel() { UserArtistOrder = artistOrderViewModels };
+                return this.View("Reservations",model);
+            };
+            return this.Json(result);
+        }
     }
 }

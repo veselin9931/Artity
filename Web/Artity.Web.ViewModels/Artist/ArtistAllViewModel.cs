@@ -38,7 +38,6 @@
                       .ForMember(
                destination => destination.AboutMe,
                opts => opts.MapFrom(origin => origin.AboutMe.Length <= 85 ? origin.Description : origin.AboutMe.Substring(0, 85)));
-               
         }
     }
 }

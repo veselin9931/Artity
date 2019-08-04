@@ -6,7 +6,7 @@
 <h1 class="text-center mt-1 mb-3">Reserved artist</h1>
 
 <table class="table  table-bordered table-hover">
-    <thead class="text-center bg-secondary table-borderless text-uppercase text-white">
+    <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
         <tr>
             <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
             <th scope="col">Artist nikname</th>
@@ -14,6 +14,8 @@
             <th scope="col"><i class="fas fa-map-marker-alt"></i></th>
             <th scope="col"><i class="far fa-clock"></i></th>
             <th scope="col"><i class="fas fa-calendar-alt"></i></th>
+            <th scope="col"><i class="fas fa-cog"></i>  </th>
+
         </tr>
     </thead>
     <tbody class="bg-info text-center table-bordered text-white">
@@ -30,7 +32,8 @@
             <td>@artistOrder.Status</td>
             <td>@artistOrder.Place</td>
             <td>@artistOrder.Duration</td>
-            <td>@artistOrder.EventDate</td>
+            <td>@artistOrder.EventDate </td>
+            <td><a asp-action="DeleteReservation" asp-controller="User" asp-route-id="@artistOrder.Id"  class="btn btn-danger btn-outline-danger"><i class="far fa-times-circle"></i></a></td>
 
             
         </tr>

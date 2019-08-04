@@ -14,13 +14,13 @@
 
     public class OrderService : IOrderService
     {
-        private readonly IRepository<Data.Models.Order> repositoryOrder;
+        private readonly IDeletableEntityRepository<Data.Models.Order> repositoryOrder;
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
 
         public OrderService(
-            IRepository<Data.Models.Order> repositoryOrder,
+            IDeletableEntityRepository<Data.Models.Order> repositoryOrder,
             IUserService userService,
             IArtistService artistService,
             IPerformenceService performenceService
@@ -36,16 +36,17 @@
         {
             return
                  this.repositoryOrder.All()
-                 .Where(a => a.ArtistId == artistId)
+                 .Where(a => a.ArtistId == artistId && a.IsDeleted == false)
                  .OrderBy(a => a.CreatedOn)
                  .To<TViewModel>();
         }
+
 
         public IEnumerable<TViewModel> AllPerformenceOrders<TViewModel>(string artistId)
         {
             return
              this.repositoryOrder.All()
-             .Where(a => a.ArtistId == artistId && a.Performence != null)
+             .Where(a => a.ArtistId == artistId && a.Performence != null && a.IsDeleted == false)
              .OrderBy(a => a.CreatedOn)
              .To<TViewModel>();
         }
@@ -54,7 +55,7 @@
         {
             return
              this.repositoryOrder.All()
-             .Where(a => a.ArtistId == artistId && a.Performence == null)
+             .Where(a => a.ArtistId == artistId && a.Performence == null && a.IsDeleted == false)
              .OrderBy(a => a.CreatedOn)
              .To<TViewModel>();
         }
@@ -63,7 +64,7 @@
         {
             return
              this.repositoryOrder.All()
-             .Where(a => a.UserId == userId && a.Performence == null)
+             .Where(a => a.UserId == userId && a.Performence == null && a.IsDeleted == false)
              .OrderBy(a => a.CreatedOn)
              .To<TViewModel>();
         }
@@ -103,7 +104,7 @@
             return result > 0;
         }
 
-       
+
         public async Task<bool> CreatePerformenceOrder(PerformenceOrderCreateInputModel inputModel)
         {
             var order = AutoMapper.Mapper.Map<Data.Models.Order>(inputModel);
@@ -134,6 +135,23 @@
 
             return result > 0;
 
+        }
+
+        public async Task<bool> DeleteOrderById(string id)
+        {
+            var order = this.repositoryOrder
+                 .All()
+                 .FirstOrDefault(a => a.Id == id);
+
+            if (order == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.repositoryOrder.Delete(order);
+            var result = await this.repositoryOrder.SaveChangesAsync();
+
+            return result > 0;
         }
     }
 }

@@ -10,9 +10,13 @@
 
     public interface IOrderService
     {
+        #region CreateServices
         Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel);
 
         Task<bool> CreatePerformenceOrder(PerformenceOrderCreateInputModel inputModel);
+        #endregion
+
+        #region GetServices
 
         IEnumerable<TViewModel> AllOrders<TViewModel>(string artistId);
 
@@ -23,6 +27,12 @@
         IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId);
 
         IEnumerable<TViewModel> GetAllUserArtistOrders<TViewModel>(string userId);
+        #endregion
+
+        #region DeleteServices
+
+        Task<bool> DeleteOrderById(string id);
+        #endregion
 
     }
 }

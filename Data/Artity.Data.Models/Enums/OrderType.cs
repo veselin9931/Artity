@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Artity.Data.Models.Enums
 {
     public enum OrderType
     {
-        Price=1, Contract=2, Charity=3, PerHour=4
+        [Description("Price")]
+        Price =1,
+        [Description("Price")]
+        Contract = 2,
+        [Description("Price")]
+        Charity = 3,
+        [Description("Price")]
+        PerHour = 4,
     }
 }

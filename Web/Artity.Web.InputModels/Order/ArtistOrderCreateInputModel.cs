@@ -28,6 +28,7 @@
         [Display(Name = "To")]
         public string ArtistNikname { get; set; }
 
+        //TODO add validation.
         [Required]
         public string Type { get; set; }
 
