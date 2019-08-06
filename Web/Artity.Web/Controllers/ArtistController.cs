@@ -32,7 +32,7 @@
         public async Task<IActionResult> All()
         {
             var artists = this.artistService
-                .GetAllArtists<ArtistAllViewModel>();
+                .GetAllArtists<ArtistAllViewModel>(true);
 
             var categories = this.categoryService
                 .GetAllCategories();

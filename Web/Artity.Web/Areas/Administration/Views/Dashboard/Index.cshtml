@@ -4,4 +4,48 @@
 }
 
 <h1>@this.ViewData["Title"]</h1>
+
 Settings: @this.Model.SettingsCount
+
+<table class="table  table-bordered table-hover">
+    <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
+        <tr>
+            <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+            <th scope="col">Artist nikname</th>
+            <th scope="col" alt="Status">Description</th>
+            <th scope="col">IsApproved</th>
+            <th scope="col"><i class="fas fa-thumbs-up"></i></i></th>
+            <th scope="col"><i class="fas fa-thumbs-down"></i></th>
+        </tr>
+    </thead>
+    <tbody class="bg-info text-center table-bordered text-white">
+
+        @{
+            int i = 0;
+        }
+        @foreach (var artistOrder in Model.allArtist)
+        {
+            i++;
+        <tr>
+            <th scope="row">@i</th>
+            <td>@artistOrder.Nikname</td>
+            <td>@artistOrder.AboutMe</td>
+            <td>@artistOrder.IsApproved</td>
+            <td>
+                <a asp-action="Approved" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
+                   class="btn btn-danger btn-outline-danger text-white">
+                    <i class="far fa-check-circle"></i>
+                </a>
+            </td>
+            <td>
+                <a asp-action="Refusal" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
+                   class="btn btn-danger btn-outline-danger text-white">
+                    <i class="far fa-times-circle"></i>
+                </a>
+            </td>
+
+
+        </tr>
+        }
+    </tbody>
+</table>

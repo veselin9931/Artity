@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\Web\Artity.Web.InputModels\Artity.Web.InputModels.csproj" />
     <ProjectReference Include="..\..\Web\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Artity.Services.Mapping\Artity.Services.Mapping.csproj" />
+    <ProjectReference Include="..\Artity.Services.Messaging\Artity.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

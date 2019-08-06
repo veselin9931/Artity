@@ -32,6 +32,7 @@
     using Microsoft.Extensions.Logging;
     using Artity.Services.Order;
     using Artity.Web.InputModels.Order;
+    using Artity.Web.Areas.Administration.ViewModels.Dashboard;
 
     public class Startup
     {
@@ -145,7 +146,7 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly, typeof(ArtistOrderCreateInputModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly, typeof(ArtistOrderCreateInputModel).GetTypeInfo().Assembly, typeof(ApprovedArtistViewModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

@@ -24,6 +24,8 @@
 
         public string Description { get; set; }
 
+        [Required]
+        [MaxLength(1500)]
         public string AboutMe { get; set; }
 
         public string CategoryId { get; set; }
@@ -45,5 +47,8 @@
         public virtual Social Social { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        [Required]
+        public bool IsApproved { get; set; }
     }
 }

@@ -20,7 +20,9 @@
 
         public async Task<Picture> AddPictureToDb(PictureInputModel picture, ApplicationUser user)
         {
-            var pic = new Picture { Link = picture.Link, Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
+            //TODO: Refactor this;
+            string picTransform = @"/$w_300,$h_200,$ar_1.45/w_$w,ar_$ar,c_fill,g_face";
+            var pic = new Picture { Link = picture.Link.Insert(46, picTransform), Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
             await this.context.AddAsync(pic);
             await this.context.SaveChangesAsync();
             return pic;
@@ -28,7 +30,9 @@
 
         public async Task<string> AddPictureToDb(PictureInputModel picture)
         {
-            var pic = new Picture { Link = picture.Link, Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
+            //TODO: Refactor this;
+            string picTransform = @"/$w_300,$h_200,$ar_1.45/w_$w,ar_$ar,c_fill,g_face";
+            var pic = new Picture { Link = picture.Link.Insert(46, picTransform), Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
             await this.context.AddAsync(pic);
             await this.context.SaveChangesAsync();
             return pic.Id;

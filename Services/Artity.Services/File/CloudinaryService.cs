@@ -19,6 +19,16 @@
             this.cloudinaryUtility = cloudinaryUtility;
         }
 
+        public Task<string> UploadCardPictureAsync(IFormFile pictureFile, string fileName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<string> UploadDetailsPictureAsync(IFormFile pictureFile, string fileName)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<string> UploadPictureAsync(IFormFile pictureFile, string fileName)
         {
             byte[] destinationData;
@@ -44,5 +54,7 @@
 
             return uploadResult?.SecureUri.AbsoluteUri;
         }
+
+        
     }
 }

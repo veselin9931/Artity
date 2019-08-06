@@ -15,9 +15,7 @@ namespace Artity.Services
         public UserService(ApplicationDbContext context)
         {
             this.context = context;
-        }
-
-    
+        } 
         public void AddArtistSettings(ApplicationUser user, Artist artist)
         {
             this.context.Artists.Add(artist);
@@ -32,6 +30,11 @@ namespace Artity.Services
             return context.Users.
                 FirstOrDefault(a => a.UserName.ToLower() == name.ToLower());
 
+        }
+
+        public async Task<string> GetArtistEmail(string id)
+        {
+           return this.context.Users.FirstOrDefault(u => u.ArtistId == id).Email;
         }
 
         public async Task SetFirstLogin(ApplicationUser user)
