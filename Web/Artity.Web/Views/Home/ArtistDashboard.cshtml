@@ -114,13 +114,13 @@
                                         <td>
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn  btn-success active">
-                                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> accept
+                                                    <a class="text-white" asp-action="ApprovedReservation" asp-route-id="@order.Id" asp-controller="Artist" name="options" id="option1" autocomplete="off" checked> accept</a>
                                                 </label>
                                                 <label class="btn btn  btn-danger">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off"> refuse
+                                                    <a  class=" text-white" asp-action="RefuseReservation" asp-route-id="@order.Id" asp-controller="Artist" name="options" id="option2" autocomplete="off"> refuse </a>
                                                 </label>
                                                 <label class="btn btn  btn-primary"  data-toggle="modal" data-target="#offertsModal">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off"> offerts
+                                                    <a class="text-white" name="options" id="option2" autocomplete="off"> offerts </a>
                                                 </label>
 
 

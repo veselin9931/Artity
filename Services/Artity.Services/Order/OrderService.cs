@@ -153,5 +153,43 @@
 
             return result > 0;
         }
+
+        public async Task<bool> ApprovedReservation(string orderId)
+        {
+            var order = this.repositoryOrder
+                 .All()
+                 .FirstOrDefault(a => a.Id == orderId);
+
+            if (order == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            order.Status = Data.Models.Enums.OrderStatus.Accepted;
+
+            this.repositoryOrder.Update(order);
+            var result = await this.repositoryOrder.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+        public async Task<bool> RefuseReservation(string orderId)
+        {
+            var order = this.repositoryOrder
+                .All()
+                .FirstOrDefault(a => a.Id == orderId);
+
+            if (order == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            order.Status = Data.Models.Enums.OrderStatus.Refused;
+
+            this.repositoryOrder.Update(order);
+            var result = await this.repositoryOrder.SaveChangesAsync();
+
+            return result > 0;
+        }
     }
 }

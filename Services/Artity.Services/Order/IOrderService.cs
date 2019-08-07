@@ -34,5 +34,13 @@
         Task<bool> DeleteOrderById(string id);
         #endregion
 
+        #region UpdateService
+
+        Task<bool> ApprovedReservation(string orderId);
+
+        Task<bool> RefuseReservation(string orderId);
+
+        #endregion
+
     }
 }

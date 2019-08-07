@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using System.Linq;
     using Artity.Services.Rating;
+    using Artity.Services.Order;
 
     public class ArtistController : BaseController
     {
@@ -16,16 +17,19 @@
         private readonly ISendGrid emailSender;
         private readonly ICategoryService categoryService;
         private readonly IRatingService ratingService;
+        private readonly IOrderService orderService;
 
         public ArtistController(
             IArtistService artistService
             , ICategoryService categoryService,
-            IRatingService ratingService
+            IRatingService ratingService,
+            IOrderService orderService
             )
         {
             this.artistService = artistService;
             this.categoryService = categoryService;
             this.ratingService = ratingService;
+            this.orderService = orderService;
         }
 
         [HttpGet(Name = "/All")]
@@ -67,13 +71,39 @@
         public async Task<IActionResult> Profile(string id)
         {
             var artist = this.artistService.GetArtist(id).To<ArtistProfileViewModel>().ToList().First();
-            
             return this.View(artist);
         }
 
         public async Task<IActionResult> Dashboard()
         {
             return this.View();
+        }
+
+        [Route("/ApprovedReservation/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> ApprovedReservation(string id)
+        {
+            var result = await this.orderService.ApprovedReservation(id);
+            if (result)
+            {
+                return this.Redirect("/");
+
+            }
+
+            return this.NotFound();
+        }
+
+        [Route("/RefuseReservation/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> RefuseReservation(string id)
+        {
+            var result = await this.orderService.RefuseReservation(id);
+            if (result)
+            {
+                return this.Redirect("/");
+            }
+
+            return this.NotFound();
         }
 
     }
