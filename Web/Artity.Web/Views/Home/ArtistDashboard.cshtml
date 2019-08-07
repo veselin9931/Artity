@@ -1,4 +1,4 @@
-﻿
+﻿@model Artity.Web.ViewModels.Artist.ArtistDashboardViewModel
 @{
     ViewData["Title"] = "Profile";
 }
@@ -11,10 +11,10 @@
 <div class="container bootstrap snippet mb-1">
     <div class="row">
         <div class="col-sm-10">
-            <h1>@this.User.Identity.Name</h1>
+            <h1>@Model.Nikname</h1>
         </div>
         <div class="col-sm-2">
-            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
+            <a href="/Artist/Profile/@Model.Id" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="@Model.ProfilePicture.Link"></a>
         </div>
     </div>
     <div class="row">
@@ -23,20 +23,16 @@
 
             <ul class="list-group">
                 <li class="list-group-item text-muted">Profile</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> 2.13.2014</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> Yesterday</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Real name</strong></span> Joseph Doe</li>
-
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> @Model.CrearedOn</li>
             </ul>
 
-            
+
 
             <ul class="list-group mt-2">
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Deals</strong></span> 125</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Performences</strong></span>@Model.PerformenceCount</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Rating</strong></span>@Model.Rating</li>
             </ul>
 
             <div class="panel panel-default">
@@ -50,10 +46,10 @@
         <!--/col-3-->
         <div class="col-sm-9">
 
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            <ul class="nav mt-3 nav-tabs" id="myTab">
+                <li><a href="#home" class=" btn btn-dark mr-2" data-toggle="tab">Reservations</a></li>
+                <li><a href="#messages" class=" btn btn-dark mr-2" data-toggle="tab">Offert</a></li>
+                <li><a href="#settings" class=" btn btn-dark mr-1" data-toggle="tab">Settings</a></li>
             </ul>
 
             <div class="tab-content">
@@ -63,106 +59,99 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Label 1</th>
-                                    <th>Label 2</th>
-                                    <th>Label 3</th>
-                                    <th>Label </th>
-                                    <th>Label </th>
-                                    <th>Label </th>
+                                    <th>Тenant</th>
+                                    <th>Date</th>
+                                    <th>Place</th>
+                                    <th>Duration </th>
+                                    <th> Message </th>
+                                    <th> Action </th>
+
                                 </tr>
                             </thead>
                             <tbody id="items">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
+
+                                @{var i = 0;
+
+                                }
+                                @foreach (var order in this.Model.Orders)
+                                {
+
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@order.ApplicationUserUsername</td>
+                                        <td>@order.EventDate</td>
+                                        <td>@order.Place</td>
+                                        <td>@order.Duration</td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <a class="btn btn btn-info text-white " data-toggle="modal" data-target="#infoModal">
+                                                Info
+                                            </a>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade text-black-50" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Order info</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body mx-4 text-center">
+                                                            <div class="row">(@order.Message) </div>
+
+                                                            <button type="button" class="btn btn-secondary mt-3 pu" data-dismiss="modal">Close</button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn  btn-success active">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> accept
+                                                </label>
+                                                <label class="btn btn  btn-danger">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off"> refuse
+                                                </label>
+                                                <label class="btn btn  btn-primary"  data-toggle="modal" data-target="#offertsModal">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off"> offerts
+                                                </label>
+
+
+                                                <!-- Modal -->
+                                                <div class="modal fade text-black-50" id="offertsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Order info</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body mx-4 text-center">
+                                                                <div class="row">(@order.Message) </div>
+
+                                                                <button type="button" class="btn btn-secondary mt-3 pu" data-dismiss="modal">Close</button>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+
                             </tbody>
+
                         </table>
                         <hr>
                         <div class="row">

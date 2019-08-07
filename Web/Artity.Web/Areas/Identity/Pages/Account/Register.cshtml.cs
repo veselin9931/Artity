@@ -88,7 +88,7 @@
                     var pictureToDb = await this.picureService.AddPictureToDb(picture, user);
                     bool isGenerate = await this.picureService.GenerateProfilePicture(picture, user);
                 }
-
+                
                 if (user.UserType == UserType.User)
                 {
                     user.FirstLogin = true;
