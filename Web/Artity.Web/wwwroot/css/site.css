@@ -431,3 +431,10 @@ pre {
     -webkit-transform: rotate(180);
     -ms-transform: rotate(180);
 }
+
+.badge-notify {
+    background: red;
+    position: relative;
+    top: -20px;
+    left: -35px;
+}

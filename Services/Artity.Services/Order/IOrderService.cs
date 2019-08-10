@@ -1,7 +1,7 @@
 ﻿namespace Artity.Services.Order
 {
     using Artity.Data.Models;
-
+    using Artity.Data.Models.Enums;
     using Artity.Web.InputModels.Order;
     using System.Collections;
     using System.Collections.Generic;
@@ -27,6 +27,9 @@
         IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId);
 
         IEnumerable<TViewModel> GetAllUserArtistOrders<TViewModel>(string userId);
+
+        IEnumerable<TViewModel> AllOrdersInStatus<TViewModel>(string artistId, OrderStatus status);
+
         #endregion
 
         #region DeleteServices

@@ -3,6 +3,7 @@
 
     using System.Threading.Tasks;
     using Artity.Data.Models;
+    using Artity.Data.Models.Enums;
     using Artity.Services.Rating;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,20 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var rate = await this.ratingService.RateArtist(userId, artist, rateValue);
+            return this.Json(rate);
+        }
+
+        [Route("GetRate/Artist/{artistId}/")]
+        public async Task<JsonResult> GetArtistRate([FromRoute]string artistId)
+        {
+            var rate = this.ratingService.GetRate(RatingType.Artist, artistId);
+            return this.Json(rate);
+        }
+
+        [Route("GetRate/Performence/{performenceId}/")]
+        public async Task<JsonResult> GetPerformenceRate([FromRoute]string performenceId)
+        {
+            var rate = this.ratingService.GetRate(RatingType.Artist, performenceId);
             return this.Json(rate);
         }
 

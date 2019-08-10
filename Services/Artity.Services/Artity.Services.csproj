@@ -21,10 +21,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Artity.Data\Artity.Data.csproj" />
+    <ProjectReference Include="..\..\Web\Artity.Web.Infrastructure\Artity.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\Artity.Web.InputModels\Artity.Web.InputModels.csproj" />
     <ProjectReference Include="..\..\Web\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Artity.Services.Mapping\Artity.Services.Mapping.csproj" />
     <ProjectReference Include="..\Artity.Services.Messaging\Artity.Services.Messaging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Core">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.signalr.core\1.1.0\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

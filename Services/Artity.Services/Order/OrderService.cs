@@ -11,6 +11,7 @@
     using Artity.Services.Performence;
     using Artity.Web.InputModels.Order;
     using Artity.Services.Mapping;
+    using Artity.Data.Models.Enums;
 
     public class OrderService : IOrderService
     {
@@ -41,6 +42,16 @@
                  .To<TViewModel>();
         }
 
+        public IEnumerable<TViewModel> AllOrdersInStatus<TViewModel>(string artistId, OrderStatus status)
+        {
+            return
+                 this.repositoryOrder.All()
+                 .Where(a => a.ArtistId == artistId &&
+                 a.IsDeleted == false &&
+                 a.Status == status)
+                 .OrderBy(a => a.CreatedOn)
+                 .To<TViewModel>();
+        }
 
         public IEnumerable<TViewModel> AllPerformenceOrders<TViewModel>(string artistId)
         {

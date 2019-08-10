@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="card-footer text-muted text-center">
-                    <a class="btn btn-small btn-dribbble"><i class="fa fa-star"></i> Rating: @artist.Rating</a>
+                    <a class="btn btn-small btn-dribbble"><i class="fa fa-star"></i> Rating:<span id="rating"><script>getRate.Get(@artist.Id);</script></span></a>
                 </div>
                 <div class="btn-group   text-white" role="group" aria-label="Basic example">
                     <a class="btn btn-secondary ">Performences</a>
@@ -102,4 +102,24 @@
             });
         });
     </script>
+<script>
+    const getRate = function () {
+        const Get = function (id) {
+        let url = `getrate/artist/${id}`
+        let rating = fetch(url).then(() =>
+            getElementById('rating')
+            .textContent = rating;)
+        debugger;
+        
+
+    }
+
+    return {
+
+        Get
+
+    }
+}()
+</script>
+    <script type="text/javascript" src="~/js/GetRate.js"></script>
 }

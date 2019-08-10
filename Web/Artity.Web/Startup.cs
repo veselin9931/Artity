@@ -33,6 +33,7 @@
     using Artity.Services.Order;
     using Artity.Web.InputModels.Order;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
+    using Artity.Web.Hubs;
 
     public class Startup
     {
@@ -80,6 +81,7 @@
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
 
+            services.AddSignalR();
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -109,8 +111,6 @@
                         options.MinimumSameSitePolicy = SameSiteMode.Lax;
                         options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
-
-  
 
             services.AddSingleton(this.configuration);
             // Identity stores
@@ -172,14 +172,18 @@
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-
+            app.UseSignalR(
+                routes =>
+                {
+                    routes.MapHub<NotifyHub>("/notify");
+                });
             app.UseMvc(routes =>
             {
-            
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });

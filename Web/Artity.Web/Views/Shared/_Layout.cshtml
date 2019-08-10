@@ -133,8 +133,12 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script src="~/js/rate.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+        <script src="~/js/notify.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
+        <script src="~/js/notify.js" asp-append-version="true"></script>
         <script src="~/vendor/jquery/jquery.js" asp-append-version="true"></script>
         <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
         <script src="~/vendor/jquery-easing/jquery.easing.js" asp-append-version="true"></script>
@@ -144,6 +148,8 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+        <script src="~/lib/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)

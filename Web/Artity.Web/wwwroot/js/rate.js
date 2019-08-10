@@ -90,3 +90,18 @@ function responseMessage(msg) {
     $('.success-box div.text-message').html("<span>" + msg + "</span>");
 }
 
+function GetRate(id) {
+    let url = `getrate/artist/${id}`
+    let rating = httpGet(url);
+    debugger;
+    getElementById('rating').textContent = rating;
+   
+}
+
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", theUrl, false); // false for synchronous request
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+

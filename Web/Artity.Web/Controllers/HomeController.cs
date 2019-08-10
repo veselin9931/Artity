@@ -40,7 +40,8 @@
 
                 var viewModel = await this.artistService.GetArtist(user.ArtistId).To<ArtistDashboardViewModel>().FirstAsync();
 
-                var artistOrders = this.orderService.AllOrders<ArtistOrdersViewModel>(user.ArtistId);
+                var artistOrders = this.orderService
+                    .AllOrdersInStatus<ArtistOrdersViewModel>(user.ArtistId, Data.Models.Enums.OrderStatus.Sent);
                 viewModel.Orders = artistOrders;
 
                 return this.View("ArtistDashboard", viewModel);
