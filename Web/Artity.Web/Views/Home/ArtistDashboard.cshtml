@@ -169,19 +169,49 @@
                 <div class="tab-pane" id="messages">
 
                     <h2></h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Review </th>
+                          
 
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted">Inbox</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                            </tr>
+                        </thead>
+                        <tbody id="items">
 
-                    </ul>
+                            @{var b = 0;
+
+                            }
+                            @foreach (var offert in this.Model.Offerts)
+                            {
+
+                                b++;
+
+                            <tr >
+                                <td>@b</td>
+                                <td>@offert.Title</td>
+                                <td>@offert.Type</td>
+                                <td>@offert.Price</td>
+                                
+                                <td>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn  btn-success active">
+                                            <a class="text-white" asp-action="ApprovedReservation" asp-route-id="@offert.Id" asp-controller="Artist" name="options" id="option1" autocomplete="off" checked> More</a>
+                                        </label>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
 
                 </div>
                 <!--/tab-pane-->

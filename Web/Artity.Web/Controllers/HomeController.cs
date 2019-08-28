@@ -12,22 +12,27 @@
     using System.Threading.Tasks;
     using Artity.Services.Order;
     using Artity.Web.ViewModels.Order;
+    using Artity.Services.Offert;
+    using Artity.Web.ViewModels.Offert;
 
     public class HomeController : BaseController
     {
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IOrderService orderService;
+        private readonly IOffertService offertService;
 
         public HomeController(
             IUserService userService,
             IArtistService artistService,
-            IOrderService orderService
+            IOrderService orderService, 
+            IOffertService offertService
             )
         {
             this.userService = userService;
             this.artistService = artistService;
             this.orderService = orderService;
+            this.offertService = offertService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,6 +48,9 @@
                 var artistOrders = this.orderService
                     .AllOrdersInStatus<ArtistOrdersViewModel>(user.ArtistId, Data.Models.Enums.OrderStatus.Sent);
                 viewModel.Orders = artistOrders;
+
+                var offerts = this.offertService.GetAllOfferts<OffertViewModel>(user.ArtistId);
+                viewModel.Offerts = offerts;
 
                 return this.View("ArtistDashboard", viewModel);
             }

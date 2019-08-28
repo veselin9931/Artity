@@ -6,7 +6,7 @@ using Artity.Services.ServiceModels;
 using System.Linq;
 using System.Threading.Tasks;
 using Artity.Data.Common.Repositories;
-using Artity.Services.Artists;
+using Artity.Services.Mapping;
 
 namespace Artity.Services.Offert
 {
@@ -43,10 +43,64 @@ namespace Artity.Services.Offert
                 Town = town,
             };
 
-           await this.repository.AddAsync(offer);
-           var result = await this.repository.SaveChangesAsync();
+            await this.repository.AddAsync(offer);
+            var result = await this.repository.SaveChangesAsync();
 
             return result > 0;
+        }
+
+        public async Task<bool> DeleteOffert(string id)
+        {
+            var offert = this.repository
+                .All()
+                .FirstOrDefault(a => a.Id == id);
+
+            if (offert != null)
+            {
+                this.repository
+                   .Delete(offert);
+
+                int result = await this.repository.SaveChangesAsync();
+                return result > 0;
+
+            }
+
+            throw new NullReferenceException();
+        }
+
+        public async Task<bool> EditOffert(string id, string title, int type, string message, string features, bool contract, string userId, string tel, decimal price, string town)
+        {
+            var offert = this.repository
+               .All()
+               .FirstOrDefault(a => a.Id == id);
+
+            if (offert != null)
+            {
+                offert.Title = title;
+                offert.Type = (OrderType)type;
+                offert.Message = message;
+                offert.Features = features;
+                offert.Contract = contract;
+                offert.Tel = tel;
+                offert.Price = price;
+                offert.Town = town;
+
+                this.repository.Update(offert);
+
+                int result = await this.repository.SaveChangesAsync();
+                return result > 0;
+
+            }
+
+            throw new NullReferenceException();
+        }
+
+        public IEnumerable<TViewModel> GetAllOfferts<TViewModel>(string artistid)
+        {
+          return this.repository
+                .All()
+                .Where(a => a.ArtistId == artistid && a.IsDeleted != true)
+                .To<TViewModel>();
         }
 
         public IEnumerable<OffertTypeServiceModel> GetAllOffertTypes()
@@ -59,6 +113,7 @@ namespace Artity.Services.Offert
             {
                 types.Add(new OffertTypeServiceModel() { Name = names[i], EnumValue = values[i] });
             }
+
             return types;
         }
     }

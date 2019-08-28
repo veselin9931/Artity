@@ -1,14 +1,14 @@
-﻿namespace Artity.Web.InputModels.Offert
+﻿using Artity.Common;
+using Artity.Web.InputModels.Type;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace Artity.Web.InputModels.Offert
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    using Artity.Common;
-    using Artity.Web.InputModels.Type;
-
-    public class OffertInputModel
+    public class OffertEditInputModel
     {
-
         [Display(Name = "Type")]
         [Required]
         public int Type { get; set; }
@@ -42,6 +42,5 @@
         public string Tel { get; set; }
 
         public IEnumerable<OffertTypeInputModel> Categories { get; set; }
-
     }
 }

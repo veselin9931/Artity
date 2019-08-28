@@ -28,7 +28,7 @@ namespace Artity.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var types = offertService.GetAllOffertTypes().MapTo<OffertTypeInputModel[]>();
+            var types = this.offertService.GetAllOffertTypes().MapTo<OffertTypeInputModel[]>();
 
             var result = new OffertInputModel()
             {
@@ -51,5 +51,30 @@ namespace Artity.Web.Controllers
             return this.Redirect(Common.GlobalConstants.HomeUrl);
         }
 
+        public async Task<IActionResult> Delete(string offertId)
+        {
+           var result = await this.offertService.DeleteOffert(offertId);
+
+           if (result == true)
+            {
+                return this.Redirect("/Offerts");
+            }
+
+           return this.NotFound();
+        }
+
+        [HttpPost]
+        [Route("Offert/Edit/{offertId}")]
+        public async Task<IActionResult> Edit(OffertEditInputModel input, [FromRoute]string offertId)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return await this.Create();
+            }
+
+            var user = this.userService.GetApplicationUserByName(this.User.Identity.Name);
+            await this.offertService.EditOffert(offertId,input.Title, input.Type, input.Review, input.Features, input.Contract, user.Id, input.Tel, input.Price, input.Town);
+            return this.Redirect("/Offerts");
+        }
     }
 }

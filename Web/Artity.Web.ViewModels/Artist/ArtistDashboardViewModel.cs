@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Artity.Services.Mapping;
+    using Artity.Web.ViewModels.Offert;
     using Artity.Web.ViewModels.Order;
     using Artity.Web.ViewModels.Picture;
     using AutoMapper;
@@ -34,6 +35,8 @@
         public int PerformenceCount { get; set; }
 
         public IEnumerable<ArtistOrdersViewModel> Orders { get; set; }
+
+        public IEnumerable<OffertViewModel> Offerts { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
