@@ -37,12 +37,18 @@ namespace Artity.Services
            return this.context.Users.FirstOrDefault(u => u.ArtistId == id).Email;
         }
 
+        public async Task<string> GetArtistId(string id)
+        {
+          return this.context
+                .Users
+                .FirstOrDefault(a => a.Id == id).ArtistId;
+        }
+
         public async Task SetFirstLogin(ApplicationUser user)
         {
             var dbuser = await this.context.Users.FindAsync(user.Id); 
-           user.FirstLogin = true;
+            user.FirstLogin = true;
             await this.context.SaveChangesAsync();
-
         }
     }
 }

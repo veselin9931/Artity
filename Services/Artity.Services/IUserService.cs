@@ -15,5 +15,7 @@ namespace Artity.Services
          Task SetFirstLogin(ApplicationUser user);
 
          Task<string> GetArtistEmail(string id);
+
+         Task<string> GetArtistId(string id);
     }
 }

@@ -79,6 +79,7 @@
                   .FirstOrDefault(a => a.Nikname == name).Id;
         }
 
+
         public async Task<bool> RefuseArtist(string id, string message)
         {
             string email = await this.userService.GetArtistEmail(id);

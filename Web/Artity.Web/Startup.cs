@@ -34,6 +34,7 @@
     using Artity.Web.InputModels.Order;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
     using Artity.Web.Hubs;
+    using Artity.Services.Offert;
 
     public class Startup
     {
@@ -136,6 +137,8 @@
             services.AddTransient<Services.Performence.IPerformenceService, Services.Performence.PerformenceService>();
             services.AddTransient<Services.Rating.IRatingService, Services.Rating.RatingService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOffertService, OffertService>();
+
 
 
             //Artity system services 

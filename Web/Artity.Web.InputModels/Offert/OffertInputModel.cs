@@ -1,17 +1,16 @@
-﻿namespace Artity.Web.ViewModels.Offert
+﻿namespace Artity.Web.InputModels.Offert
 {
-    using Artity.Common;
-    using System;
-
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
+
+    using Artity.Common;
+    using Artity.Web.InputModels.Type;
 
     public class OffertInputModel
     {
         [Display(Name = "Type")]
         [Required]
-        public string Type { get; set; }
+        public int Type { get; set; }
 
         [Display(Name = "Name")]
         [Required]
@@ -40,6 +39,8 @@
         [Required(ErrorMessage = OffertConstants.PhoneIsRequired)]
         [RegularExpression(OffertConstants.PhoneRegex, ErrorMessage = OffertConstants.PleaseEnterValidPhone)]
         public string Tel { get; set; }
+
+        public IEnumerable<OffertTypeInputModel> Categories { get; set; }
 
     }
 }
