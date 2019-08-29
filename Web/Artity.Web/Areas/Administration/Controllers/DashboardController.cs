@@ -24,6 +24,7 @@
             {
                 SettingsCount = this.settingsService.GetCount(),
                 allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
             };
             return this.View(viewModel);
         }
@@ -38,6 +39,33 @@
                 {
                     SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                };
+
+                if (result)
+                {
+                    return this.View("Index", viewModel);
+                }
+
+                return this.View("Error");
+            }
+            catch (System.Exception)
+            {
+
+                return this.View("Error");
+            }
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+
+                bool result = await this.artistService.RefuseArtist(id, "Sory but");
+                var viewModel = new IndexViewModel
+                {
+                    SettingsCount = this.settingsService.GetCount(),
+                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                 };
 
                 if (result)

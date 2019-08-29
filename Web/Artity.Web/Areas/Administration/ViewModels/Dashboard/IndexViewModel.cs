@@ -8,5 +8,7 @@ namespace Artity.Web.Areas.Administration.ViewModels.Dashboard
         public int SettingsCount { get; set; }
 
         public IEnumerable<ApprovedArtistViewModel> allArtist { get; set; }
+
+        public IEnumerable<ArtistsEditingViewModel> allArtistsForEdit { get; set; }
     }
 }

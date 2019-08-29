@@ -3,47 +3,94 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<h1 class="text-center" >@this.ViewData["Title"]</h1>
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+<div class="container">
+    <div class="row">
+        <table class="table  table-bordered table-hover">
+            <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
+                <tr>
+                    <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+                    <th scope="col">Artist nikname</th>
+                    <th scope="col" alt="Status">Description</th>
+                    <th scope="col">IsApproved</th>
+                    <th scope="col"><i class="fas fa-thumbs-up"></i></i></th>
+                    <th scope="col"><i class="fas fa-thumbs-down"></i></th>
+                </tr>
+            </thead>
+            <tbody class="bg-info text-center table-bordered text-white">
 
-<table class="table  table-bordered table-hover">
-    <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
-        <tr>
-            <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
-            <th scope="col">Artist nikname</th>
-            <th scope="col" alt="Status">Description</th>
-            <th scope="col">IsApproved</th>
-            <th scope="col"><i class="fas fa-thumbs-up"></i></i></th>
-            <th scope="col"><i class="fas fa-thumbs-down"></i></th>
-        </tr>
-    </thead>
-    <tbody class="bg-info text-center table-bordered text-white">
-
-        @{
-            int i = 0;
-        }
-        @foreach (var artistOrder in Model.allArtist)
-        {
-            i++;
-        <tr>
-            <th scope="row">@i</th>
-            <td>@artistOrder.Nikname</td>
-            <td>@artistOrder.AboutMe</td>
-            <td>@artistOrder.IsApproved</td>
-            <td>
-                <a asp-action="Approved" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
-                   class="btn btn-danger btn-outline-danger text-white">
-                    <i class="far fa-check-circle"></i>
-                </a>
-            </td>
-            <td>
-                <a asp-action="Refusal" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
-                   class="btn btn-danger btn-outline-danger text-white">
-                    <i class="far fa-times-circle"></i>
-                </a>
-            </td>
+                @{
+                    int i = 0;
+                }
+                @foreach (var artistOrder in Model.allArtist)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@artistOrder.Nikname</td>
+                        <td>@artistOrder.AboutMe</td>
+                        <td>@artistOrder.IsApproved</td>
+                        <td>
+                            <a asp-action="Approved" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
+                               class="btn btn-danger btn-outline-danger text-white">
+                                <i class="far fa-check-circle"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="Refusal" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artistOrder.Id"
+                               class="btn btn-danger btn-outline-danger text-white">
+                                <i class="far fa-times-circle"></i>
+                            </a>
+                        </td>
 
 
-        </tr>
-        }
-    </tbody>
-</table>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table  table-bordered table-hover">
+            <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
+                <tr>
+                    <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+                    <th scope="col">Artist nikname</th>
+                    <th scope="col" alt="Status">Description</th>
+                    <th scope="col">IsApproved</th>
+                    <th scope="col"><i class="fas fa-thumbs-up"></i></i></th>
+                    <th scope="col"><i class="fas fa-thumbs-down"></i></th>
+                    <th scope="col"><i class="fas fa-thumbs-down"></i></th>
+                    <th scope="col"><i class="fas fa-thumbs-down"></i></th>
+                </tr>
+            </thead>
+            <tbody class="bg-info text-center table-bordered text-white">
+
+                @{
+                    int b = 0;
+                }
+                @foreach (var artists in Model.allArtistsForEdit)
+                {
+                    b++;
+                <tr>
+                    <th scope="row">@b</th>
+                    <td>@artists.Nikname</td>
+                    <td>@artists.Email</td>
+                    <td>@artists.NumberOfPerformances</td>
+                    <td>@artists.NumberOfOfferts</td>
+                    <td>@artists.CreatedOn</td>
+                    <td>@artists.IsApproved</td>
+
+                    <td>
+                        <a asp-action="Delete" asp-controller="Dashboard" asp-area="Administration" asp-route-id="@artists.Id"
+                           class="btn btn-danger btn-outline-danger text-white">
+                            <i class="far fa-times-circle"></i>
+                        </a>
+                    </td>
+
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

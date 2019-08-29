@@ -6,6 +6,8 @@
 
     public interface IArtistService
     {
+        IEnumerable<TViewModel> GetAllArtists<TViewModel>();
+
         IEnumerable<TViewModel> GetAllArtists<TViewModel>(bool isApproved);
 
         IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter);

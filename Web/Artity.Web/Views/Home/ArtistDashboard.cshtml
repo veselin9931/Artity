@@ -117,9 +117,9 @@
                                                     <a class="text-white" asp-action="ApprovedReservation" asp-route-id="@order.Id" asp-controller="Artist" name="options" id="option1" autocomplete="off" checked> accept</a>
                                                 </label>
                                                 <label class="btn btn  btn-danger">
-                                                    <a  class=" text-white" asp-action="RefuseReservation" asp-route-id="@order.Id" asp-controller="Artist" name="options" id="option2" autocomplete="off"> refuse </a>
+                                                    <a class=" text-white" asp-action="RefuseReservation" asp-route-id="@order.Id" asp-controller="Artist" name="options" id="option2" autocomplete="off"> refuse </a>
                                                 </label>
-                                                <label class="btn btn  btn-primary"  data-toggle="modal" data-target="#offertsModal">
+                                                <label class="btn btn  btn-primary" data-toggle="modal" data-target="#offertsModal">
                                                     <a class="text-white" name="options" id="option2" autocomplete="off"> offerts </a>
                                                 </label>
 
@@ -177,7 +177,7 @@
                                 <th>Type</th>
                                 <th>Price</th>
                                 <th>Review </th>
-                          
+
 
                             </tr>
                         </thead>
@@ -191,21 +191,21 @@
 
                                 b++;
 
-                            <tr >
-                                <td>@b</td>
-                                <td>@offert.Title</td>
-                                <td>@offert.Type</td>
-                                <td>@offert.Price</td>
-                                
-                                <td>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn  btn-success active">
-                                            <a class="text-white" asp-action="ApprovedReservation" asp-route-id="@offert.Id" asp-controller="Artist" name="options" id="option1" autocomplete="off" checked> More</a>
-                                        </label>
-                                        
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr class='clickable-row' data-href='/offert/@offert.Id' >
+                                    <td>@b</td>
+                                    <td>@offert.Title</td>
+                                    <td>@offert.Type</td>
+                                    <td>@offert.Price</td>
+
+                                    <td >
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                                            <a class="text-white btn btn  btn-success active" asp-controller="Offert" asp-action="Offert" asp-route-offertId="@offert.Id"> More</a>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
 
                             }
 

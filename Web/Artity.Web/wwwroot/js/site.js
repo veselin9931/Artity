@@ -14,3 +14,8 @@ $('.custom-file-input').on('change', function () {
 
 //connection.start().catch(err => console.error(err.toString()));
     
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+    window.location = $(this).data("href");
+    });
+    });

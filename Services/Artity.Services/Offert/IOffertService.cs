@@ -12,7 +12,9 @@
 
          IEnumerable<TViewModel> GetAllOfferts<TViewModel>(string artistid);
 
-         Task<bool> CreateOffert(string title, int type, string message, string features, bool contract, string userId, string tel, decimal price, string town);
+        TViewModel GetOffert<TViewModel>(string artistid);
+
+        Task<bool> CreateOffert(string title, int type, string message, string features, bool contract, string userId, string tel, decimal price, string town);
 
          Task<bool> EditOffert(string id, string title, int type, string message, string features, bool contract, string userId, string tel, decimal price, string town);
 

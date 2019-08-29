@@ -10,6 +10,7 @@ using Artity.Services.Mapping;
 using Artity.Web.InputModels.Type;
 using Artity.Web.InputModels.Offert;
 using Artity.Services;
+using Artity.Web.ViewModels.Offert;
 
 namespace Artity.Web.Controllers
 {
@@ -34,6 +35,15 @@ namespace Artity.Web.Controllers
             {
                 Categories = types,
             };
+
+            return this.View(result);
+        }
+
+        [HttpGet]
+        [Route("Offert/{offertId}")]
+        public async Task<IActionResult> Offert(string offertId)
+        {
+            var result = this.offertService.GetOffert<OffertViewModel>(offertId);
 
             return this.View(result);
         }

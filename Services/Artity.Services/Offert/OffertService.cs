@@ -116,5 +116,12 @@ namespace Artity.Services.Offert
 
             return types;
         }
+
+        public TViewModel GetOffert<TViewModel>(string artistid)
+        {
+           return this.repository.All()
+                 .FirstOrDefault(a => a.Id == artistid && a.IsDeleted != true)
+                 .MapTo<TViewModel>();
+        }
     }
 }

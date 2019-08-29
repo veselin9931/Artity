@@ -82,6 +82,12 @@
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
 
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            });
+
             services.AddSignalR();
             services
                 .AddMvc()

@@ -51,6 +51,15 @@
                 .To<TViewModel>().ToList();
         }
 
+        public IEnumerable<TViewModel> GetAllArtists<TViewModel>()
+        {
+            return this.artistContext
+                  .All()
+                .Where(a => a.IsDeleted != true)
+                .OrderBy(a => a.CreatedOn)
+                .To<TViewModel>().ToList();
+        }
+
         public IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter)
         {
             throw new NotImplementedException();
