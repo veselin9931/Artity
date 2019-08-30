@@ -3,19 +3,16 @@
     ViewData["Title"] = "Profile";
 }
 
-<h1>@ViewData["Title"]</h1>
+    <h1 class="text-center font-weight-bold text-secondary pt-1">@ViewData["Title"] - @Model.Nikname</h1>
 
 <hr>
 
 
 <div class="container bootstrap snippet mb-1">
-    <div class="row">
-        <div class="col-sm-10">
-            <h1>@Model.Nikname</h1>
-        </div>
-        <div class="col-sm-2">
-            <a href="/Artist/Profile/@Model.Id" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="@Model.ProfilePicture.Link"></a>
-        </div>
+    <div class="row mx-auto pb-2">
+
+        <a href="/Artist/Profile/@Model.Id" class="pull-right"><img width="300" height="300" title="profile image" class="img-circle img-responsive img-thumbnail" src="@Model.ProfilePicture.Link"></a>
+
     </div>
     <div class="row">
         <div class="col-sm-3">

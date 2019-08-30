@@ -82,6 +82,10 @@
               .HasKey(p => p.Id);
 
             builder.Entity<Artist>()
+                .Property(p => p.AboutMe)
+                .HasMaxLength(2500);
+
+            builder.Entity<Artist>()
                 .HasMany(p => p.Performences)
                 .WithOne(a => a.Artist);
 

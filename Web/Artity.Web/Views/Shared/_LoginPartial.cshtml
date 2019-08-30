@@ -15,7 +15,7 @@
             <li class="nav-item dropdown  mr-2">
 
                 <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Performences
+                    Performences
                 </button>
 
 
@@ -92,40 +92,44 @@
 
 
 
-    if (User.IsInRole(GlobalConstants.ArtistRoleName) || User.IsInRole(GlobalConstants.UserRoleName) ||  User.IsInRole(GlobalConstants.AdministratorRoleName))
+    if (User.IsInRole(GlobalConstants.ArtistRoleName) || User.IsInRole(GlobalConstants.UserRoleName) || User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
 
-         string ProfilePictureUrl = " ";
+        string ProfilePictureUrl = " ";
         string AltText = " ";
         var user = await this.UserManager.GetUserAsync(this.User);
         if (user.PofilePicture != null)
         {
             ProfilePictureUrl = user.PofilePicture.Link;
             AltText = user.PofilePicture.Description;
-          
+
         }
 
-<div class="  mx-lg-2 mt-2 col-xs-1 col-sm-1 avata ">
-    <img src="@ProfilePictureUrl" alt="@AltText" class=" rounded-circle img-rounded ml-2"
-         style="max-height: 40px; max-width: 40px;">
-    <span class="badge badge-notify text-white" id="notification">0</span>
-    <span class="text-white ">
-        <strong>
-            @this.User.Identity.Name.ToString()
-        </strong>
-    </span>
-</div>
-    }
-}
-else
-{
-    <ul class="navbar-nav">
-        <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register">Register <i class="fas fa-user-plus"></i></a>
-        </li>
-        <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login <i class="fas fa-sign-in-alt"></i></a>
-        </li>
-    </ul>
-}
+       
+            <div class="  mx-lg-2 mt-2 col-xs-1 col-sm-1 avata ">
+                <a class="text-decoration-none text-lg-center" href="/">
+                    <img src="@ProfilePictureUrl" onclick="/" alt="@AltText" class="border border-info rounded-circle img-rounded ml-3"
+                         style="max-height: 40px; max-width: 40px;" />
+                    <span class="badge badge-notify text-white" id="notification">0</span>
+                    <span class="text-white ">
+                        <strong>
+                            @this.User.Identity.Name.ToString()
+                        </strong>
+                    </span>
+                </a>
+            </div>
+          
+            }
+            }
+            else
+            {
+            <ul class="navbar-nav">
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register">Register <i class="fas fa-user-plus"></i></a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login <i class="fas fa-sign-in-alt"></i></a>
+                </li>
+            </ul>
+            }
 

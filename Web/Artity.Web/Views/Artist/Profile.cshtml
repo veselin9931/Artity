@@ -19,7 +19,7 @@
 
         <div class="row mx-auto">
             <div class="btn-group col-12   pt-3 pb-3" role="group" aria-label="Basic example">
-                <partial name="_RateArtistPartial"  />          
+                <partial name="_RateArtistPartial" model="@Model.Id"  />          
                 <button type="submit" class="btn btn-secondary">
                     <i class="fas fa-dollar-sign"></i> Category: @Model.CategoryName
                 </button>

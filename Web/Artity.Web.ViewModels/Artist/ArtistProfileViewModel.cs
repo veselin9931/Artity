@@ -11,6 +11,7 @@ namespace Artity.Web.ViewModels.Artist
 {
     public class ArtistProfileViewModel : IMapFrom<Data.Models.Artist>, IHaveCustomMappings
     {
+        public string Id { get; set; }
 
         public string Nikname { get; set; }
 

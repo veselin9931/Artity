@@ -27,10 +27,17 @@ namespace Artity.Services.Rating
 
         public double GetRate(RatingType type, string rateId)
         {
-            return this.ratingRepo.All()
+            var rating = this.ratingRepo.All()
                       .Where(a => a.RatedId == rateId && a.Type == type)
                       .Select(a => a.RatingValue)
-                      .Average();
+                      ;
+            if (rating.ToList().Count == 0)
+            {
+                return 0;
+            }
+
+            return rating.Average();
+                     
         }
 
         public bool IsRated(string userId, string ratedId)

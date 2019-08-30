@@ -78,7 +78,7 @@
         {
             return this.artistContext
                   .All()
-                  .Where(a => a.Id == id);
+                  .Where(a => a.Id == id && a.IsDeleted == false);
         }
 
         public async Task<string> GetArtistIdByName(string name)

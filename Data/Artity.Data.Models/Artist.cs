@@ -25,7 +25,7 @@
         public string Description { get; set; }
 
         [Required]
-        [MaxLength(1500)]
+        [MaxLength(2200)]
         public string AboutMe { get; set; }
 
         public string CategoryId { get; set; }

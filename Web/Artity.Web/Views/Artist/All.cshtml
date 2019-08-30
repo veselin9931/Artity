@@ -12,61 +12,67 @@
 
             @foreach (var artist in this.Model.ArtistAlls)
             {
-            <div class="card card-cascade mx-auto mr-5 mb-5 mb-lg-4">
+                <div id="@artist.Id" class="card card-cascade mx-auto mr-5 mb-5 mb-lg-4">
 
-                <!-- Card image -->
-                <div class="view view-cascade overlay">
-                    <img class="card-img-top" src="@artist.ProfilePicture.Link" alt="Card image cap">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
+                    <!-- Card image -->
+                    <div  class="view view-cascade overlay">
+                        <img class="card-img-top" src="@artist.ProfilePicture.Link" alt="Card image cap">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body card-body-cascade text-center">
+
+                        <!-- Title -->
+                        <h4 class="card-title "><strong id="artist-name">@artist.Nikname</strong></h4>
+                        <!-- Subtitle -->
+                        <h6 class="font-weight-bold indigo-text py-2">@artist.CategoryName</h6>
+                        <!-- Text -->
+                        <p class="card-text">
+                            @artist.AboutMe
+                        </p>
+
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-facebook" style="font-size:1.5em">@artist.Facebook</i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-twitter " style="font-size:1.5em">@artist.Twiter</i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-youtube" style="font-size:1.5em">@artist.Youtube</i>
+                                </a>
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
+                    <div id="a" class="card-footer text-muted text-center">
+                        <a class="btn btn-small btn-dribbble">
+                            <i class="fa fa-star"></i> Rating:<span id="ar">
+                                <titlle id="id">0</titlle>
+
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group   text-white" role="group" aria-label="Basic example">
+                        <a class="btn btn-secondary ">Performences</a>
+                        <a asp-controller="Artist" asp-action="Profile" asp-route-id="@artist.Id" class="btn btn-secondary">Profile</a>
+                        <a asp-action="Create" asp-controller="OrderArtist" asp-route-ArtistNikname="@artist.Nikname" class="btn btn-secondary">Request</a>
+                    </div>
+                    <!-- Card footer -->
+
+
                 </div>
-
-                <!-- Card content -->
-                <div class="card-body card-body-cascade text-center">
-
-                    <!-- Title -->
-                    <h4 class="card-title "><strong>@artist.Nikname</strong></h4>
-                    <!-- Subtitle -->
-                    <h6 class="font-weight-bold indigo-text py-2">@artist.CategoryName</h6>
-                    <!-- Text -->
-                    <p class="card-text">
-                        @artist.AboutMe
-                    </p>
-
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                <i class="fa fa-facebook" style="font-size:1.5em">@artist.Facebook</i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                <i class="fa fa-twitter " style="font-size:1.5em">@artist.Twiter</i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                <i class="fa fa-youtube" style="font-size:1.5em">@artist.Youtube</i>
-                            </a>
-                        </li>
-                    </ul>
-
-
-                </div>
-
-                <div class="card-footer text-muted text-center">
-                    <a class="btn btn-small btn-dribbble"><i class="fa fa-star"></i> Rating:<span id="rating"><script>getRate.Get(@artist.Id);</script></span></a>
-                </div>
-                <div class="btn-group   text-white" role="group" aria-label="Basic example">
-                    <a class="btn btn-secondary ">Performences</a>
-                    <a asp-controller="Artist" asp-action="Profile" asp-route-id="@artist.Id" class="btn btn-secondary">Profile</a>
-                    <a asp-action="Create" asp-controller="OrderArtist" asp-route-ArtistNikname="@artist.Nikname" class="btn btn-secondary">Request</a>
-                </div>
-                <!-- Card footer -->
-
-
-            </div>
             }
 
             <!-- ./Team member -->
@@ -79,17 +85,23 @@
 
 
 @section Scripts {
-  
+
 
     <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $(".dropdown-menu li").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
+
+
+          
+
+             
+
+                    $(document).ready(function () {
+                        $("#myInput").on("keyup", function () {
+                            var value = $(this).val().toLowerCase();
+                            $(".dropdown-menu li").filter(function () {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                        });
+                    });
     </script>
     <script>
         $(document).ready(function (e) {
@@ -102,24 +114,5 @@
             });
         });
     </script>
-<script>
-    const getRate = function () {
-        const Get = function (id) {
-        let url = `getrate/artist/${id}`
-        let rating = fetch(url).then(() =>
-            getElementById('rating')
-            .textContent = rating;)
-        debugger;
-        
 
-    }
-
-    return {
-
-        Get
-
-    }
-}()
-</script>
-    <script type="text/javascript" src="~/js/GetRate.js"></script>
 }

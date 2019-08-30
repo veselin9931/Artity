@@ -118,7 +118,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
         {
 
             [Required]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
+            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
             [Display(Name = "Nikname")]
             public string Nikname { get; set; }
 
@@ -127,7 +127,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             public string Category { get; set; }
 
             [Required]
-            [StringLength(1500, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 30)]
+            [StringLength(2500, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 30)]
             [Display(Name = "About Me")]
             public string AboutMe { get; set; }
 

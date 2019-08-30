@@ -20,6 +20,7 @@
         });
     });
 
+  
 
     /* 2. Action to perform on click */
     $('#stars li').on('click', function () {
@@ -38,7 +39,17 @@
         let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
         var msg = "Thanks! You rated this " + ratingValue + " stars.";
         responseMessage(msg);
-        sendInfo(ratingValue);
+      
+         let a = document.getElementsByClassName("container text-center text-uppercase");
+
+        debugger;
+        if (a.length != 1) {
+            sendInfo(ratingValue);
+        }
+        else {
+            sendInfoToPerformence(ratingValue)
+        }
+       
     });
 
 });
@@ -64,9 +75,9 @@ function sendInfo(ratingValue) {
         })
 }
 
-function sendInfoToPerformence() {
-    let artistName = document.getElementById("artist-name").textContent;
-    let url = `/Rate/${ratingValue}/Performence/${artistName}`;
+function sendInfoToPerformence(ratingValue) {
+    let performenceName = document.getElementById("performence-name").textContent;
+    let url = `/Rate/${ratingValue}/Performence/${performenceName}`;
     let calculatedRating = 0;
     fetch(url)
         .then((response) => response.json())
@@ -90,18 +101,113 @@ function responseMessage(msg) {
     $('.success-box div.text-message').html("<span>" + msg + "</span>");
 }
 
-function GetRate(id) {
-    let url = `getrate/artist/${id}`
-    let rating = httpGet(url);
-    debugger;
-    getElementById('rating').textContent = rating;
+
+$(function  () {
+
+    let artistName = document.getElementById("rating").getAttribute("name");
+    let url = `/GetRate/Artist/${artistName}`;
+let calculatedRating = 0;
+    fetch(url)
+        .then((response) => response.text())
+    .then((data) => {
+        calculatedRating = data
+        if (calculatedRating) {
+            let ratingElement = document.querySelector("#rating");
+            ratingElement.innerHTML = ''
+            let innerI = document.createElement("I");
+            innerI.className = "fas fa-star-half-alt";
+
+            ratingElement.appendChild(innerI);
+            ratingElement.textContent = ` Rating: ${calculatedRating}`;
+
+        }
+    });
    
-}
+
+});
+
+$(function () {
+
+    let artistName = document.getElementById("rating").getAttribute("name");
+    let url = `/GetRate/Performence/${artistName}`;
+    let calculatedRating = 0;
+    fetch(url)
+        .then((response) => response.text())
+        .then((data) => {
+            calculatedRating = data
+            if (calculatedRating) {
+                let ratingElement = document.querySelector("#rating");
+                ratingElement.innerHTML = ''
+                let innerI = document.createElement("I");
+                innerI.className = "fas fa-star-half-alt";
+
+                ratingElement.appendChild(innerI);
+                ratingElement.textContent = ` Rating: ${calculatedRating} %`;
+
+            }
+        });
+
+});
 
 function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
-    xmlHttp.send(null);
+    xmlHttp.send(theUrl);
+  
     return xmlHttp.responseText;
 }
 
+$(function () {
+    let artistName = document.getElementsByClassName("card card-cascade mx-auto mr-5 mb-5 mb-lg-4");
+
+    if (artistName.length != 0) {
+        for (let cart in artistName) {
+            let artistcart = artistName[cart]
+
+            let url = `https://localhost:44319/GetRate/Artist/${artistcart.id}`;
+          
+            fetch(url)
+                .then((response) => response.text())
+                .then((data) => {
+                    calculatedRating = data
+                    let aaaa = (artistcart.childNodes[9].childNodes[1].childNodes[3]);
+                    aaaa.textContent = ` ${data}`
+
+
+                })
+
+
+
+        }
+    }
+    
+    $(function () {
+        let artistName = document.getElementsByClassName("col-xs-12 col-sm-6 col-md-4");
+
+        if (artistName.length != 0) {
+            for (let cart in artistName) {
+                let artistcart = artistName[cart]
+
+                let url = `https://localhost:44319/GetRate/Performence/${artistcart.id}`;
+       
+                fetch(url)
+                    .then((response) => response.text())
+                    .then((data) => {
+                        calculatedRating = data
+                        let aaaa = (artistcart.childNodes[1].childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1]);
+                      
+                        aaaa.textContent = ` ${data} %`
+                  
+
+
+                    })
+
+
+
+            }
+        }
+
+
+    });
+
+});

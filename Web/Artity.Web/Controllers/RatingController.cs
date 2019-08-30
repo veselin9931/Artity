@@ -2,9 +2,11 @@
 {
 
     using System.Threading.Tasks;
+    using Artity.Common;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
     using Artity.Services.Rating;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +21,7 @@
             this.userManager = userManager;
         }
 
+        [Authorize(Roles = GlobalConstants.UserRoleName)]
         [Route("Rate/{rateValue}/Artist/{artist}/")]
         public async Task<JsonResult> RateArtist([FromRoute]int rateValue, [FromRoute]string artist)
         {
@@ -38,7 +41,7 @@
         [Route("GetRate/Performence/{performenceId}/")]
         public async Task<JsonResult> GetPerformenceRate([FromRoute]string performenceId)
         {
-            var rate = this.ratingService.GetRate(RatingType.Artist, performenceId);
+            var rate = this.ratingService.GetRate(RatingType.Performence, performenceId);
             return this.Json(rate);
         }
 
