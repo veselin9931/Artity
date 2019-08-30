@@ -54,5 +54,8 @@
 
         public DateTime? DeletedOn { get; set; }
 
+        [Required]
+        public bool IsApproved { get; set; }
+
     }
 }

@@ -36,7 +36,7 @@
         public async Task<IActionResult> All()
         {
             var performences = this.performenceService
-                .GetAll<PerformenceAllViewModel>();
+                .GetAll<PerformenceAllViewModel>(true);
 
             var categories = this.categoryService
                 .GetAllCategories();

@@ -27,7 +27,8 @@
             this.userService = userService;
         }
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/Reservations")]
         [HttpGet]
         public async Task<IActionResult> Reservations()
@@ -39,7 +40,7 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/Reservations/Delete/{id}")]
         [HttpGet]
         public async Task<IActionResult> DeleteReservation(string id)

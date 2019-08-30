@@ -2,6 +2,7 @@
 {
     using Artity.Services.Artists;
     using Artity.Services.Data;
+    using Artity.Services.Performence;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@
     {
         private readonly ISettingsService settingsService;
         private readonly IArtistService artistService;
+        private readonly IPerformenceService performenceService;
 
-        public DashboardController(ISettingsService settingsService, IArtistService artistService)
+        public DashboardController(ISettingsService settingsService, IArtistService artistService, IPerformenceService performenceService)
         {
             this.settingsService = settingsService;
             this.artistService = artistService;
+            this.performenceService = performenceService;
         }
 
         public IActionResult Index()
@@ -25,6 +28,7 @@
                 SettingsCount = this.settingsService.GetCount(),
                 allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                 allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
             };
             return this.View(viewModel);
         }
@@ -39,6 +43,64 @@
                 {
                     SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
+                };
+
+                if (result)
+                {
+                    return this.View("Index", viewModel);
+                }
+
+                return this.View("Error");
+            }
+            catch (System.Exception)
+            {
+
+                return this.View("Error");
+            }
+        }
+
+        public async Task<IActionResult> ApprovedPerformence(string id)
+        {
+            try
+            {
+
+                bool result = await this.performenceService.ApprovedPerformence(id);
+                var viewModel = new IndexViewModel
+                {
+                    SettingsCount = this.settingsService.GetCount(),
+                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
+                };
+
+                if (result)
+                {
+                    return this.View("Index", viewModel);
+                }
+
+                return this.View("Error");
+            }
+            catch (System.Exception)
+            {
+
+                return this.View("Error");
+            }
+        }
+
+        public async Task<IActionResult> RefusalPerfoermence(string id)
+        {
+            try
+            {
+
+                bool result = await this.performenceService.RefusePerformence(id);
+                var viewModel = new IndexViewModel
+                {
+                    SettingsCount = this.settingsService.GetCount(),
+                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
                 if (result)
@@ -66,6 +128,7 @@
                     SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                     allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
                 if (result)

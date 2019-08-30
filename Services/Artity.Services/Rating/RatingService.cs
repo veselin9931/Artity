@@ -37,7 +37,7 @@ namespace Artity.Services.Rating
             }
 
             return rating.Average();
-                     
+
         }
 
         public bool IsRated(string userId, string ratedId)

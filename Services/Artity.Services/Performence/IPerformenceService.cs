@@ -14,7 +14,7 @@
     {
         Task<bool> CreatePerformence(PerformenceCreateInputModel inputModel, ApplicationUser user);
 
-        IEnumerable<TViewModel> GetAll<TViewModel>();
+        IEnumerable<TViewModel> GetAll<TViewModel>(bool approved);
 
         IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category);
 
@@ -24,6 +24,8 @@
 
         string GetPerformenceByName(string name);
 
+        Task<bool> ApprovedPerformence(string id);
 
+        Task<bool> RefusePerformence(string id);
     }
 }

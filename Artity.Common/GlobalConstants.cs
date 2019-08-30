@@ -4,6 +4,9 @@
     {
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AllRoles = "Administrator, Artist, User";
+
+
         public const string UserRoleName = "User";
 
         public const string ArtistRoleName = "Artist";

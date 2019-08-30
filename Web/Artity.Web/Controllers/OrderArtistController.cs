@@ -28,7 +28,8 @@ namespace Artity.Web.Controllers
         public IOrderService OrderService { get; }
         public IPerformenceService PerformenceService { get; }
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/Order/Create/{ArtistNikname}")]
         [HttpPost]
         public async Task<IActionResult> Create([FromRoute]string ArtistNikname, ArtistOrderCreateInputModel model)
@@ -75,7 +76,7 @@ namespace Artity.Web.Controllers
         }
 
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/Order/Create/{ArtistNikname}")]
         [HttpGet]
         public IActionResult Create([FromRoute]string ArtistNikname)
@@ -93,7 +94,8 @@ namespace Artity.Web.Controllers
             return this.View(iputModel);
         }
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/CreatePerformenceOrder/{id}/{artistNikname}")]
         [HttpGet]
         public IActionResult CreatePerformenceOrder([FromRoute]string id, string artistNikname)
@@ -114,7 +116,8 @@ namespace Artity.Web.Controllers
             }
         }
 
-        [Authorize(Roles = GlobalConstants.UserRoleName)]
+
+        [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/CreatePerformenceOrder/{id}/{artistNikname}")]
         [HttpPost]
         public async Task<IActionResult> CreatePerformenceOrder([FromRoute]string id, string artistNikname, PerformenceOrderCreateInputModel model)

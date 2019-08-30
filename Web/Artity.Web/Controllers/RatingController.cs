@@ -10,7 +10,9 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class RatingController : BaseController
+
+    [Authorize(Roles = GlobalConstants.AllRoles)]
+    public class RatingController : Controller
     {
         private readonly IRatingService ratingService;
         private readonly UserManager<ApplicationUser> userManager;
@@ -31,6 +33,7 @@
             return this.Json(rate);
         }
 
+        [AllowAnonymous]
         [Route("GetRate/Artist/{artistId}/")]
         public async Task<JsonResult> GetArtistRate([FromRoute]string artistId)
         {
@@ -38,6 +41,7 @@
             return this.Json(rate);
         }
 
+        [AllowAnonymous]
         [Route("GetRate/Performence/{performenceId}/")]
         public async Task<JsonResult> GetPerformenceRate([FromRoute]string performenceId)
         {
@@ -54,7 +58,6 @@
             return this.Json(rate);
         }
 
-        
 
     }
 }
