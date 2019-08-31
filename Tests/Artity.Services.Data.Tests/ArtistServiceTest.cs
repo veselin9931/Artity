@@ -36,12 +36,16 @@ namespace Artity.Services.Data.Tests
 
             var mock = new Mock<IRepository<Artist>>();
             mock.Setup<IQueryable<Artist>>(x => x.All())
-                .Returns(this.Data().AsQueryable); 
+                .Returns(this.Data().AsQueryable);
+
+            var mock2 = new Mock<IRepository<Social>>();
+            mock.Setup<IQueryable<Artist>>(x => x.All())
+                .Returns(this.Data().AsQueryable);
 
             this.Repository = mock.Object;
 
             this.UserService = new UserService(this.dbContext);
-            this.ArtistService = new ArtistService(this.Repository, this.emailSender , this.UserService);
+            this.ArtistService = new ArtistService(this.Repository, this.emailSender , this.UserService, mock2.Object);
         }
 
         public IUserService UserService { get; }

@@ -6,6 +6,7 @@
     using Artity.Web.ViewModels.Offert;
     using Artity.Web.ViewModels.Order;
     using Artity.Web.ViewModels.Picture;
+    using Artity.Web.ViewModels.Social;
     using AutoMapper;
 
     public class ArtistDashboardViewModel : IMapFrom<Data.Models.Artist>, IHaveCustomMappings
@@ -18,13 +19,7 @@
 
         public PictureViewModel ProfilePicture { get; set; }
 
-        public string Facebook { get; set; }
-
-        public string Twiter { get; set; }
-
-        public string LinkIn { get; set; }
-
-        public string Youtube { get; set; }
+        public SocialViewModel Social { get; set; }
 
         public double Rating { get; set; }
 

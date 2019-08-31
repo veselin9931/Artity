@@ -1,4 +1,4 @@
-﻿namespace Artity.Common
+﻿""namespace Artity.Common
 {
     public static class GlobalConstants
     {
@@ -25,5 +25,6 @@
 
         public const string Artist = "Artist";
 
+        public const string AccountMenager = "Identity/Account/Manage";
     }
 }

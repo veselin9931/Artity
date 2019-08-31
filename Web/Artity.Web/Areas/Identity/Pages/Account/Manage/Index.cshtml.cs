@@ -4,13 +4,16 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    
     using Artity.Data.Models;
-
+    using Artity.Services.Artists;
+    using Artity.Web.InputModels.Social;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+
+    using Artity.Services.Mapping;
 
 #pragma warning disable SA1649 // File name should match first type name
     public class IndexModel : PageModel
@@ -19,15 +22,19 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
+        private readonly IArtistService artistService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IArtistService artistService
+            )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.emailSender = emailSender;
+            this.artistService = artistService;
         }
 
         public string Username { get; set; }
@@ -61,6 +68,23 @@
             };
 
             this.IsEmailConfirmed = await this.userManager.IsEmailConfirmedAsync(user);
+            this.Input.Id = user.ArtistId;
+
+            if (user.ArtistId != null)
+            {
+                var socialsServiceModel = await this.artistService
+                      .GetSocial(user.ArtistId);
+
+                if (socialsServiceModel != null)
+                {
+                    this.Input.Social = new SocialInputModel()
+                    {
+                        Facebook = socialsServiceModel.Facebook,
+                        Youtube = socialsServiceModel.Youtube,
+                        Website = socialsServiceModel.WebSite,
+                    };
+                }
+            }
 
             return this.Page();
         }
@@ -144,6 +168,10 @@
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string Id { get; set; }
+
+            public SocialInputModel Social { get; set; }
         }
     }
 }

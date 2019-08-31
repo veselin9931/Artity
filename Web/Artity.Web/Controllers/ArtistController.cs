@@ -10,6 +10,11 @@
     using System.Linq;
     using Artity.Services.Rating;
     using Artity.Services.Order;
+    using Microsoft.AspNetCore.Authorization;
+    using Artity.Common;
+    using Artity.Services.ServiceModels;
+    using Artity.Web.ViewModels.Social;
+    using Artity.Web.InputModels.Social;
 
     public class ArtistController : BaseController
     {
@@ -74,11 +79,13 @@
             return this.View(artist);
         }
 
+        [Authorize(Roles = GlobalConstants.Artist)]
         public async Task<IActionResult> Dashboard()
         {
             return this.View();
         }
 
+        [Authorize(Roles = GlobalConstants.Artist)]
         [Route("/ApprovedReservation/{id}")]
         [HttpGet]
         public async Task<IActionResult> ApprovedReservation(string id)
@@ -92,7 +99,7 @@
 
             return this.NotFound();
         }
-
+        [Authorize(Roles = GlobalConstants.Artist)]
         [Route("/RefuseReservation/{id}")]
         [HttpGet]
         public async Task<IActionResult> RefuseReservation(string id)
@@ -104,6 +111,57 @@
             }
 
             return this.NotFound();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.Artist)]
+        public async Task<IActionResult> AddSocial([FromRoute]string id, [FromForm]SocialServiceModel input)
+        {
+            try
+            {
+                bool result = await this.artistService
+                     .AddSocial(id, input);
+
+                return this.Redirect(GlobalConstants.AccountMenager);
+            }
+            catch (System.Exception)
+            {
+
+                return this.NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.Artist)]
+        [Route("Artist/AddSocial/{id}")]
+        public async Task<IActionResult> EditSocial(string id, SocialServiceModel input)
+        {
+          
+
+                bool result = await this.artistService
+                     .AddSocial(id, input);
+
+                return this.Redirect(GlobalConstants.AccountMenager);
+      
+
+          
+        }
+
+
+        [HttpGet]
+        [Route("Artist/AddSocial/{artistId}")]
+        [Authorize(Roles = GlobalConstants.Artist)]
+        public async Task<IActionResult> AddSocial([FromRoute]string artistId)
+        {
+            return this.View(new SocialInputModel() {ArtistId = artistId});
+        }
+
+        [HttpGet]
+        [Authorize(Roles = GlobalConstants.Artist)]
+        public async Task<IActionResult> EditSocial(string id)
+        {
+            var result = await this.artistService.GetSocial(id);
+            return this.View("AddSocial", result.MapTo<SocialViewModel>());
         }
 
     }
