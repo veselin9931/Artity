@@ -1,4 +1,4 @@
-﻿""namespace Artity.Common
+﻿namespace Artity.Common
 {
     public static class GlobalConstants
     {

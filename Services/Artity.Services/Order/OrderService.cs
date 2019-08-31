@@ -12,6 +12,7 @@
     using Artity.Web.InputModels.Order;
     using Artity.Services.Mapping;
     using Artity.Data.Models.Enums;
+    using Artity.Data.Models;
 
     public class OrderService : IOrderService
     {
@@ -19,18 +20,21 @@
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
+        private readonly IRepository<Artist> artistRepo;
 
         public OrderService(
             IDeletableEntityRepository<Data.Models.Order> repositoryOrder,
             IUserService userService,
             IArtistService artistService,
-            IPerformenceService performenceService
+            IPerformenceService performenceService,
+            IRepository<Artist> artistRepo
             )
         {
             this.repositoryOrder = repositoryOrder;
             this.userService = userService;
             this.artistService = artistService;
             this.performenceService = performenceService;
+            this.artistRepo = artistRepo;
         }
 
         public IEnumerable<TViewModel> AllOrders<TViewModel>(string artistId)
@@ -79,6 +83,7 @@
              .OrderBy(a => a.CreatedOn)
              .To<TViewModel>();
         }
+
 
         public IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId)
         {

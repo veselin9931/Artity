@@ -11,6 +11,7 @@ using Artity.Web.InputModels.Type;
 using Artity.Web.InputModels.Offert;
 using Artity.Services;
 using Artity.Web.ViewModels.Offert;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Artity.Web.Controllers
 {
@@ -73,18 +74,32 @@ namespace Artity.Web.Controllers
            return this.NotFound();
         }
 
+        [HttpGet]
+        [Route("Offert/Edit/{offertId}")]
+        public async Task<IActionResult> Edit( [FromRoute]string offertId)
+        {
+
+            var types = this.offertService.GetAllOffertTypes().MapTo<OffertTypeInputModel[]>();
+
+            var user = this.userService.GetApplicationUserByName(this.User.Identity.Name);
+            var offert = this.offertService.GetOffert<OffertEditInputModel>(offertId);
+            offert.Categories = types;
+
+            return this.View(offert);
+        }
+
         [HttpPost]
         [Route("Offert/Edit/{offertId}")]
         public async Task<IActionResult> Edit(OffertEditInputModel input, [FromRoute]string offertId)
         {
             if (!this.ModelState.IsValid)
             {
-                return await this.Create();
+                return await this.Edit(offertId);
             }
 
             var user = this.userService.GetApplicationUserByName(this.User.Identity.Name);
-            await this.offertService.EditOffert(offertId,input.Title, input.Type, input.Review, input.Features, input.Contract, user.Id, input.Tel, input.Price, input.Town);
-            return this.Redirect("/Offerts");
+            await this.offertService.EditOffert(offertId, input.Title, input.Type, input.Review, input.Features, input.Contract, user.Id, input.Tel, input.Price, input.Town);
+            return this.Redirect($"/Offert/{offertId}");
         }
     }
 }

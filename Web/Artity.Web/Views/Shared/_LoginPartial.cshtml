@@ -53,9 +53,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Personal data</a>
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Artist data</a>
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Portfolio</a>
-                    <a class="dropdown-item" asp-action="">Reservations</a>
+                    <a class="dropdown-item" asp-controller="User" asp-action="Reservations">Reservations</a>
                     <form asp-area="Identity" method="post" asp-page="/Account/Logout">
                         <button class="dropdown-item" type="submit" typeof=" ">Logout</button>
                     </form>

@@ -1,4 +1,5 @@
 ﻿using Artity.Common;
+using Artity.Services.Mapping;
 using Artity.Web.InputModels.Type;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,11 @@ using System.Text;
 
 namespace Artity.Web.InputModels.Offert
 {
-    public class OffertEditInputModel
+    public class OffertEditInputModel : IMapFrom<Data.Models.Offert>
     {
+
+        public string Id { get; set; }
+
         [Display(Name = "Type")]
         [Required]
         public int Type { get; set; }
