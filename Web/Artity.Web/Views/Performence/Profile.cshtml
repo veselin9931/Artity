@@ -24,10 +24,10 @@
                 <partial name="_RatePerformencePartial" model="@Model.Id" />
 
                 <button type="button" class="btn btn-secondary">
-                    <i class="fab fa-creative-commons-by mr-1"></i> Creator:
+                    <i class="fab fa-creative-commons-by mr-1"></i> Creator: @Model.ArtistNikname
                 </button>
                 <button type="button" class="btn btn-secondary">
-                    <i class="fas fa-dollar-sign"></i> Price:
+                    <i class="fas fa-dollar-sign"></i> Price:  @Model.Price
                 </button>
                 <a href="/CreatePerformenceOrder/@Model.Id/@Model.ArtistNikname" class="btn btn-secondary">
                     <i class="fas fa-reply-all"></i> Request:

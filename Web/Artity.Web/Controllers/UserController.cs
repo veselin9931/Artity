@@ -38,19 +38,32 @@
         {
             //TODO : Check exeptions
             var user = this.userService.GetApplicationUserByName(this.User.Identity.Name);
-            if (user.Artist == null)
+            if (this.User.IsInRole(GlobalConstants.ArtistRoleName))
             {
-                var userOrders = this.orderService.GetAllUserArtistOrders<UserArtistOrderViewModel>(user.Id);
-                var model1 = new UserOrdersViewModel() { UserArtistOrder = userOrders };
-                return this.View(model1);
+                return await this.ArtistReservation(user.ArtistId);
             }
 
-            var artistOrderViewModels = this.orderService.AllPrivateOrders<UserArtistOrderViewModel>(user.Id);
-            var model2 = new UserOrdersViewModel() { UserArtistOrder = artistOrderViewModels };
-            return this.View(model2);
+            return await this.UserReservation(user.Id);
+        }
+
+
+        public async Task<IActionResult> ArtistReservation(string id)
+        {
+
+            var artistOrderViewModels = this.orderService.AllOrdersInStatus<ArtistOrdersViewModel>(id, Data.Models.Enums.OrderStatus.Accepted);
+            return this.View("ArtistReservation", artistOrderViewModels);
 
         }
 
+        public async Task<IActionResult> UserReservation(string id)
+        {
+
+            var artistOrderViewModels = this.orderService.GetAllUserArtistOrders<UserArtistOrderViewModel>(id);
+            var artistPerformenceOrderViewModels = this.orderService.GetAllUserPerformenceOrders<UserPerformenceOrderViewModel>(id);
+            var model = new UserOrdersViewModel() { UserArtistOrder = artistOrderViewModels, UserPerformenceOrder = artistPerformenceOrderViewModels};
+            return this.View("UserReservation", model);
+
+        }
 
         [Authorize(Roles = GlobalConstants.AllRoles)]
         [Route("/Reservations/Delete/{id}")]
@@ -64,7 +77,7 @@
                 var userId = this.userService.GetApplicationUserByName(this.User.Identity.Name).Id;
                 var artistOrderViewModels = this.orderService.GetAllUserArtistOrders<UserArtistOrderViewModel>(userId);
                 var model = new UserOrdersViewModel() { UserArtistOrder = artistOrderViewModels };
-                return this.View("Reservations",model);
+                return this.Redirect("/Reservations");
             };
             return this.Json(result);
         }

@@ -1,0 +1,80 @@
+﻿@model Artity.Web.ViewModels.Order.UserOrdersViewModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+    <div class="container">
+        <h2 class="text-center mt-1 mb-3">Ordered artists</h2>
+
+        <table class="table  table-bordered table-hover">
+            <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
+                <tr>
+                    <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+                    <th scope="col">Artist nikname</th>
+                    <th scope="col" alt="Status"><i class="fas fa-hourglass-half"></i></th>
+                    <th scope="col"><i class="fas fa-map-marker-alt"></i></th>
+                    <th scope="col"><i class="far fa-clock"></i></th>
+                    <th scope="col"><i class="fas fa-calendar-alt"></i></th>
+                    <th scope="col"><i class="fas fa-cog"></i>  </th>
+
+                </tr>
+            </thead>
+            <tbody class="bg-info text-center table-bordered text-white">
+
+                @{
+                    int i = 0;
+                }
+                @foreach (var artistOrder in Model.UserArtistOrder)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@artistOrder.ArtistNikname</td>
+                        <td>@artistOrder.Status</td>
+                        <td>@artistOrder.Place</td>
+                        <td>@artistOrder.Duration</td>
+                        <td>@artistOrder.EventDate </td>
+                        <td><a asp-action="DeleteReservation" asp-controller="User" asp-route-id="@artistOrder.Id" class="btn btn-danger btn-outline-danger"><i class="far fa-times-circle"></i></a></td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h2 class="text-center mt-1 mb-3">Ordered performences</h2>
+        <table class="table  table-bordered table-hover">
+            <thead class="text-center  bg-secondary table-borderless text-uppercase text-white">
+                <tr>
+                    <th scope="col"><i class="fas fa-sort-numeric-down"></i></th>
+                    <th scope="col">Artist nikname</th>
+                    <th scope="col" alt="Status"><i class="fas fa-hourglass-half"></i></th>
+                    <th scope="col"><i class="fas fa-map-marker-alt"></i></th>
+                    <th scope="col"><i class="far fa-clock"></i></th>
+                    <th scope="col"><i class="fas fa-calendar-alt"></i></th>
+                    <th scope="col"><i class="fas fa-cog"></i>  </th>
+
+                </tr>
+            </thead>
+            <tbody class="bg-info text-center table-bordered text-white">
+
+                @{
+                    int b = 0;
+                }
+                @foreach (var artistOrder in Model.UserPerformenceOrder)
+                {
+                    b++;
+                    <tr>
+                        <th scope="row">@b</th>
+                        <td>@artistOrder.PerformenceTitle</td>
+                        <td>@artistOrder.Status</td>
+                        <td>@artistOrder.Place</td>
+                        <td>@artistOrder.Duration</td>
+                        <td>@artistOrder.EventDate </td>
+                        <td><a asp-action="DeleteReservation" asp-controller="User" asp-route-id="@artistOrder.Id" class="btn btn-danger btn-outline-danger"><i class="far fa-times-circle"></i></a></td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

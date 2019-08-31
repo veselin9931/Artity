@@ -16,14 +16,14 @@
 
     public class OrderService : IOrderService
     {
-        private readonly IDeletableEntityRepository<Data.Models.Order> repositoryOrder;
+        private readonly IRepository<Data.Models.Order> repositoryOrder;
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
         private readonly IRepository<Artist> artistRepo;
 
         public OrderService(
-            IDeletableEntityRepository<Data.Models.Order> repositoryOrder,
+            IRepository<Data.Models.Order> repositoryOrder,
             IUserService userService,
             IArtistService artistService,
             IPerformenceService performenceService,
@@ -83,6 +83,7 @@
              .OrderBy(a => a.CreatedOn)
              .To<TViewModel>();
         }
+
 
 
         public IEnumerable<TViewModel> GetAllUserPerformenceOrders<TViewModel>(string userId)
