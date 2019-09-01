@@ -25,6 +25,6 @@
 
         public const string Artist = "Artist";
 
-        public const string AccountMenager = "Identity/Account/Manage";
+        public const string AccountMenager = "/Identity/Account/Manage";
     }
 }

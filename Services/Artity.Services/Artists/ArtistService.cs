@@ -128,7 +128,10 @@
             var social = this.artistContext
                .All()
                .FirstOrDefault(a => a.Id == artistId).Social;
-
+            if (social == null)
+            {
+                  return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
+            }
             return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
         }
 

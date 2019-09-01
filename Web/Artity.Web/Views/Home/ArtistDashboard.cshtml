@@ -14,16 +14,26 @@
         <a href="/Artist/Profile/@Model.Id" class="pull-right"><img width="300" height="300" title="profile image" class="img-circle img-responsive img-thumbnail" src="@Model.ProfilePicture.Link"></a>
 
     </div>
+
     <div class="row">
         <div class="col-sm-3">
-            <!--left col-->
-            <div class="panel panel-default pb-3 ">
-                <h6 class="panel-heading text-center text-uppercase text-secondary ">Social Media</h6>
-                <div class="panel-body text-center">
-                    <a class="h3 pr-2 pt-1" href="https://@Model.Social.Facebook"><i class="fab fa-facebook text-secondary"></i></a> <a class="h3 pr-2 pt-1" href="https://@Model.Social.Youtube"><i class="fab fa-youtube  text-secondary"></i></a> <a class="h3 pr-2 pt-1" href="https://@Model.Social.Website"><i class="fas fa-globe  text-secondary"></i></a>
-                </div>
-            </div>
+            <!--left col-->  @if (Model.Social != null)
+            {
+                <div class="panel panel-default pb-3 ">
+                    <h6 class="panel-heading text-center text-uppercase text-secondary ">Social Media</h6>
+                    <div class="panel-body text-center">
 
+                        <a class="h3 pr-2 pt-1" href="https://@Model.Social.Facebook">
+                            <i class="fab fa-facebook text-secondary"></i>
+                        </a> <a class="h3 pr-2 pt-1" href="https://@Model.Social.Youtube">
+                            <i class="fab fa-youtube  text-secondary"></i>
+                        </a> <a class="h3 pr-2 pt-1" href="https://@Model.Social.Website">
+                            <i class="fas fa-globe  text-secondary"></i>
+                        </a>
+
+                    </div>
+                </div>
+            }
             <ul class="list-group pb-1">
                 <li class="list-group-item text-muted">Profile</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> @Model.CrearedOn</li>
@@ -134,12 +144,12 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body mx-4 text-center">
-                                                          
-                                                                @foreach (var ofert in Model.Offerts)
-                                                                {
+
+                                                            @foreach (var ofert in Model.Offerts)
+                                                            {
                                                                 <div class="mx-auto h6 "><a href="a"><p class=" text-center">@ofert.Title - @ofert.Type - @ofert.Price</p> </a></div>
-                                                                }
-                                                        
+                                                            }
+
 
                                                             <button type="button" class="btn btn-secondary mt-3 " data-dismiss="modal">Close</button>
 
