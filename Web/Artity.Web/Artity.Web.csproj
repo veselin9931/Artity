@@ -13,6 +13,11 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -69,12 +74,8 @@
     <None Include="wwwroot\scss\layout\_portfolio.scss" />
     <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js" />
     <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
     <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
     <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js.map" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
     <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.svg" />
     <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
     <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
@@ -105,9 +106,6 @@
     <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -115,9 +113,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="wwwroot\vendor\fontawesome-free\css\all.css">
