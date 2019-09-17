@@ -29,7 +29,6 @@
 
         public SendGridEmailSender(ILoggerFactory loggerFactory, IConfiguration configuration)
         {
-
             this.configuration = configuration;
 
             var key = configuration["SendGrid:ApiKey"];

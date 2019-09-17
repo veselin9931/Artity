@@ -131,9 +131,7 @@
 
             // Application services
             services.AddTransient<ISeeder, RolesSeeder>();
-            services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISendGrid, SendGridEmailSender>();
-            services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtistService, ArtistService>();
@@ -142,8 +140,6 @@
             services.AddTransient<Services.Rating.IRatingService, Services.Rating.RatingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOffertService, OffertService>();
-
-
 
             //Artity system services 
             services.AddTransient<IPicureService, PictureService>();
