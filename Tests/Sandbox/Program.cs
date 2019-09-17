@@ -10,7 +10,6 @@
     using Artity.Data.Models;
     using Artity.Data.Repositories;
     using Artity.Data.Seeding;
-    using Artity.Services.Data;
     using Artity.Services.Messaging;
 
     using CommandLine;
@@ -52,8 +51,6 @@
         private static int SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)
         {
             var sw = Stopwatch.StartNew();
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
             Console.WriteLine(sw.Elapsed);
             return 0;
         }
@@ -91,7 +88,6 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
     }
 }

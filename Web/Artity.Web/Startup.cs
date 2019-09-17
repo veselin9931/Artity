@@ -10,7 +10,6 @@
     using Artity.Data.Repositories;
     using Artity.Data.Seeding;
     using Artity.Services;
-    using Artity.Services.Data;
     using Artity.Services.File;
     using Artity.Services.Artists;
     using Artity.Services.Mapping;
@@ -135,7 +134,6 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISendGrid, SendGridEmailSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtistService, ArtistService>();

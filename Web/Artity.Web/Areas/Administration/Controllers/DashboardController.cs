@@ -1,7 +1,6 @@
 ﻿namespace Artity.Web.Areas.Administration.Controllers
 {
     using Artity.Services.Artists;
-    using Artity.Services.Data;
     using Artity.Services.Performence;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
 
@@ -10,13 +9,11 @@
 
     public class DashboardController : AdministrationController
     {
-        private readonly ISettingsService settingsService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
 
-        public DashboardController(ISettingsService settingsService, IArtistService artistService, IPerformenceService performenceService)
+        public DashboardController(IArtistService artistService, IPerformenceService performenceService)
         {
-            this.settingsService = settingsService;
             this.artistService = artistService;
             this.performenceService = performenceService;
         }
@@ -25,7 +22,6 @@
         {
             var viewModel = new IndexViewModel
             {
-                SettingsCount = this.settingsService.GetCount(),
                 allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                 allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                 allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
@@ -41,7 +37,6 @@
                 bool result = await this.artistService.ApprovedArtist(id);
                 var viewModel = new IndexViewModel
                 {
-                    SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                     allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
@@ -69,7 +64,6 @@
                 bool result = await this.performenceService.ApprovedPerformence(id);
                 var viewModel = new IndexViewModel
                 {
-                    SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                     allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
@@ -97,7 +91,6 @@
                 bool result = await this.performenceService.RefusePerformence(id);
                 var viewModel = new IndexViewModel
                 {
-                    SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                     allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
@@ -125,7 +118,6 @@
                 bool result = await this.artistService.RefuseArtist(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
-                    SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                     allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
@@ -153,7 +145,6 @@
                 bool result = await this.artistService.RefuseArtist(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
-                    SettingsCount = this.settingsService.GetCount(),
                     allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
                 };
 

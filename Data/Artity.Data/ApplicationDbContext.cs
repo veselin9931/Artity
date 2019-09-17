@@ -25,8 +25,6 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<Artist> Artists { get; set; }
 
         public DbSet<Category> Categories { get; set; }
