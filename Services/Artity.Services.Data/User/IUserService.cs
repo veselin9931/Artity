@@ -1,16 +1,14 @@
-﻿using Artity.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Artity.Services
+﻿namespace Artity.Services.Data.User
 {
+    using System.Threading.Tasks;
+
+    using Artity.Data.Models;
+
     public interface IUserService
     {
          ApplicationUser GetApplicationUserByName(string name);
 
-        void AddArtistSettings(ApplicationUser user, Data.Models.Artist artist);
+        void AddArtistSettings(ApplicationUser user, Artist artist);
 
          Task SetFirstLogin(ApplicationUser user);
 

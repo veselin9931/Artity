@@ -1,10 +1,9 @@
-﻿namespace Artity.Services.Offert
+﻿namespace Artity.Services.Data.Offert
 {
     using System.Collections.Generic;
-
     using System.Threading.Tasks;
 
-    using Artity.Services.ServiceModels;
+    using ServiceModels;
 
     public interface IOffertService
     {

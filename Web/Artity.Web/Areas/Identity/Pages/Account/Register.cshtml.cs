@@ -9,7 +9,6 @@
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
     using Artity.Services;
-    using Artity.Services.File;
     using Artity.Services.Messaging;
     using Artity.Web.InputModels.Picture;
     using Microsoft.AspNetCore.Authorization;
@@ -19,6 +18,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
+
+    using Services.Data.File;
 
     [AllowAnonymous]
 #pragma warning disable SA1649 // File name should match first type name

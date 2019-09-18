@@ -1,7 +1,6 @@
 ﻿using Artity.Data;
 using Artity.Data.Common.Repositories;
 using Artity.Data.Models;
-using Artity.Services.Artists;
 using Artity.Services.Messaging;
 using Artity.Web.ViewModels.Artist;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +15,12 @@ using Xunit;
 
 namespace Artity.Services.Data.Tests
 {
+    using Artists;
+
+    using User;
+
+    using Category = Artity.Data.Models.Category;
+
     public class ArtistServiceTest : BaseServiceTest
     {
         public readonly IRepository<Artist> Repository;
@@ -25,28 +30,28 @@ namespace Artity.Services.Data.Tests
 
 
 
-        public ArtistServiceTest()
-        {
+        //public ArtistServiceTest()
+        //{
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                         .Options;
+        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        //                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
+        //                 .Options;
 
-            this.dbContext = new ApplicationDbContext(options);
+        //    this.dbContext = new ApplicationDbContext(options);
 
-            var mock = new Mock<IRepository<Artist>>();
-            mock.Setup<IQueryable<Artist>>(x => x.All())
-                .Returns(this.Data().AsQueryable);
+        //    var mock = new Mock<IRepository<Artist>>();
+        //    mock.Setup<IQueryable<Artist>>(x => x.All())
+        //        .Returns(this.Data().AsQueryable);
 
-            var mock2 = new Mock<IRepository<Social>>();
-            mock.Setup<IQueryable<Artist>>(x => x.All())
-                .Returns(this.Data().AsQueryable);
+        //    var mock2 = new Mock<IRepository<Social>>();
+        //    mock.Setup<IQueryable<Artist>>(x => x.All())
+        //        .Returns(this.Data().AsQueryable);
 
-            this.Repository = mock.Object;
+        //    this.Repository = mock.Object;
 
-            this.UserService = new UserService(this.dbContext);
-            this.ArtistService = new ArtistService(this.Repository, this.emailSender , this.UserService, mock2.Object);
-        }
+        //    this.UserService = new UserService(this.dbContext);
+        //    this.ArtistService = new ArtistService(this.Repository, this.emailSender , this.UserService, mock2.Object);
+        //}
 
         public IUserService UserService { get; }
 

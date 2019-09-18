@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Artity.Data.Models.Enums;
-using Artity.Services.ServiceModels;
-using System.Linq;
-using System.Threading.Tasks;
-using Artity.Data.Common.Repositories;
-using Artity.Services.Mapping;
-
-namespace Artity.Services.Offert
+﻿namespace Artity.Services.Data.Offert
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Artity.Data.Common.Repositories;
+    using Artity.Data.Models;
+    using Artity.Data.Models.Enums;
+
+    using Mapping;
+
+    using ServiceModels;
+
+    using User;
+
     public class OffertService : IOffertService
     {
-        private readonly IRepository<Data.Models.Offert> repository;
+        private readonly IRepository<Offert> repository;
         private readonly IUserService userService;
 
-        public OffertService(IRepository<Data.Models.Offert> repository)
+        public OffertService(IRepository<Offert> repository)
         {
             this.repository = repository;
         }
 
-        public OffertService(IRepository<Data.Models.Offert> repository, IUserService userService)
+        public OffertService(IRepository<Offert> repository, IUserService userService)
         {
             this.repository = repository;
             this.userService = userService;
@@ -30,7 +35,7 @@ namespace Artity.Services.Offert
         {
             var artistId = await this.userService.GetArtistId(userId);
 
-            var offer = new Data.Models.Offert()
+            var offer = new Offert()
             {
                 Title = title,
                 Type = (OrderType)type,

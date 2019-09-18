@@ -1,4 +1,4 @@
-﻿namespace Artity.Services.File
+﻿namespace Artity.Services.Data.File
 {
     using System.Threading.Tasks;
 

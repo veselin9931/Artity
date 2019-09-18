@@ -10,13 +10,15 @@
 
     using Artity.Common;
     using Artity.Services;
-    using Artity.Services.Offert;
-    using Artity.Services.Order;
     using Artity.Web.ViewModels.Offert;
     using Artity.Web.ViewModels.Order;
     using Microsoft.AspNetCore.Authorization;
 
     using Microsoft.AspNetCore.Mvc;
+
+    using Services.Data.Offert;
+    using Services.Data.Order;
+    using Services.Data.User;
 
     public class UserController : BaseController
     {

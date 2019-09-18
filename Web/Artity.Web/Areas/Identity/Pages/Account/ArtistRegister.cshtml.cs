@@ -8,7 +8,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Artity.Common;
     using Artity.Data.Models;
     using Artity.Services;
-    using Artity.Services.File;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -17,6 +17,10 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Net.Http.Headers;
     using Artity.Web.InputModels.Picture;
+
+    using Services.Data.Category;
+    using Services.Data.File;
+    using Services.Data.User;
 
     public class ArtistRegisterModel : PageModel
     {

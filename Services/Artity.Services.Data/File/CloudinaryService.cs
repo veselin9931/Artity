@@ -1,11 +1,9 @@
-﻿namespace Artity.Services.File
+﻿namespace Artity.Services.Data.File
 {
     using System.IO;
-
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
-
     using CloudinaryDotNet.Actions;
 
     using Microsoft.AspNetCore.Http;

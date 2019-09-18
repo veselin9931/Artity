@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     
     using Artity.Data.Models;
-    using Artity.Services.Artists;
     using Artity.Web.InputModels.Social;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -14,6 +13,8 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     using Artity.Services.Mapping;
+
+    using Services.Data.Artists;
 
 #pragma warning disable SA1649 // File name should match first type name
     public class IndexModel : PageModel

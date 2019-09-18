@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Services
+﻿namespace Artity.Services.Data.Category
 {
+    using System.Collections.Generic;
+
     public interface ICategoryService
     {
         IList<string> GetAllCategories();

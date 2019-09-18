@@ -1,24 +1,20 @@
-﻿namespace Artity.Services.Performence
+﻿namespace Artity.Services.Data.Performence
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Artity.Data.Common.Repositories;
-
     using Artity.Data.Models;
 
-    using Artity.Web.InputModels.Performence;
+    using File;
+
+    using Mapping;
 
     using Microsoft.AspNetCore.Identity;
 
-    using System.Linq;
-
-    using Artity.Services.File;
-
-    using Artity.Web.InputModels.Picture;
-
-    using Artity.Services.Mapping;
-
-    using System.Collections.Generic;
+    using Web.InputModels.Performence;
+    using Web.InputModels.Picture;
 
     public class PerformenceService : IPerformenceService
     {

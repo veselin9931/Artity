@@ -1,23 +1,22 @@
-﻿using Artity.Data.Common.Repositories;
-using System;
-using Artity.Data.Models;
-using System.Threading.Tasks;
-using Artity.Common;
-using System.Linq;
-using Artity.Data.Models.Enums;
-
-namespace Artity.Services.Rating
+﻿namespace Artity.Services.Data.Rating
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Artity.Data.Common.Repositories;
+    using Artity.Data.Models;
+    using Artity.Data.Models.Enums;
+
     public class RatingService : IRatingService
     {
         private readonly IRepository<Artist> artistRepo;
-        private readonly IRepository<Data.Models.Performence> perfomenceRepo;
-        private readonly IRepository<Data.Models.Rating> ratingRepo;
+        private readonly IRepository<Performence> perfomenceRepo;
+        private readonly IRepository<Rating> ratingRepo;
 
         public RatingService(
             IRepository<Artist> artistRepo,
             IRepository<Artity.Data.Models.Performence> perfomenceRepo,
-            IRepository<Data.Models.Rating> ratingRepo
+            IRepository<Rating> ratingRepo
             )
         {
             this.artistRepo = artistRepo;
@@ -29,8 +28,8 @@ namespace Artity.Services.Rating
         {
             var rating = this.ratingRepo.All()
                       .Where(a => a.RatedId == rateId && a.Type == type)
-                      .Select(a => a.RatingValue)
-                      ;
+                      .Select(a => a.RatingValue);
+
             if (rating.ToList().Count == 0)
             {
                 return 0;
@@ -58,7 +57,13 @@ namespace Artity.Services.Rating
 
                 if (!this.IsRated(userId, ratedArtist.Id))
                 {
-                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = ratedArtist.Id, UserId = userId, Type = RatingType.Artist };
+                    var rating = new Rating
+                    {
+                        RatingValue = ratingValue,
+                        RatedId = ratedArtist.Id,
+                        UserId = userId,
+                        Type = RatingType.Artist,
+                    };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
                     model.Rating = this.GetRate(rating.Type, model.RatedId);
@@ -91,7 +96,7 @@ namespace Artity.Services.Rating
 
                 if (!this.IsRated(userId, performence.Id))
                 {
-                    var rating = new Data.Models.Rating() { RatingValue = ratingValue, RatedId = performence.Id, UserId = userId, Type = RatingType.Performence };
+                    var rating = new Rating() { RatingValue = ratingValue, RatedId = performence.Id, UserId = userId, Type = RatingType.Performence };
                     await this.ratingRepo.AddAsync(rating);
                     await this.ratingRepo.SaveChangesAsync();
                     model.Rating = this.GetRate(rating.Type, performence.Id);

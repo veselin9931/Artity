@@ -1,12 +1,11 @@
-﻿namespace Artity.Services.Order
+﻿namespace Artity.Services.Data.Order
 {
-    using Artity.Data.Models;
-    using Artity.Data.Models.Enums;
-    using Artity.Web.InputModels.Order;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Artity.Data.Models.Enums;
+
+    using Web.InputModels.Order;
 
     public interface IOrderService
     {

@@ -1,11 +1,12 @@
 ﻿namespace Artity.Web.Areas.Administration.Controllers
 {
-    using Artity.Services.Artists;
-    using Artity.Services.Performence;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+
+    using Services.Data.Artists;
+    using Services.Data.Performence;
 
     public class DashboardController : AdministrationController
     {

@@ -1,29 +1,34 @@
-﻿namespace Artity.Services.Order
+﻿namespace Artity.Services.Data.Order
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Artity.Data.Common.Repositories;
+    using Artists;
 
-    using Artity.Services.Artists;
-    using Artity.Services.Performence;
-    using Artity.Web.InputModels.Order;
-    using Artity.Services.Mapping;
-    using Artity.Data.Models.Enums;
+    using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
+    using Artity.Data.Models.Enums;
+
+    using Mapping;
+
+    using Performence;
+
+    using User;
+
+    using Web.InputModels.Order;
 
     public class OrderService : IOrderService
     {
-        private readonly IRepository<Data.Models.Order> repositoryOrder;
+        private readonly IRepository<Order> repositoryOrder;
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
         private readonly IRepository<Artist> artistRepo;
 
         public OrderService(
-            IRepository<Data.Models.Order> repositoryOrder,
+            IRepository<Order> repositoryOrder,
             IUserService userService,
             IArtistService artistService,
             IPerformenceService performenceService,
@@ -97,7 +102,7 @@
 
         public async Task<bool> CreateArtistOrder(ArtistOrderCreateInputModel inputModel)
         {
-            var order = AutoMapper.Mapper.Map<Data.Models.Order>(inputModel);
+            var order = AutoMapper.Mapper.Map<Order>(inputModel);
 
             var user = this.userService.GetApplicationUserByName(inputModel.Username);
 
@@ -113,7 +118,7 @@
 
             order.ArtistId = artist;
 
-            order.Status = Data.Models.Enums.OrderStatus.Sent;
+            order.Status = OrderStatus.Sent;
 
             await this.repositoryOrder.AddAsync(order);
             var result = await this.repositoryOrder.SaveChangesAsync();
@@ -124,7 +129,7 @@
 
         public async Task<bool> CreatePerformenceOrder(PerformenceOrderCreateInputModel inputModel)
         {
-            var order = AutoMapper.Mapper.Map<Data.Models.Order>(inputModel);
+            var order = AutoMapper.Mapper.Map<Order>(inputModel);
 
             var user = this.userService.GetApplicationUserByName(inputModel.Username);
 
@@ -145,7 +150,7 @@
 
             order.PerformenceId = performence;
 
-            order.Status = Data.Models.Enums.OrderStatus.Sent;
+            order.Status = OrderStatus.Sent;
 
             await this.repositoryOrder.AddAsync(order);
             var result = await this.repositoryOrder.SaveChangesAsync();
@@ -182,7 +187,7 @@
                 throw new ArgumentNullException();
             }
 
-            order.Status = Data.Models.Enums.OrderStatus.Accepted;
+            order.Status = OrderStatus.Accepted;
 
             this.repositoryOrder.Update(order);
             var result = await this.repositoryOrder.SaveChangesAsync();
@@ -201,7 +206,7 @@
                 throw new ArgumentNullException();
             }
 
-            order.Status = Data.Models.Enums.OrderStatus.Refused;
+            order.Status = OrderStatus.Refused;
 
             this.repositoryOrder.Update(order);
             var result = await this.repositoryOrder.SaveChangesAsync();

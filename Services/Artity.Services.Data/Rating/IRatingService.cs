@@ -1,7 +1,8 @@
-﻿namespace Artity.Services.Rating
+﻿namespace Artity.Services.Data.Rating
 {
-    using Artity.Data.Models.Enums;
     using System.Threading.Tasks;
+
+    using Artity.Data.Models.Enums;
 
     public interface IRatingService
     {

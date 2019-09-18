@@ -1,4 +1,4 @@
-﻿namespace Artity.Services.Rating
+﻿namespace Artity.Services.Data.Rating
 {
     public class RatingModel
     {

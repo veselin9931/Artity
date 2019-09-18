@@ -3,10 +3,6 @@
     using Artity.Web.ViewModels.Performence;
 
     using Artity.Web.InputModels.Performence;
-
-
-    using Artity.Services.Performence;
-
     using Artity.Services;
 
     using Microsoft.AspNetCore.Mvc;
@@ -15,6 +11,9 @@
 
     using Artity.Services.Mapping;
     using System.Linq;
+
+    using Services.Data.Category;
+    using Services.Data.Performence;
 
     public class PerformenceController : BaseController
     {

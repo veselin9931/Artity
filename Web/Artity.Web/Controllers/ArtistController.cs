@@ -1,20 +1,23 @@
 ﻿namespace Artity.Web.Controllers
 {
     using Artity.Services;
-    using Artity.Services.Artists;
     using Artity.Services.Messaging;
     using Artity.Web.ViewModels.Artist;
     using Artity.Services.Mapping;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using System.Linq;
-    using Artity.Services.Rating;
-    using Artity.Services.Order;
+
     using Microsoft.AspNetCore.Authorization;
     using Artity.Common;
     using Artity.Services.ServiceModels;
     using Artity.Web.ViewModels.Social;
     using Artity.Web.InputModels.Social;
+
+    using Services.Data.Artists;
+    using Services.Data.Category;
+    using Services.Data.Order;
+    using Services.Data.Rating;
 
     public class ArtistController : BaseController
     {
@@ -99,6 +102,7 @@
 
             return this.NotFound();
         }
+
         [Authorize(Roles = GlobalConstants.Artist)]
         [Route("/RefuseReservation/{id}")]
         [HttpGet]

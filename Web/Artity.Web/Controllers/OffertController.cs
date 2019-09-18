@@ -1,6 +1,4 @@
-﻿using Artity.Services.Offert;
-using Artity.Services.Order;
-using Artity.Web.InputModels.Order;
+﻿using Artity.Web.InputModels.Order;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +13,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Artity.Web.Controllers
 {
+    using Services.Data.Offert;
+    using Services.Data.Order;
+    using Services.Data.User;
+
     public class OffertController : BaseArtistController
     {
         private readonly IOrderService orderService;

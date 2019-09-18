@@ -1,10 +1,12 @@
-﻿namespace Artity.Services.Artists
+﻿namespace Artity.Services.Data.Artists
 {
-    using Artity.Data.Models;
-    using Artity.Services.ServiceModels;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using Artity.Data.Models;
+
+    using ServiceModels;
 
     public interface IArtistService
     {

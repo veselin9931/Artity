@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Artity.Common;
 using Artity.Data.Models.Enums;
-using Artity.Services.Order;
-using Artity.Services.Performence;
 using Artity.Web.InputModels.Order;
 using Artity.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -17,6 +15,9 @@ using Artity.Services.Mapping;
 
 namespace Artity.Web.Controllers
 {
+    using Services.Data.Order;
+    using Services.Data.Performence;
+
     public class OrderArtistController : BaseController
     {
         public OrderArtistController(IOrderService orderService, IPerformenceService performenceService)

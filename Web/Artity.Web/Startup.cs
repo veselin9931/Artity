@@ -10,8 +10,6 @@
     using Artity.Data.Repositories;
     using Artity.Data.Seeding;
     using Artity.Services;
-    using Artity.Services.File;
-    using Artity.Services.Artists;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
     using Artity.Services.Messaging.SendGrid;
@@ -29,11 +27,19 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
-    using Artity.Services.Order;
+
     using Artity.Web.InputModels.Order;
     using Artity.Web.Areas.Administration.ViewModels.Dashboard;
     using Artity.Web.Hubs;
-    using Artity.Services.Offert;
+
+    using Services.Data.Artists;
+    using Services.Data.Category;
+    using Services.Data.File;
+    using Services.Data.Offert;
+    using Services.Data.Order;
+    using Services.Data.Performence;
+    using Services.Data.Rating;
+    using Services.Data.User;
 
     public class Startup
     {
@@ -136,8 +142,8 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<Services.Performence.IPerformenceService, Services.Performence.PerformenceService>();
-            services.AddTransient<Services.Rating.IRatingService, Services.Rating.RatingService>();
+            services.AddTransient<IPerformenceService, PerformenceService>();
+            services.AddTransient<IRatingService, RatingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOffertService, OffertService>();
 

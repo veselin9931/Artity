@@ -1,10 +1,10 @@
-﻿namespace Artity.Services.File
+﻿namespace Artity.Services.Data.File
 {
     using System.Threading.Tasks;
 
     using Artity.Data.Models;
 
-    using Artity.Web.InputModels.Picture;
+    using Web.InputModels.Picture;
 
     public interface IPicureService
     {

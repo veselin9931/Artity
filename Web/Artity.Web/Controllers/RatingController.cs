@@ -5,10 +5,12 @@
     using Artity.Common;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
-    using Artity.Services.Rating;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
+    using Services.Data.Rating;
 
 
     [Authorize(Roles = GlobalConstants.AllRoles)]

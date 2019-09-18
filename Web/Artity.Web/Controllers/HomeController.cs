@@ -2,7 +2,6 @@
 {
     using Artity.Common;
     using Artity.Services;
-    using Artity.Services.Artists;
     using Artity.Web.ViewModels.Artist;
     using Microsoft.AspNetCore.Mvc;
     using Artity.Services.Mapping;
@@ -10,10 +9,14 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Threading.Tasks;
-    using Artity.Services.Order;
+
     using Artity.Web.ViewModels.Order;
-    using Artity.Services.Offert;
     using Artity.Web.ViewModels.Offert;
+
+    using Services.Data.Artists;
+    using Services.Data.Offert;
+    using Services.Data.Order;
+    using Services.Data.User;
 
     public class HomeController : BaseController
     {
