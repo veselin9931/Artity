@@ -6,20 +6,21 @@
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
+    using Artity.Services.Data.Artists;
 
     public class RatingService : IRatingService
     {
-        private readonly IRepository<Artist> artistRepo;
-        private readonly IRepository<Performence> perfomenceRepo;
-        private readonly IRepository<Rating> ratingRepo;
+        private readonly IArtistService artistService;
+        private readonly IDeletableEntityRepository<Performence> perfomenceRepo;
+        private readonly IDeletableEntityRepository<Rating> ratingRepo;
 
         public RatingService(
-            IRepository<Artist> artistRepo,
-            IRepository<Artity.Data.Models.Performence> perfomenceRepo,
-            IRepository<Rating> ratingRepo
+            IArtistService artistService
+            IDeletableEntityRepository<Performence> perfomenceRepo,
+            IDeletableEntityRepository<Rating> ratingRepo
             )
         {
-            this.artistRepo = artistRepo;
+            this.artistService = artistService;
             this.perfomenceRepo = perfomenceRepo;
             this.ratingRepo = ratingRepo;
         }
@@ -47,20 +48,20 @@
 
         public async Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue)
         {
-            var ratedArtist = this.artistRepo.All().FirstOrDefault(p => p.Nikname == ratedId);
+            var ratedArtistId = await this.artistService.GetArtistIdByName(ratedId);
 
             var model = new RatingModel();
 
-            if (ratedArtist != null)
+            if (ratedArtistId != null)
             {
-                model.RatedId = ratedArtist.Id;
+                model.RatedId = ratedArtistId;
 
-                if (!this.IsRated(userId, ratedArtist.Id))
+                if (!this.IsRated(userId, ratedArtistId))
                 {
                     var rating = new Rating
                     {
                         RatingValue = ratingValue,
-                        RatedId = ratedArtist.Id,
+                        RatedId = ratedArtis,
                         UserId = userId,
                         Type = RatingType.Artist,
                     };
