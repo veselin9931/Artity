@@ -1,52 +1,52 @@
 ﻿namespace Artity.Services.Data.Artists
 {
-    using System;
     using System.Collections.Generic;
+
     using System.Linq;
+
     using System.Threading.Tasks;
 
     using Artity.Data.Common.Repositories;
+
     using Artity.Data.Models;
+
+    using Artity.Services.Mapping;
+
+    using Artity.Services.Data.User;
+
     using Artity.Services.Messaging;
-    using Mapping;
 
-    using ServiceModels;
+    using Artity.Services.ServiceModels;
 
-    using User;
+    using Artity.Services.Data.Social;
 
     public class ArtistService : IArtistService
     {
         private readonly IRepository<Artist> artistContext;
         private readonly ISendGrid emailSender;
         private readonly IUserService userService;
-        private readonly IRepository<Social> socialContext;
+        private readonly ISocialService socialService;
 
         public ArtistService(
             IRepository<Artist> artistContext,
             ISendGrid emailSender,
             IUserService userService,
-            IRepository<Social> socialContext
+            ISocialService socialService
             )
         {
             this.artistContext = artistContext;
             this.emailSender = emailSender;
             this.userService = userService;
-            this.socialContext = socialContext;
+            this.socialService = socialService;
+            this.socialService = socialService;
         }
 
-        public async Task<bool> AddSocial(string artistId, SocialServiceModel socialServiceModel)
+        public async Task<bool> SetSocial(string artistId, SocialServiceModel socialServiceModel)
         {
-            var social = new Social() {
-                 Facebook = socialServiceModel.Facebook,
-                 Youtube = socialServiceModel.Youtube,
-                 WebSite = socialServiceModel.WebSite,
+            var artist = this.GetArtistById(artistId);
 
-            };
-            var artist = this.Get(artistId);
-
-            await this.socialContext.AddAsync(social);
-            var w = await this.artistContext.SaveChangesAsync();
-            artist.Social = social;
+            await this.socialService.AddSocial(socialServiceModel);
+            artist.Social = this.socialService.MapTo<Social>(); // TODO: Test map
 
             this.artistContext.Update(artist);
             var result = await this.artistContext.SaveChangesAsync();
@@ -56,8 +56,7 @@
 
         public async Task<bool> ApprovedArtist(string id)
         {
-            var approvedArtist = this.artistContext.All()
-                .FirstOrDefault(a => a.Id == id);
+            var approvedArtist = this.GetArtistById(id);
             approvedArtist.IsApproved = true;
 
             this.artistContext.Update(approvedArtist);
@@ -69,7 +68,7 @@
         public async Task<SocialServiceModel> EditSocial(string artistId, SocialServiceModel socialServiceModel)
         {
             var social = socialServiceModel.MapTo<Social>();
-            var artist = this.GetArtist(artistId).MapTo<Artist>();
+            var artist = this.GetArtistById(artistId).MapTo<Artist>();
             artist.Social = social;
             this.artistContext.Update(artist);
             var result = await this.artistContext.SaveChangesAsync();
@@ -93,11 +92,6 @@
                 .Where(a => a.IsDeleted != true)
                 .OrderBy(a => a.CreatedOn)
                 .To<TViewModel>().ToList();
-        }
-
-        public IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter)
-        {
-            throw new NotImplementedException();
         }
 
         public IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category)
@@ -125,51 +119,36 @@
 
         public async Task<SocialServiceModel> GetSocial(string artistId)
         {
-            var social = this.artistContext
-               .All()
-               .FirstOrDefault(a => a.Id == artistId).Social;
+            var social = this.GetArtistById(artistId).Social;
+
             if (social == null)
             {
                   return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
             }
+
             return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
         }
 
         public async Task<bool> RefuseArtist(string id, string message)
         {
+            message = "sds";
             string email = await this.userService.GetArtistEmail(id);
+            await this.emailSender.SendEmailAsync(email, message, message);
 
-           await this.emailSender.SendEmailAsync(email,
-                         "You ",
-                         $"Sorry, the art team is delighted to have your access to a platform for playing your account," +
-                         $" please contact < a href='support@artity.com.>support@artity.com.</a>."
-                         +$"<h4>POSSIBLE CAUSES:</h4>"
-                         + "1.Unlawful content"
-                         + "2. Security issues"
-                         + message
-                         );
+            var artist = this.GetArtistById(id);
+            artist.IsDeleted = true;
 
-            this.artistContext.All()
-                .FirstOrDefault(a => a.Id == id)
-                .IsDeleted = true;
-
+            this.artistContext.Update(artist);
             var result = await this.artistContext.SaveChangesAsync();
 
             return result > 0;
         }
 
-        Artist Get(string artistId)
+        private Artist GetArtistById(string artistId)
         {
             return this.artistContext
                   .All()?
-                  .FirstOrDefault(a => a.Id == artistId);
-        }
-
-        Artist IArtistService.Get(string artistId)
-        {
-            return this.artistContext
-                   .All()?
-                   .FirstOrDefault(a => a.Id == artistId);
+                  .FirstOrDefault(a => a.Id == artistId && a.IsDeleted != true);
         }
     }
 }

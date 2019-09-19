@@ -14,13 +14,9 @@
 
         IEnumerable<TViewModel> GetAllArtists<TViewModel>(bool isApproved);
 
-        IList<TViewModel> GetAllArtistsFiltretBy<TViewModel>(string filter);
-
         IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category);
 
         IQueryable GetArtist(string id);
-
-        Artist Get(string artistId);
 
         Task<string> GetArtistIdByName(string name);
 
@@ -28,7 +24,7 @@
 
         Task<bool> RefuseArtist(string id, string message);
 
-        Task<bool> AddSocial(string artistId, SocialServiceModel socialServiceModel);
+        Task<bool> SetSocial(string artistId, SocialServiceModel socialServiceModel);
 
         Task<SocialServiceModel> GetSocial(string artistId);
 

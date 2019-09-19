@@ -124,7 +124,7 @@
             try
             {
                 bool result = await this.artistService
-                     .AddSocial(id, input);
+                     .SetSocial(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
             }
@@ -140,15 +140,10 @@
         [Route("Artist/AddSocial/{id}")]
         public async Task<IActionResult> EditSocial(string id, SocialServiceModel input)
         {
-          
-
                 bool result = await this.artistService
-                     .AddSocial(id, input);
+                     .SetSocial(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
-      
-
-          
         }
 
 

@@ -8,21 +8,21 @@
 
     public class CategoryService : ICategoryService
     {
-        private readonly IDeletableEntityRepository<Category> context;
+        private readonly IDeletableEntityRepository<Category> categoryRepository;
 
         public CategoryService(IDeletableEntityRepository<Category> context)
         {
-            this.context = context;
+            this.categoryRepository = context;
         }
 
         public IList<string> GetAllCategories()
         {
-            return this.context.All().Select(a => a.Name).ToList();
+            return this.categoryRepository.All().Select(a => a.Name).ToList();
         }
 
         public string GetCategoryId(string name)
         {
-           var category = this.context.All().FirstOrDefault(a => a.Name == name);
+           var category = this.categoryRepository.All().FirstOrDefault(a => a.Name == name);
            return category.Id;
         }
     }

@@ -17,15 +17,15 @@
 
     public class OffertService : IOffertService
     {
-        private readonly IRepository<Offert> repository;
+        private readonly IDeletableEntityRepository<Offert> repository;
         private readonly IUserService userService;
 
-        public OffertService(IRepository<Offert> repository)
+        public OffertService(IDeletableEntityRepository<Offert> offertRepository)
         {
-            this.repository = repository;
+            this.repository = offertRepository;
         }
 
-        public OffertService(IRepository<Offert> repository, IUserService userService)
+        public OffertService(IDeletableEntityRepository<Offert> repository, IUserService userService)
         {
             this.repository = repository;
             this.userService = userService;
