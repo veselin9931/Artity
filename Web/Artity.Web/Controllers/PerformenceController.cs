@@ -1,19 +1,14 @@
 ﻿namespace Artity.Web.Controllers
 {
-    using Artity.Web.ViewModels.Performence;
-
-    using Artity.Web.InputModels.Performence;
-    using Artity.Services;
-
-    using Microsoft.AspNetCore.Mvc;
-
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using Artity.Services.Data.Category;
+    using Artity.Services.Data.Performence;
     using Artity.Services.Mapping;
-    using System.Linq;
-
-    using Services.Data.Category;
-    using Services.Data.Performence;
+    using Artity.Web.InputModels.Performence;
+    using Artity.Web.ViewModels.Performence;
+    using Microsoft.AspNetCore.Mvc;
 
     public class PerformenceController : BaseController
     {
@@ -67,6 +62,7 @@
 
             return View();
         }
+
         public async Task<IActionResult> Profile(string id)
         {
             var performence = this.performenceService.GetPerformence(id).To<PerformneceProfileViewModel>().ToList().First();

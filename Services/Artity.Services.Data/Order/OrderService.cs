@@ -5,19 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Artists;
-
+    using Artity.Common;
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Data.Models.Enums;
-
-    using Mapping;
-
-    using Performence;
-
-    using User;
-
-    using Web.InputModels.Order;
+    using Artity.Services.Data.Artists;
+    using Artity.Services.Data.Performence;
+    using Artity.Services.Data.User;
+    using Artity.Services.Mapping;
+    using Artity.Web.InputModels.Order;
 
     public class OrderService : IOrderService
     {
@@ -25,21 +21,18 @@
         private readonly IUserService userService;
         private readonly IArtistService artistService;
         private readonly IPerformenceService performenceService;
-        private readonly IRepository<Artist> artistRepo;
 
         public OrderService(
             IRepository<Order> repositoryOrder,
             IUserService userService,
             IArtistService artistService,
-            IPerformenceService performenceService,
-            IRepository<Artist> artistRepo
+            IPerformenceService performenceService
             )
         {
             this.repositoryOrder = repositoryOrder;
             this.userService = userService;
             this.artistService = artistService;
             this.performenceService = performenceService;
-            this.artistRepo = artistRepo;
         }
 
         public IEnumerable<TViewModel> AllOrders<TViewModel>(string artistId)
@@ -110,8 +103,7 @@
 
             if (user == null || artist == null)
             {
-                // TODO: Refactor
-                throw new ArgumentNullException("Artist or User is invalid");
+                throw new ArgumentNullException(GlobalConstants.OrderErr);
             }
 
             order.User = user;
@@ -137,11 +129,9 @@
 
             var performence = this.performenceService.GetPerformenceByName(inputModel.PerformenceName);
 
-
             if (user == null || artist == null || performence == null)
             {
-                // TODO: Refactor
-                throw new ArgumentNullException("Artist or User is invalid");
+                throw new ArgumentNullException(GlobalConstants.OrderErr);
             }
 
             order.User = user;
@@ -167,7 +157,7 @@
 
             if (order == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(GlobalConstants.OrderErr);
             }
 
             this.repositoryOrder.Delete(order);
@@ -184,7 +174,7 @@
 
             if (order == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(GlobalConstants.OrderErr);
             }
 
             order.Status = OrderStatus.Accepted;
@@ -203,7 +193,7 @@
 
             if (order == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(GlobalConstants.OrderErr);
             }
 
             order.Status = OrderStatus.Refused;

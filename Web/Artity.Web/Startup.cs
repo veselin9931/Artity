@@ -2,17 +2,27 @@
 {
     using System;
     using System.Reflection;
-    using System.Threading.Tasks;
+
     using Artity.Data;
     using Artity.Data.Common;
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Data.Repositories;
     using Artity.Data.Seeding;
-    using Artity.Services;
+    using Artity.Services.Data.Artists;
+    using Artity.Services.Data.Category;
+    using Artity.Services.Data.File;
+    using Artity.Services.Data.Offert;
+    using Artity.Services.Data.Order;
+    using Artity.Services.Data.Performence;
+    using Artity.Services.Data.Rating;
+    using Artity.Services.Data.Social;
+    using Artity.Services.Data.User;
     using Artity.Services.Mapping;
     using Artity.Services.Messaging;
-    using Artity.Services.Messaging.SendGrid;
+    using Artity.Web.Areas.Administration.ViewModels.Dashboard;
+    using Artity.Web.Hubs;
+    using Artity.Web.InputModels.Order;
     using Artity.Web.ViewModels;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
@@ -20,26 +30,12 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
-
-    using Artity.Web.InputModels.Order;
-    using Artity.Web.Areas.Administration.ViewModels.Dashboard;
-    using Artity.Web.Hubs;
-
-    using Services.Data.Artists;
-    using Services.Data.Category;
-    using Services.Data.File;
-    using Services.Data.Offert;
-    using Services.Data.Order;
-    using Services.Data.Performence;
-    using Services.Data.Rating;
-    using Services.Data.User;
 
     public class Startup
     {
@@ -55,7 +51,6 @@
         public void ConfigureServices(IServiceCollection services)
         {
             // Framework services
-            // TODO: Add pooling when this bug is fixed: https://github.com/aspnet/EntityFrameworkCore/issues/9741
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
@@ -146,9 +141,10 @@
             services.AddTransient<IRatingService, RatingService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOffertService, OffertService>();
-
-            //Artity system services 
+            services.AddTransient<IOffertService, OffertService>();
+            services.AddTransient<ISocialService, SocialService>();
             services.AddTransient<IPicureService, PictureService>();
+
 
         }
 

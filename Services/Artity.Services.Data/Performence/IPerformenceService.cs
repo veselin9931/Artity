@@ -16,9 +16,9 @@
 
         IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category);
 
-        IQueryable GetPerformence(string id);
+        IEnumerable<TViewModel> GetAllByArtistId<TViewModel>(string id);
 
-        IEnumerable<TViewModel> GetAll<TViewModel>(string userId);
+        IQueryable GetPerformence(string id);
 
         string GetPerformenceByName(string name);
 

@@ -30,5 +30,8 @@
 
         Task<SocialServiceModel> EditSocial(string artistId, SocialServiceModel socialServiceModel);
 
+        Task<bool> SetPerformence(string artistId, Performence performence);
+
+        IEnumerable<TViewModel> GetAllPerformence<TViewModel>(string artistId);
     }
 }

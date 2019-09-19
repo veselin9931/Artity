@@ -6,51 +6,48 @@
 
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
+    using Artity.Services.Data.Artists;
+    using Artity.Services.Data.File;
 
-    using File;
+    using Artity.Services.Mapping;
 
-    using Mapping;
+    using Artity.Web.InputModels.Performence;
 
-    using Microsoft.AspNetCore.Identity;
-
-    using Web.InputModels.Performence;
-    using Web.InputModels.Picture;
+    using Artity.Web.InputModels.Picture;
 
     public class PerformenceService : IPerformenceService
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IRepository<Performence> repository;
-        private readonly IRepository<Artist> repositoryArtists;
+        private readonly IDeletableEntityRepository<Performence> performenceRepository; 
         private readonly ICloudinaryService cloudinaryService;
         private readonly IPicureService fileService;
+        private readonly IArtistService artistService;
 
-        public PerformenceService(UserManager<ApplicationUser> userManager,
-            IRepository<Artity.Data.Models.Performence> repository,
-            IRepository<Artist> repositoryArtists,
+        public PerformenceService(
+            IDeletableEntityRepository<Performence> performenceRepository,
             ICloudinaryService cloudinaryService,
-            IPicureService fileService
+            IPicureService fileService,
+            IArtistService artistService
             )
         {
-            this.userManager = userManager;
-            this.repository = repository;
-            this.repositoryArtists = repositoryArtists;
+
+            this.performenceRepository = performenceRepository;
             this.cloudinaryService = cloudinaryService;
             this.fileService = fileService;
+            this.artistService = artistService;
         }
 
         public async Task<bool> ApprovedPerformence(string id)
         {
 
-            var approvedArtist = this.repository.All()
+            var approvedPerformence = this.performenceRepository.All()
                 .FirstOrDefault(a => a.Id == id);
-            approvedArtist.IsApproved = true;
+            approvedPerformence.IsApproved = true;
 
-            this.repository.Update(approvedArtist);
-            var result = await this.repository.SaveChangesAsync();
+            this.performenceRepository.Update(approvedPerformence);
+            var result = await this.performenceRepository.SaveChangesAsync();
 
             return result > 0;
         }
-
 
         public async Task<bool> CreatePerformence(PerformenceCreateInputModel inputModel, ApplicationUser user)
         {
@@ -77,41 +74,31 @@
 
             performence.PerformencePhotoId = pictureId;
 
-            var artist = this.repositoryArtists.All()
-                .FirstOrDefault(a => a.Id == user.ArtistId);
+            await this.performenceRepository.AddAsync(performence);
+            await this.performenceRepository.SaveChangesAsync();
 
-            artist.Performences.Add(performence);
-            await this.repository.AddAsync(performence);
-            this.repositoryArtists.Update(artist);
+            bool result = await this.artistService.SetPerformence(user.ArtistId, performence);
 
-            await this.repository.SaveChangesAsync();
-            await this.repositoryArtists.SaveChangesAsync();
-
-            return true;
+            return result;
         }
 
         public IEnumerable<TViewModel> GetAll<TViewModel>(bool approved)
         {
-            return this.repository
+            return this.performenceRepository
                 .All()
                 .Where(a => a.IsApproved == approved && a.IsDeleted != true)
                 .OrderBy(a => a.CreatedOn)
                 .To<TViewModel>().ToList();
         }
 
-        public IEnumerable<TViewModel> GetAll<TViewModel>(string artistId)
+        public IEnumerable<TViewModel> GetAllByArtistId<TViewModel>(string artistId)
         {
-            return this.repositoryArtists
-               .All()
-               .FirstOrDefault(a => a.Id == artistId)
-               .Performences
-               .AsQueryable()
-               .To<TViewModel>().ToList();
+            return this.artistService.GetAllPerformence<TViewModel>(artistId);
         }
 
         public IEnumerable<TViewModel> GetAllFrom<TViewModel>(string category)
         {
-            return this.repository
+            return this.performenceRepository
                  .All()
                  .Where(a => a.Category.Name == category && a.IsApproved == true)
                  .OrderBy(a => a.CreatedOn)
@@ -120,25 +107,25 @@
 
         public IQueryable GetPerformence(string id)
         {
-            return this.repository
+            return this.performenceRepository
                   .All()
                   .Where(a => a.Id == id && a.IsApproved == true);
         }
 
         public string GetPerformenceByName(string name)
         {
-            return this.repository
+            return this.performenceRepository
                 .All()
                 .FirstOrDefault(a => a.Title == name && a.IsApproved == true).Id;
         }
 
         public async Task<bool> RefusePerformence(string id)
         {
-            this.repository.All()
+            this.performenceRepository.All()
                  .FirstOrDefault(a => a.Id == id)
                  .IsDeleted = true;
 
-            var result = await this.repository.SaveChangesAsync();
+            var result = await this.performenceRepository.SaveChangesAsync();
 
             return result > 0;
         }
