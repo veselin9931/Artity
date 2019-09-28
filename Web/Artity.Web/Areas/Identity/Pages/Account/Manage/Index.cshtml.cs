@@ -74,7 +74,7 @@
             if (user.ArtistId != null)
             {
                 var socialsServiceModel = await this.artistService
-                      .GetSocial(user.ArtistId);
+                      .GetSocialAsync(user.ArtistId);
 
                 if (socialsServiceModel != null)
                 {

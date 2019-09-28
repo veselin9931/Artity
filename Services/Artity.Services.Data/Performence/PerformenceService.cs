@@ -77,7 +77,7 @@
             await this.performenceRepository.AddAsync(performence);
             await this.performenceRepository.SaveChangesAsync();
 
-            bool result = await this.artistService.SetPerformence(user.ArtistId, performence);
+            bool result = await this.artistService.SetPerformenceAsync(user.ArtistId, performence);
 
             return result;
         }

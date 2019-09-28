@@ -35,7 +35,7 @@
             try
             {
 
-                bool result = await this.artistService.ApprovedArtist(id);
+                bool result = await this.artistService.ApprovedArtistAsync(id);
                 var viewModel = new IndexViewModel
                 {
                     allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
@@ -116,7 +116,7 @@
             try
             {
 
-                bool result = await this.artistService.RefuseArtist(id, "Sory but");
+                bool result = await this.artistService.RefuseArtistAsync(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
                     allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
@@ -143,7 +143,7 @@
             try
             {
 
-                bool result = await this.artistService.RefuseArtist(id, "Sory but");
+                bool result = await this.artistService.RefuseArtistAsync(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
                     allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),

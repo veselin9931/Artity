@@ -116,7 +116,7 @@ namespace Artity.Services.Data.Tests
         [Fact]
         public async Task GetArtistIdByNameShouldReturnArtistId()
         {
-            string actualResult = await this.ArtistService.GetArtistIdByName("Gosho");
+            string actualResult = await this.ArtistService.GetArtistIdByNameAsync("Gosho");
             string expectedResult = "aaa";
             Assert.Equal(actualResult, expectedResult);
         }

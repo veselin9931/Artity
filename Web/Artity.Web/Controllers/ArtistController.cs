@@ -115,7 +115,7 @@
             try
             {
                 bool result = await this.artistService
-                     .SetSocial(id, input);
+                     .SetSocialAsync(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
             }
@@ -132,7 +132,7 @@
         public async Task<IActionResult> EditSocial(string id, SocialServiceModel input)
         {
                 bool result = await this.artistService
-                     .SetSocial(id, input);
+                     .SetSocialAsync(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
         }
@@ -150,7 +150,7 @@
         [Authorize(Roles = GlobalConstants.Artist)]
         public async Task<IActionResult> EditSocial(string id)
         {
-            var result = await this.artistService.GetSocial(id);
+            var result = await this.artistService.GetSocialAsync(id);
             return this.View("AddSocial", result.MapTo<SocialViewModel>());
         }
 

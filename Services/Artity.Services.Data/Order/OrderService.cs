@@ -99,7 +99,7 @@
 
             var user = this.userService.GetApplicationUserByName(inputModel.Username);
 
-            var artist = await this.artistService.GetArtistIdByName(inputModel.ArtistNikname);
+            var artist = await this.artistService.GetArtistIdByNameAsync(inputModel.ArtistNikname);
 
             if (user == null || artist == null)
             {
@@ -125,7 +125,7 @@
 
             var user = this.userService.GetApplicationUserByName(inputModel.Username);
 
-            var artist = await this.artistService.GetArtistIdByName(inputModel.ArtistNikname);
+            var artist = await this.artistService.GetArtistIdByNameAsync(inputModel.ArtistNikname);
 
             var performence = this.performenceService.GetPerformenceByName(inputModel.PerformenceName);
 

@@ -48,7 +48,7 @@
 
         public async Task<RatingModel> RateArtist(string userId, string ratedId, int ratingValue)
         {
-            var ratedArtistId = await this.artistService.GetArtistIdByName(ratedId);
+            var ratedArtistId = await this.artistService.GetArtistIdByNameAsync(ratedId);
 
             var model = new RatingModel();
 
