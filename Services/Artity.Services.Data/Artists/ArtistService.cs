@@ -106,7 +106,7 @@
         {
             return this.artistRepository
                   .All()?
-                  .FirstOrDefault(a => a.Nikname == name).Id;
+                  .FirstOrDefault(a => a.Nikname == name)?.Id;
         }
 
         public async Task<SocialServiceModel> GetSocial(string artistId)
