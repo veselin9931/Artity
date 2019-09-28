@@ -15,7 +15,7 @@
         private readonly IDeletableEntityRepository<Rating> ratingRepo;
 
         public RatingService(
-            IArtistService artistService
+            IArtistService artistService,
             IDeletableEntityRepository<Performence> perfomenceRepo,
             IDeletableEntityRepository<Rating> ratingRepo
             )
@@ -61,7 +61,7 @@
                     var rating = new Rating
                     {
                         RatingValue = ratingValue,
-                        RatedId = ratedArtis,
+                        RatedId = ratedArtistId,
                         UserId = userId,
                         Type = RatingType.Artist,
                     };

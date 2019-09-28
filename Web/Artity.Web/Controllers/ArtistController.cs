@@ -1,42 +1,33 @@
 ﻿namespace Artity.Web.Controllers
 {
-    using Artity.Services;
-    using Artity.Services.Messaging;
-    using Artity.Web.ViewModels.Artist;
-    using Artity.Services.Mapping;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
     using System.Linq;
+    using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
     using Artity.Common;
+    using Artity.Services.Data.Artists;
+    using Artity.Services.Data.Category;
+    using Artity.Services.Data.Order;
+    using Artity.Services.Mapping;
     using Artity.Services.ServiceModels;
-    using Artity.Web.ViewModels.Social;
     using Artity.Web.InputModels.Social;
-
-    using Services.Data.Artists;
-    using Services.Data.Category;
-    using Services.Data.Order;
-    using Services.Data.Rating;
+    using Artity.Web.ViewModels.Artist;
+    using Artity.Web.ViewModels.Social;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ArtistController : BaseController
     {
         private readonly IArtistService artistService;
-        private readonly ISendGrid emailSender;
         private readonly ICategoryService categoryService;
-        private readonly IRatingService ratingService;
         private readonly IOrderService orderService;
 
         public ArtistController(
-            IArtistService artistService
-            , ICategoryService categoryService,
-            IRatingService ratingService,
-            IOrderService orderService
-            )
+            IArtistService artistService,
+            ICategoryService categoryService,
+            IOrderService orderService)
         {
             this.artistService = artistService;
             this.categoryService = categoryService;
-            this.ratingService = ratingService;
             this.orderService = orderService;
         }
 

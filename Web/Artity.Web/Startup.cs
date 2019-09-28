@@ -80,7 +80,7 @@
                 .AddUserStore<ApplicationUserStore>()
                 .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders()
-                .AddDefaultUI(UIFramework.Bootstrap4);
+                .AddDefaultUI();
 
             //services.AddAuthentication().AddFacebook(facebookOptions =>
             //{
@@ -89,37 +89,33 @@
             //});
 
             services.AddSignalR();
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddRazorPagesOptions(options =>
-                {
-                    options.AllowAreas = true;
+            services.AddMvc(options => { options.EnableEndpointRouting = false; }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddRazorPages(options =>
+                {
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/ArtistRegister");
-
                 });
 
-            services
-                .ConfigureApplicationCookie(options =>
-                {
-                    options.LoginPath = "/Identity/Account/Login";
-                    options.LogoutPath = "/Identity/Account/Logout";
-                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                });
+            services.ConfigureApplicationCookie(options =>
+             {
+                 options.LoginPath = "/Identity/Account/Login";
+                 options.LogoutPath = "/Identity/Account/Logout";
+                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+             });
 
             services
                 .Configure<CookiePolicyOptions>(options =>
                 {
-                        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                        options.CheckConsentNeeded = context => true;
-                        options.MinimumSameSitePolicy = SameSiteMode.Lax;
-                        options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
 
             services.AddSingleton(this.configuration);
+
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
             services.AddTransient<IRoleStore<ApplicationRole>, ApplicationRoleStore>();
@@ -144,12 +140,10 @@
             services.AddTransient<IOffertService, OffertService>();
             services.AddTransient<ISocialService, SocialService>();
             services.AddTransient<IPicureService, PictureService>();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider, ISeeder seeder, ApplicationDbContext context)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly, typeof(ArtistOrderCreateInputModel).GetTypeInfo().Assembly, typeof(ApprovedArtistViewModel).GetTypeInfo().Assembly);
 
@@ -169,7 +163,6 @@
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -177,24 +170,33 @@
                 app.UseHsts();
             }
 
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRouting();
+
             app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseSignalR(
-                routes =>
+            app.UseAuthorization();
+
+            app.UseEndpoints(
+                endpoints =>
                 {
-                    routes.MapHub<NotifyHub>("/notify");
+                    endpoints.MapHub<NotifyHub>("/notify");
                 });
+
             app.UseMvc(routes =>
             {
-                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             seeder.SeedAsync(context, serviceProvider);
-
         }
     }
 }
