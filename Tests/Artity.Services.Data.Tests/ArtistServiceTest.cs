@@ -124,20 +124,20 @@ namespace Artity.Services.Data.Tests
         [Fact]
         public async Task GetAllArtistsShouldReturnAllArtists()
         {
-            int actualResult = this.ArtistService.GetAllArtists<ArtistAllViewModel>(true).Count();
+            var actualResult = await this.ArtistService.GetAllArtistsAsync<ArtistAllViewModel>(true);
             int expectedResult = 2;
-            Assert.Equal(actualResult, expectedResult);
+            Assert.Equal(actualResult.Count(), expectedResult);
         }
 
         [Fact]
         public async Task GetAllArtiststFromCategoryShouldReturnOnlyArtistFromTargetCategory()
         {
             int category = 2;
-            int actualResult = this.ArtistService.GetAllArtiststFrom<ArtistAllViewModel>(category).Count();
+            var actualResult = await this.ArtistService.GetAllArtistsFromAsync<ArtistAllViewModel>(category);
             int expectedResult = 1;
 
             ;
-            Assert.Equal(expectedResult, actualResult);
+            Assert.Equal(expectedResult, actualResult.Count);
         }
     }
 }

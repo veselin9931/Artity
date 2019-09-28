@@ -34,8 +34,8 @@
         [HttpGet(Name = "/All")]
         public async Task<IActionResult> All()
         {
-            var artists = this.artistService
-                .GetAllArtists<ArtistAllViewModel>(true);
+            var artists = await this.artistService
+                .GetAllArtistsAsync<ArtistAllViewModel>(true);
 
             var categories = this.categoryService
                 .GetAllCategories();
@@ -52,8 +52,8 @@
         [Route("Artist/All/{category}")]
         public async Task<IActionResult> All([FromRoute] int category)
         {
-            var artists = this.artistService
-                .GetAllArtiststFrom<ArtistAllViewModel>(category);
+            var artists = await this.artistService
+                .GetAllArtistsFromAsync<ArtistAllViewModel>(category);
 
             var categories = this.categoryService
                 .GetAllCategories();
@@ -69,7 +69,7 @@
 
         public async Task<IActionResult> Profile(string id)
         {
-            var artist = this.artistService.GetArtist(id).To<ArtistProfileViewModel>().ToList().First();
+            var artist = await this.artistService.GetArtistAsync<ArtistProfileViewModel>(id);
             return this.View(artist);
         }
 

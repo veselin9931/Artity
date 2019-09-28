@@ -19,12 +19,12 @@
             this.performenceService = performenceService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new IndexViewModel
             {
-                allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
-                allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
+                allArtistsForEdit = await this.artistService.GetAllArtistsAsync<ArtistsEditingViewModel>(),
                 allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
             };
             return this.View(viewModel);
@@ -38,8 +38,8 @@
                 bool result = await this.artistService.ApprovedArtist(id);
                 var viewModel = new IndexViewModel
                 {
-                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
-                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = await this.artistService.GetAllArtistsAsync<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
@@ -65,8 +65,8 @@
                 bool result = await this.performenceService.ApprovedPerformence(id);
                 var viewModel = new IndexViewModel
                 {
-                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
-                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = await this.artistService.GetAllArtistsAsync<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
@@ -92,8 +92,8 @@
                 bool result = await this.performenceService.RefusePerformence(id);
                 var viewModel = new IndexViewModel
                 {
-                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
-                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = await this.artistService.GetAllArtistsAsync<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
@@ -119,8 +119,8 @@
                 bool result = await this.artistService.RefuseArtist(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
-                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
-                    allArtistsForEdit = this.artistService.GetAllArtists<ArtistsEditingViewModel>(),
+                    allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
+                    allArtistsForEdit = await this.artistService.GetAllArtistsAsync<ArtistsEditingViewModel>(),
                     allPerformence = this.performenceService.GetAll<ApprovedPerformenceViewModel>(false),
                 };
 
@@ -146,7 +146,7 @@
                 bool result = await this.artistService.RefuseArtist(id, "Sory but");
                 var viewModel = new IndexViewModel
                 {
-                    allArtist = this.artistService.GetAllArtists<ApprovedArtistViewModel>(false),
+                    allArtist = await this.artistService.GetAllArtistsAsync<ApprovedArtistViewModel>(false),
                 };
 
                 if (result)

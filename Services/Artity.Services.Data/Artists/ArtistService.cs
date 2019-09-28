@@ -12,6 +12,8 @@
     using Artity.Services.Messaging;
     using Artity.Services.ServiceModels;
 
+    using Microsoft.EntityFrameworkCore;
+
     public class ArtistService : IArtistService
     {
         private readonly IDeletableEntityRepository<Artist> artistRepository;
@@ -33,7 +35,7 @@
             this.socialService = socialService;
         }
 
-        public async Task<bool> SetSocial(string artistId, SocialServiceModel socialServiceModel)
+        public async Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel)
         {
             var artist = this.GetArtistById(artistId);
 
@@ -46,7 +48,7 @@
             return result > 0;
         }
 
-        public async Task<bool> ApprovedArtist(string id)
+        public async Task<bool> ApprovedArtistAsync(string id)
         {
             var approvedArtist = this.GetArtistById(id);
             approvedArtist.IsApproved = true;
@@ -57,7 +59,7 @@
             return result > 0;
         }
 
-        public async Task<SocialServiceModel> EditSocial(string artistId, SocialServiceModel socialServiceModel)
+        public async Task<SocialServiceModel> EditSocialAsync(string artistId, SocialServiceModel socialServiceModel)
         {
             var social = socialServiceModel.MapTo<Social>();
             var artist = this.GetArtistById(artistId).MapTo<Artist>();
@@ -68,48 +70,46 @@
             return socialServiceModel;
         }
 
-        public IEnumerable<TViewModel> GetAllArtists<TViewModel>(bool isApproved)
-        {
-            return this.artistRepository
-                  .All()
-                .Where(a => a.IsApproved == isApproved && a.IsDeleted != true)
-                .OrderBy(a => a.CreatedOn)
-                .To<TViewModel>().ToList();
-        }
+        public async Task<IEnumerable<TViewModel>> GetAllArtistsAsync<TViewModel>(bool isApproved)
+            => await this.artistRepository
+                       .All()
+                       .Where(a => a.IsApproved == isApproved && a.IsDeleted != true)
+                       .OrderBy(a => a.CreatedOn)
+                       .To<TViewModel>().ToListAsync();
 
-        public IEnumerable<TViewModel> GetAllArtists<TViewModel>()
-        {
-            return this.artistRepository
+        public async Task<IEnumerable<TViewModel>> GetAllArtistsAsync<TViewModel>()
+            => await this.artistRepository
                   .All()
                 .Where(a => a.IsDeleted != true)
                 .OrderBy(a => a.CreatedOn)
-                .To<TViewModel>().ToList();
-        }
+                .To<TViewModel>().ToListAsync();
 
-        public IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category)
-        {
-            return this.artistRepository
-                 .All()
-                 .Where(a => (int)a.Category.CategoryType == (int)category)
-                 .OrderBy(a => a.CreatedOn)
-                 .To<TViewModel>().ToList();
-        }
+        public async Task<IList<TViewModel>> GetAllArtistsFromAsync<TViewModel>(int category)
+            => await this.artistRepository
+                         .All()
+                         .Where(a => (int)a.Category.CategoryType == (int)category)
+                         .OrderBy(a => a.CreatedOn)
+                         .To<TViewModel>()
+                         .ToListAsync();
 
-        public IQueryable GetArtist(string id)
-        {
-            return this.artistRepository
+        public async Task<TViewModel> GetArtistAsync<TViewModel>(string id)
+            => await this.artistRepository
                   .All()
-                  .Where(a => a.Id == id && a.IsDeleted == false);
-        }
+                  .Where(a => a.Id == id && a.IsDeleted == false)
+                  .To<TViewModel>()
+                  .FirstOrDefaultAsync();
 
-        public async Task<string> GetArtistIdByName(string name)
+        public async Task<string> GetArtistIdByNameAsync(string name)
         {
-            return this.artistRepository
-                  .All()?
-                  .FirstOrDefault(a => a.Nikname == name)?.Id;
+            var artist = await this.artistRepository
+                  .All()
+                  .FirstOrDefaultAsync(a => a.Nikname == name);
+
+            // TODO : if null throw exception
+            return artist?.Id;
         }
 
-        public async Task<SocialServiceModel> GetSocial(string artistId)
+        public async Task<SocialServiceModel> GetSocialAsync(string artistId)
         {
             var social = this.GetArtistById(artistId).Social;
 
@@ -121,8 +121,9 @@
             return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
         }
 
-        public async Task<bool> RefuseArtist(string id, string message)
+        public async Task<bool> RefuseArtistAsync(string id, string message)
         {
+            // TODO : Fix ?
             message = "sds";
             string email = await this.userService.GetArtistEmail(id);
             await this.emailSender.SendEmailAsync(email, message, message);
@@ -136,7 +137,7 @@
             return result > 0;
         }
 
-        public async Task<bool> SetPerformence(string artistId, Performence performence)
+        public async Task<bool> SetPerformenceAsync(string artistId, Performence performence)
         {
             var artist = this.GetArtistById(artistId);
             artist.Performences.Add(performence);
@@ -164,5 +165,4 @@
                   .FirstOrDefault(a => a.Id == artistId && a.IsDeleted != true);
         }
     }
-
 }

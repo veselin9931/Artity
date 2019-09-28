@@ -10,27 +10,28 @@
 
     public interface IArtistService
     {
-        IEnumerable<TViewModel> GetAllArtists<TViewModel>();
+        Task<IEnumerable<TViewModel>> GetAllArtistsAsync<TViewModel>();
 
-        IEnumerable<TViewModel> GetAllArtists<TViewModel>(bool isApproved);
+        Task<IEnumerable<TViewModel>> GetAllArtistsAsync<TViewModel>(bool isApproved);
 
-        IList<TViewModel> GetAllArtiststFrom<TViewModel>(int category);
+        Task<IList<TViewModel>> GetAllArtistsFromAsync<TViewModel>(int category);
 
-        IQueryable GetArtist(string id);
+        Task<TViewModel> GetArtistAsync<TViewModel>(string id);
 
-        Task<string> GetArtistIdByName(string name);
+        Task<string> GetArtistIdByNameAsync(string name);
 
-        Task<bool> ApprovedArtist(string id);
+        // TODO : Approve Artist ?
+        Task<bool> ApprovedArtistAsync(string id);
 
-        Task<bool> RefuseArtist(string id, string message);
+        Task<bool> RefuseArtistAsync(string id, string message);
 
-        Task<bool> SetSocial(string artistId, SocialServiceModel socialServiceModel);
+        Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel);
 
-        Task<SocialServiceModel> GetSocial(string artistId);
+        Task<SocialServiceModel> GetSocialAsync(string artistId);
 
-        Task<SocialServiceModel> EditSocial(string artistId, SocialServiceModel socialServiceModel);
+        Task<SocialServiceModel> EditSocialAsync(string artistId, SocialServiceModel socialServiceModel);
 
-        Task<bool> SetPerformence(string artistId, Performence performence);
+        Task<bool> SetPerformenceAsync(string artistId, Performence performence);
 
         IEnumerable<TViewModel> GetAllPerformence<TViewModel>(string artistId);
     }

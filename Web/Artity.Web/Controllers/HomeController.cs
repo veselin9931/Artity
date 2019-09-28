@@ -46,7 +46,7 @@
 
                 var user = this.userService.GetApplicationUserByName(currentUsername);
 
-                var viewModel = await this.artistService.GetArtist(user.ArtistId).To<ArtistDashboardViewModel>().FirstAsync();
+                var viewModel = await this.artistService.GetArtistAsync<ArtistDashboardViewModel>(user.ArtistId);
 
                 var artistOrders = this.orderService
                     .AllOrdersInStatus<ArtistOrdersViewModel>(user.ArtistId, Data.Models.Enums.OrderStatus.Sent);
