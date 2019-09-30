@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
-
-namespace Artity.Web.Hubs
+﻿namespace Artity.Web.Hubs
 {
+    using Microsoft.AspNetCore.SignalR;
+
     public class NotifyHub : Hub
     {
 
