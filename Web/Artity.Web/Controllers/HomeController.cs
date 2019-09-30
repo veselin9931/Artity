@@ -10,8 +10,12 @@
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Threading.Tasks;
 
+    using Areas.Administration.Controllers;
+
     using Artity.Web.ViewModels.Order;
     using Artity.Web.ViewModels.Offert;
+
+    using Extensions;
 
     using Services.Data.Artists;
     using Services.Data.Offert;
@@ -59,11 +63,11 @@
             }
             else if (this.User.IsInRole(GlobalConstants.UserRoleName))
             {
-                return this.RedirectToAction("All", "Artist");
+                return this.RedirectTo<ArtistController>(x => x.All());
             }
             else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return this.RedirectToAction(GlobalConstants.Index, GlobalConstants.Dashboard, new { area = GlobalConstants.AdminArea});
+                return this.RedirectTo<DashboardController>(x => x.Index());
             }
 
             return this.View();

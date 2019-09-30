@@ -37,20 +37,7 @@
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
-            Account cloudinaryCredentials = new Account(
-              this.configuration["Cloudinary:CloudName"],
-              this.configuration["Cloudinary:ApiKey"],
-              this.configuration["Cloudinary:ApiSecret"]);
-
-            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
-
-            services.AddSingleton(cloudinaryUtility);
-
-            // services.AddAuthentication().AddFacebook(facebookOptions =>
-            // {
-            //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
-            //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
-            // });
+            services.RegisterCloudinary(this.configuration);
 
             services.AddSignalR();
 
@@ -67,21 +54,7 @@
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/ArtistRegister");
                 });
 
-            services.ConfigureApplicationCookie(options =>
-             {
-                 options.LoginPath = "/Identity/Account/Login";
-                 options.LogoutPath = "/Identity/Account/Logout";
-                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-             });
-
-            services
-                .Configure<CookiePolicyOptions>(options =>
-                {
-                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                    options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
-                    options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
-                });
+            services.RegisterCookie();
 
             services.AddSingleton(this.configuration);
 
