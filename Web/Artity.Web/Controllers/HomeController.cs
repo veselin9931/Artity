@@ -1,26 +1,18 @@
 ﻿namespace Artity.Web.Controllers
 {
-    using Artity.Common;
-    using Artity.Services;
-    using Artity.Web.ViewModels.Artist;
-    using Microsoft.AspNetCore.Mvc;
-    using Artity.Services.Mapping;
-    using System.Linq;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.Threading.Tasks;
 
-    using Areas.Administration.Controllers;
-
-    using Artity.Web.ViewModels.Order;
+    using Artity.Common;
+    using Artity.Services.Data.Artists;
+    using Artity.Services.Data.Offert;
+    using Artity.Services.Data.Order;
+    using Artity.Services.Data.User;
+    using Artity.Web.Areas.Administration.Controllers;
+    using Artity.Web.Extensions;
+    using Artity.Web.ViewModels.Artist;
     using Artity.Web.ViewModels.Offert;
-
-    using Extensions;
-
-    using Services.Data.Artists;
-    using Services.Data.Offert;
-    using Services.Data.Order;
-    using Services.Data.User;
+    using Artity.Web.ViewModels.Order;
+    using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
