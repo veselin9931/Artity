@@ -37,8 +37,8 @@
             var artists = await this.artistService
                 .GetAllArtistsAsync<ArtistAllViewModel>(true);
 
-            var categories = this.categoryService
-                .GetAllCategories();
+            var categories = await this.categoryService
+                .GetAllCategoriesNamesAsync();
 
             var artitView = new ArtistViewModel()
             {
@@ -55,8 +55,8 @@
             var artists = await this.artistService
                 .GetAllArtistsFromAsync<ArtistAllViewModel>(category);
 
-            var categories = this.categoryService
-                .GetAllCategories();
+            var categories = await this.categoryService
+                .GetAllCategoriesNamesAsync();
 
             var artitView = new ArtistViewModel()
             {

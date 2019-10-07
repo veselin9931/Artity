@@ -30,7 +30,7 @@
         [Required]
         public OrderType Type { get; set; }
 
-        [Required]   
+        [Required]
         public OrderStatus Status { get; set; }
 
         public string Place { get; set; }

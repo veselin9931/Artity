@@ -92,7 +92,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
                 var artist = new Artist()
                 {
                     AboutMe = this.Input.AboutMe,
-                    CategoryId = this.categoryService.GetCategoryId(this.Input.Category),
+                    CategoryId = await this.categoryService.GetCategoryIdAsync(this.Input.Category),
                     Nikname = this.Input.Nikname,
                     WorkNumber = this.Input.WorkNumber,
 
@@ -162,7 +162,7 @@ namespace Artity.Web.Areas.Identity.Pages.Account
             this.service = service;
         }
 
-        public List<string> Categories => this.service.GetAllCategories().ToList();
+        public List<string> Categories => this.service.GetAllCategoriesNamesAsync().GetAwaiter().GetResult().ToList();
 
     }
 }

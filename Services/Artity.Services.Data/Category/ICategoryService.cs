@@ -1,11 +1,12 @@
 ﻿namespace Artity.Services.Data.Category
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICategoryService
     {
-        IList<string> GetAllCategories();
+        Task<IList<string>> GetAllCategoriesNamesAsync();
 
-        string GetCategoryId(string name);
+        Task<string> GetCategoryIdAsync(string name);
     }
 }

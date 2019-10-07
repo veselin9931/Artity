@@ -78,9 +78,8 @@ namespace Artity.Web.Controllers
 
         [HttpGet]
         [Route("Offert/Edit/{offertId}")]
-        public async Task<IActionResult> Edit( [FromRoute]string offertId)
+        public async Task<IActionResult> Edit([FromRoute]string offertId)
         {
-
             var types = this.offertService.GetAllOffertTypes().MapTo<OffertTypeInputModel[]>();
 
             var user = this.userService.GetApplicationUserByName(this.User.Identity.Name);

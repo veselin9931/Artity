@@ -61,7 +61,6 @@
         {
             try
             {
-
                 bool result = await this.performenceService.ApprovedPerformence(id);
                 var viewModel = new IndexViewModel
                 {

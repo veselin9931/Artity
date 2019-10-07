@@ -31,7 +31,7 @@
 
         public async Task<string> AddPictureToDb(PictureInputModel picture)
         {
-            //TODO: Refactor this;
+            // TODO: Refactor this;
             string picTransform = @"/$w_300,$h_200,$ar_1.45/w_$w,ar_$ar,c_fill,g_face";
             var pic = new Picture { Link = picture.Link.Insert(46, picTransform), Description = picture.Description, Title = picture.Title, UploadDate = DateTime.UtcNow };
             await this.context.AddAsync(pic);

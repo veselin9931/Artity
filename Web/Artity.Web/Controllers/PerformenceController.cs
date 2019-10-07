@@ -32,8 +32,8 @@
             var performences = this.performenceService
                 .GetAll<PerformenceAllViewModel>(true);
 
-            var categories = this.categoryService
-                .GetAllCategories();
+            var categories = await this.categoryService
+                .GetAllCategoriesNamesAsync();
 
             var artitView = new PerformenceViewModel()
             {
@@ -73,7 +73,5 @@
         {
             return this.Ok();
         }
-
-
     }
 }
