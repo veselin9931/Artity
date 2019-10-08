@@ -1,128 +1,74 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:image" content="https://res.cloudinary.com/artity/image/upload/v1564323993/profile_images/s541q0zltgugxnhmg3pu.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="1024">
     <title>@this.ViewData["Title"] - Artity</title>
 
     <environment names="Development">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/freelancer.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true">
-
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/freelancer.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" asp-append-version="true">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
-<body class="page-section-heading pt-3">
-    <partial name="NavigationBar"/>
-    <header></header>
-    <div class="container col pt-3">
-        <div class="container col pt-5">
-
-            <main role="main" class="pt-5 pb-2 ">
-                @this.RenderBody()
-            </main>
-        </div>
-    </div>
-
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-
-                <!-- Footer Location -->
-                <!-- Footer Social Icons -->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Around the Web</h4>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-facebook-f"></i>
-                    </a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-twitter"></i>
-                    </a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-linkedin-in"></i>
-                    </a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-dribbble"></i>
-                    </a>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Artity</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
                 </div>
-
-                <!-- Footer About Text -->
-                <div class="col-lg-4">
-                    <h4 class="text-uppercase mb-4">About Artity</h4>
-                    <p class="lead mb-0">
-                        ARTITY is a platform for artist booking. It aims to make it easier for the artists to put up their personal projects and help them express themselves.
-                    </p>
-                </div>
-
             </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+    </div>
+    
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Artity - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
-    <!-- Copyright Section -->
-    <section class="copyright py-4 text-center text-white">
-        <div class="container">
-            <small>Copyright &copy;Artity 2019</small>
-        </div>
-    </section>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-to-top d-lg-none position-fixed ">
-        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
-
-    <partial name="_CookieConsentPartial" />
-
     <environment names="Development">
-        <script src="~/vendor/jquery/jquery.js" asp-append-version="true"></script>
-        <script src="~/vendor/bootstrap/js/bootstrap.bundle.js" asp-append-version="true"></script>
-        <script src="~/vendor/jquery-easing/jquery.easing.js" asp-append-version="true"></script>
-        <script src="~/js/jqBootstrapValidation.js" asp-append-version="true"></script>
-        <script src="~/js/contact_me.js" asp-append-version="true"></script>
-        <script src="~/js/freelancer.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script src="~/js/rate.js" asp-append-version="true"></script>
-        <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
-        <script src="~/js/notify.js" asp-append-version="true"></script>
-        <script src="~/lib/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
     </environment>
-
     <environment names="Staging,Production">
-        <script src="~/js/notify.js" asp-append-version="true"></script>
-        <script src="~/vendor/jquery/jquery.js" asp-append-version="true"></script>
-        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
-        <script src="~/vendor/jquery-easing/jquery.easing.js" asp-append-version="true"></script>
-        <script src="~/js/jqBootstrapValidation.js" asp-append-version="true"></script>
-        <script src="~/js/contact_me.js" asp-append-version="true"></script>
-        <script src="~/js/freelancer.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
-        <script src="~/lib/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)
 </body>
-
 </html>

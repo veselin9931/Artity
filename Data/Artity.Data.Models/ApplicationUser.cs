@@ -5,7 +5,7 @@ namespace Artity.Data.Models
     using System.Collections.Generic;
 
     using Artity.Data.Common.Models;
-    using Artity.Data.Models.Enums;
+
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
@@ -16,7 +16,6 @@ namespace Artity.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.Orders = new List<Order>();
         }
 
         // Audit info
@@ -34,20 +33,5 @@ namespace Artity.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
-
-        public UserType UserType { get; set; }
-
-        public string ArtistId { get; set; }
-
-        public virtual Artist Artist { get; set; }
-
-        public string PofilePictureId { get; set; }
-
-        public virtual Picture PofilePicture { get; set; }
-
-        public virtual IList<Order> Orders { get; set; }
-
-        public bool FirstLogin { get; set; } = false;
-
     }
 }

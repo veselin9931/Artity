@@ -9,13 +9,6 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/css/bootstrap.bundle.min.js",
-    // An array of relative input file paths. Globbing patterns supported
-    "inputFiles": [
-      "wwwroot/js/bootstrap.bundle.js"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"

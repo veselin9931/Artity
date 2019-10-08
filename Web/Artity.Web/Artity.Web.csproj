@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-Artity-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
+	<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -13,27 +14,15 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
-    <Content Remove="wwwroot\vendor\bootstrap\js\bootstrap.min.js.map" />
-  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-
-    <PackageReference Include="CloudinaryDotNet" Version="1.8.0" />
-    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.41.1.1727" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
-    <!--<PackageReference Include="Microsoft.AspNetCore.App" />-->
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.76" />
-    <PackageReference Include="Nunit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Sendgrid" Version="9.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.48" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -49,189 +38,4 @@
     <ProjectReference Include="..\Artity.Web.Infrastructure\Artity.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\ProfilePicture\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\font-awesome\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\js\contact_me.js" />
-    <None Include="wwwroot\js\contact_me.min.js" />
-    <None Include="wwwroot\js\freelancer.js" />
-    <None Include="wwwroot\js\freelancer.min.js" />
-    <None Include="wwwroot\js\jqBootstrapValidation.js" />
-    <None Include="wwwroot\js\jqBootstrapValidation.min.js" />
-    <None Include="wwwroot\js\site.js" />
-    <None Include="wwwroot\js\site.min.js" />
-    <None Include="wwwroot\scss\base\_page.scss" />
-    <None Include="wwwroot\scss\base\_variables.scss" />
-    <None Include="wwwroot\scss\components\_buttons.scss" />
-    <None Include="wwwroot\scss\components\_divider.scss" />
-    <None Include="wwwroot\scss\freelancer.scss" />
-    <None Include="wwwroot\scss\layout\_contact.scss" />
-    <None Include="wwwroot\scss\layout\_footer.scss" />
-    <None Include="wwwroot\scss\layout\_masthead.scss" />
-    <None Include="wwwroot\scss\layout\_navbar.scss" />
-    <None Include="wwwroot\scss\layout\_portfolio.scss" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js.map" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.svg" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.svg" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.woff2" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.svg" />
-    <None Include="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
-    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.compatibility.js" />
-    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.js" />
-    <None Include="wwwroot\vendor\jquery-easing\jquery.easing.min.js" />
-    <None Include="wwwroot\vendor\jquery\jquery.js" />
-    <None Include="wwwroot\vendor\jquery\jquery.min.js" />
-    <None Include="wwwroot\vendor\jquery\jquery.min.map" />
-    <None Include="wwwroot\vendor\jquery\jquery.slim.js" />
-    <None Include="wwwroot\vendor\jquery\jquery.slim.min.js" />
-    <None Include="wwwroot\vendor\jquery\jquery.slim.min.map" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\img\theme\index.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.bundle.js.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.bundle.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.js.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\bootstrap\js\bootstrap.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\all.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\all.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\brands.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\brands.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\fontawesome.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\fontawesome.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\regular.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\regular.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\solid.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\solid.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\svg-with-js.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\svg-with-js.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\v4-shims.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\css\v4-shims.min.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.eot">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.svg">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.ttf">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.woff">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-brands-400.woff2">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.eot">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.svg">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.ttf">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.woff">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-regular-400.woff2">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.eot">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.svg">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.ttf">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.woff">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\fontawesome-free\webfonts\fa-solid-900.woff2">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery-easing\jquery.easing.compatibility.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery-easing\jquery.easing.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery-easing\jquery.easing.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.min.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.slim.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.slim.min.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\vendor\jquery\jquery.slim.min.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

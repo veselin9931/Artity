@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    using Artity.Common;
+
     using Artity.Data.Models;
 
     using Microsoft.AspNetCore.Authentication;
@@ -38,30 +38,21 @@
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
-              return  Redirect(GlobalConstants.HomeUrl);
+                this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
             }
-           
-                if (!string.IsNullOrEmpty(this.ErrorMessage))
-                {
-                    this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
-                }
 
-                returnUrl = returnUrl ?? this.Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
 
-                // Clear the existing external cookie to ensure a clean login process
-                await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            // Clear the existing external cookie to ensure a clean login process
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-                this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-                this.ReturnUrl = returnUrl;
-                return this.Page();
-    
-
-            
+            this.ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -72,7 +63,7 @@
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this.signInManager.PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: true);
+                var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
@@ -103,7 +94,8 @@
         public class InputModel
         {
             [Required]
-            public string Username { get; set; }
+            [EmailAddress]
+            public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]

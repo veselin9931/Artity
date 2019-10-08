@@ -5,17 +5,16 @@
     using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
-    using Artity.Common;
+
     using Artity.Services.Messaging.SendGrid;
 
     using Microsoft.AspNetCore.Identity.UI.Services;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
     using Newtonsoft.Json;
 
     // Documentation: https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html
-    public class SendGridEmailSender : IEmailSender, ISendGrid
+    public class SendGridEmailSender : IEmailSender
     {
         private const string AuthenticationScheme = "Bearer";
         private const string BaseUrl = "https://api.sendgrid.com/v3/";
@@ -25,42 +24,36 @@
         private readonly string fromName;
         private readonly HttpClient httpClient;
         private readonly ILogger logger;
-        private readonly IConfiguration configuration;
 
-        public SendGridEmailSender(ILoggerFactory loggerFactory, IConfiguration configuration)
+        public SendGridEmailSender(ILoggerFactory loggerFactory, string apiKey, string fromAddress, string fromName)
         {
-            this.configuration = configuration;
-
-            var key = configuration["SendGrid:ApiKey"];
-            this.fromAddress = configuration["SendGrid:AdressFrom"];
-            this.fromName = GlobalConstants.AdministratorRoleName;
-
-
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
             }
 
-            if (string.IsNullOrWhiteSpace(key))
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
-                throw new ArgumentOutOfRangeException(nameof(key));
+                throw new ArgumentOutOfRangeException(nameof(apiKey));
             }
 
-            if (string.IsNullOrWhiteSpace(this.fromAddress))
+            if (string.IsNullOrWhiteSpace(fromAddress))
             {
-                throw new ArgumentOutOfRangeException(nameof(this.fromAddress));
+                throw new ArgumentOutOfRangeException(nameof(fromAddress));
             }
 
-            if (string.IsNullOrWhiteSpace(this.fromName))
+            if (string.IsNullOrWhiteSpace(fromName))
             {
-                throw new ArgumentOutOfRangeException(nameof(this.fromName));
+                throw new ArgumentOutOfRangeException(nameof(fromName));
             }
 
             this.logger = loggerFactory.CreateLogger<SendGridEmailSender>();
             this.httpClient = new HttpClient();
             this.httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue(AuthenticationScheme, key);
+                new AuthenticationHeaderValue(AuthenticationScheme, apiKey);
             this.httpClient.BaseAddress = new Uri(BaseUrl);
+            this.fromAddress = fromAddress;
+            this.fromName = fromName;
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
