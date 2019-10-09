@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
-    internal class RolesSeeder : ISeeder
+    public class RolesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

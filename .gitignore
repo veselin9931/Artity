@@ -349,3 +349,4 @@ MigrationBackup/
 appsettings.Production.json
 *.min.css
 *.min.js
+/Web/Artity.Web/appsettings.json
