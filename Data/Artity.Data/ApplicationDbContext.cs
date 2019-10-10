@@ -11,6 +11,7 @@
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -24,7 +25,23 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Offert> Offerts { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Performence> Performences { get; set; }
+
+        public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Song> Songs { get; set; }
+
+        public DbSet<Social> Socials { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -45,10 +62,55 @@
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseLazyLoadingProxies()
+            //    .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning));
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
+
+            builder.Entity<Social>()
+              .HasKey(p => p.Id);
+
+            builder.Entity<Artist>()
+                .Property(p => p.AboutMe)
+                .HasMaxLength(2500);
+
+            builder.Entity<Artist>()
+                .HasMany(p => p.Performences)
+                .WithOne(a => a.Artist);
+
+            builder.Entity<Artist>()
+                .HasOne(p => p.Social)
+                ;
+
+            builder.Entity<Artist>()
+                .HasMany(p => p.Offerts)
+                .WithOne(p => p.Artist);
+
+            builder.Entity<Artist>()
+                .HasIndex(u => u.Nikname)
+                .IsUnique();
+
+            builder.Entity<Rating>()
+              .HasOne(a => a.User);
+
+            builder.Entity<ApplicationUser>()
+            .Property(p => p.UserType).IsRequired();
+
+            builder.Entity<ApplicationUser>()
+           .HasMany(a => a.Orders)
+           .WithOne(t => t.User);
+
+            builder.Entity<Performence>()
+            .HasMany(a => a.Pictures);
 
             ConfigureUserIdentityRelations(builder);
 
@@ -96,6 +158,18 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Artist>()
+                .Property(p => p.AboutMe)
+                .HasMaxLength(512);
+
+            builder.Entity<Artist>()
+                .Property(p => p.CategoryId)
+                .IsRequired();
+
+            builder.Entity<Artist>()
+               .Property(p => p.WorkNumber)
+               .IsRequired();
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
@@ -125,5 +199,7 @@
                 }
             }
         }
+
+
     }
 }

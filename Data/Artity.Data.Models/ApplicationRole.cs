@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace Artity.Data.Models
+﻿namespace Artity.Data.Models
 {
     using System;
 

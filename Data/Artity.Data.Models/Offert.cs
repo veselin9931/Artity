@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using Artity.Common;
     using Artity.Data.Common.Models;
 
     using Artity.Data.Models.Enums;
@@ -33,8 +32,6 @@
         [Required]
         public string Town { get; set; }
 
-        [Required(ErrorMessage = OffertConstants.PhoneIsRequired)]
-        [RegularExpression(OffertConstants.PhoneRegex, ErrorMessage = OffertConstants.PleaseEnterValidPhone)]
         public string Tel { get; set; }
 
         public string Message { get; set; }
