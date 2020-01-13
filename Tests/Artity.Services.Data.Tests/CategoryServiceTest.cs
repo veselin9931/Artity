@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NUnit.Framework;
 
 namespace Artity.Services.Data.Tests
 {
-    class CategoryServiceTest
+    [TestFixture]
+    public class CategoryServiceTest
     {
     }
 }

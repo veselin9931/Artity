@@ -1,10 +1,18 @@
-﻿using System;
+﻿using Artity.Data.Common.Repositories;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Artity.Services.Data.Tests
 {
-    class BaseTest
+
+    [TestFixture]
+    public abstract class BaseServiceTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+        }
     }
 }
