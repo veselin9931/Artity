@@ -1,47 +1,61 @@
 ﻿namespace Artity.Services.Data.Tests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Web.ViewModels;
-    using Microsoft.EntityFrameworkCore;
     using Moq;
     using NUnit.Framework;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class ArtistServiceTests
     {
         private IArtistService artistService;
+
+        private IList<Artist> artists;
 
         [SetUp]
         public void Init()
         {
             var mockArtistRepository = new Mock<IDeletableEntityRepository<Artist>>();
 
-            var artist = new List<Artist>
+            this.artists = new List<Artist>
             {
                 new Artist() { Nikname = "aaa"},
                 new Artist() { Nikname = "bbb"},
                 new Artist() { Nikname = "ccc"},
             };
-
-            mockArtistRepository.Setup(mr => mr.All()).Returns(artist.AsQueryable());
-
+            mockArtistRepository.Setup(mr => mr.All()).Returns(this.artists.AsQueryable());
             this.artistService = new ArtistService(mockArtistRepository.Object);
         }
 
         [Test]
-        public void GetAllArtistsShouldGetAllNotDeletedArtistsInRepository()
+        public async void CreateArtistWithInvalidValidDataShouldCreateAndAddAristInRepository()
         {
-            var artist = new List<Artist>
-            {
-                new Artist() { Nikname = "aaa"},
-                new Artist() { Nikname = "bbb"},
-                new Artist() { Nikname = "ccc"},
-            };
+            var actualResult = await this.artistService.CreateNewArtist("ddd", "ddd", "ddd", "ddd", "ddd", "ddd");
 
-            this.artistService.GetAllArtists<AllArtistViewModel>();
+            var artist = this.artists.FirstOrDefault(a => a.Id == actualResult);
+            Assert.IsNull(artist);
+        }
 
+        [Test]
+        public async void CreateArtistWithValidDataShouldCreateAndAddAristInRepository()
+        {
+            var actualResult = await this.artistService.CreateNewArtist("ddd", "ddd", "ddd", "ddd", "ddd", "ddd");
+            this.artists.Add(new Artist() { Id = actualResult });
+
+            var artist = this.artists.FirstOrDefault(a => a.Id == actualResult);
+            Assert.IsNotNull(artist);
+        }
+
+        [Test]
+        public void GetAllArtistsShouldGetAllArtistsInRepository()
+        {
+          int actualCountOfArtists = this.artistService.GetAllArtists<AllArtistViewModel>().Count();
+
+          int expectedCountOfArtists = this.artists.Count;
+          Assert.AreEqual(expectedCountOfArtists, actualCountOfArtists);
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Services.Data
+﻿namespace Artity.Services.Data
 {
-    class ICategoryService
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    public interface ICategoryService
     {
+        Task<string> CreateCategory(string name, string pictureId);
+
+        Task<IEnumerable<string>> GetAllCategoriesNamesAsync();
+
+        Task<string> GetCategoryIdAsync(string name);
     }
 }

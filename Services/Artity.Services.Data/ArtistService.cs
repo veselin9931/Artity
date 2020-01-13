@@ -1,12 +1,12 @@
-﻿using Artity.Data.Common.Repositories;
-using Artity.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Artity.Services.Data
+﻿namespace Artity.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Artity.Data.Common.Repositories;
+    using Artity.Data.Models;
+
     public class ArtistService : IArtistService
     {
 
