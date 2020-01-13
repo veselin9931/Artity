@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Web.ViewModels
+﻿namespace Artity.Web.ViewModels
 {
-    class AllArtistViewModel
+    public class AllArtistViewModel
     {
+        public string Name { get; set; }
     }
 }
