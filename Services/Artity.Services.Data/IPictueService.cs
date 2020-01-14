@@ -6,7 +6,9 @@
     {
         Task<string> AddPictureToDb(string title, string description, string link);
 
-        Task<TPictureModel> GetPicture<TPictureModel>(string id);
+        TPictureModel GetPicture<TPictureModel>(string id);
+
+        Task<TPictureModel> UpdatePicture<TPictureModel>(string id);
 
         Task<bool> DeletePicture(string id);
 

@@ -17,7 +17,6 @@
             this.artistRepository = artistRepository;
         }
 
- 
         public Task<bool> AddSocial(string artistId)
         {
             throw new NotImplementedException();

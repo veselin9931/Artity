@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Web.ViewModels;
@@ -31,7 +31,7 @@
         }
 
         [Test]
-        public async void CreateArtistWithInvalidValidDataShouldCreateAndAddAristInRepository()
+        public async Task CreateArtistWithInvalidValidDataShouldCreateAndAddAristInRepository()
         {
             var actualResult = await this.artistService.CreateNewArtist("ddd", "ddd", "ddd", "ddd", "ddd", "ddd");
 
@@ -40,7 +40,7 @@
         }
 
         [Test]
-        public async void CreateArtistWithValidDataShouldCreateAndAddAristInRepository()
+        public async Task CreateArtistWithValidDataShouldCreateAndAddAristInRepository()
         {
             var actualResult = await this.artistService.CreateNewArtist("ddd", "ddd", "ddd", "ddd", "ddd", "ddd");
             this.artists.Add(new Artist() { Id = actualResult });
@@ -50,7 +50,7 @@
         }
 
         [Test]
-        public void GetAllArtistsShouldGetAllArtistsInRepository()
+        public async Task GetAllArtistsShouldGetAllArtistsInRepository()
         {
           int actualCountOfArtists = this.artistService.GetAllArtists<AllArtistViewModel>().Count();
 
