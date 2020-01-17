@@ -3,14 +3,16 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Services.Data.Tests.TestViewModels;
+    using Artity.Tests.ServicesTests;
     using Moq;
     using NUnit.Framework;
 
     [TestFixture]
-    public class PictureServiceTests
+    public class PictureServiceTests : BaseServiceTests
     {
         private IPictueService pictueService;
 
@@ -35,7 +37,7 @@
         [Test]
         public async Task GetPicture_WithInvalidId_ShouldReturnPictureById()
         {
-            var picture =  this.pictueService.GetPicture<PictureTestViewModel>("c");
+            var picture = this.pictueService.GetPicture<PictureTestViewModel>("c");
             Assert.IsNull(picture);
         }
 

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Services.Data.Tests.TestViewModels
+﻿namespace Artity.Services.Data.Tests.TestViewModels
 {
-    class PictureTestViewModel
+    using Artity.Services.Data.ServiceModels;
+    using Artity.Services.Mapping;
+
+    public class PictureTestViewModel :  IMapFrom<PictureServiceModel>
     {
         public string Id { get; set; }
 
