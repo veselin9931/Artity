@@ -6,6 +6,7 @@
 
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
+    using Artity.Services.Data.ServiceModels;
     using Artity.Services.Mapping;
 
     public class PictureService : IPictueService
@@ -45,8 +46,9 @@
                 // TODO: exeption
             }
 
-            var mapObJ = picture.MapTo<TPictureModel>();
-            return mapObJ;
+            var mapObJ = picture.MapTo<PictureServiceModel>();
+
+            return mapObJ.MapTo<TPictureModel>();
         }
 
         public Task<bool> SetArtistPicture(string pictureId, string artistId)

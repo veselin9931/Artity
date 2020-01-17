@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Artity.Data.Common\Artity.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Artity.Data.Models\Artity.Data.Models.csproj" />
+    <ProjectReference Include="..\Artity.Services.Data.ServiceModels\Artity.Services.Data.ServiceModels.csproj" />
     <ProjectReference Include="..\Artity.Services.Mapping\Artity.Services.Mapping.csproj" />
   </ItemGroup>
 
