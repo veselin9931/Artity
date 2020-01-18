@@ -43,6 +43,7 @@
     <ProjectReference Include="..\..\Services\Artity.Services.Mapping\Artity.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\Artity.Services.Messaging\Artity.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\Artity.Services\Artity.Services.csproj" />
+    <ProjectReference Include="..\..\Tests\Artity.Services.Data.Tests\Artity.Services.Data.Tests.csproj" />
     <ProjectReference Include="..\Artity.Web.Infrastructure\Artity.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj" />
   </ItemGroup>
