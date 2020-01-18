@@ -16,9 +16,9 @@
             this.RegisterMappings();
         }
 
-        private void RegisterMappings()
-        {
-            AutoMapperConfig.RegisterMappings(typeof(Picture).GetTypeInfo().Assembly, typeof(PictureServiceModel).GetTypeInfo().Assembly, typeof(PictureTestViewModel).GetTypeInfo().Assembly);
-        }
+        private void RegisterMappings() => AutoMapperConfig.RegisterMappings(
+            typeof(Picture).GetTypeInfo().Assembly,
+            typeof(PictureServiceModel).GetTypeInfo().Assembly,
+            typeof(PictureTestViewModel).GetTypeInfo().Assembly);
     }
 }

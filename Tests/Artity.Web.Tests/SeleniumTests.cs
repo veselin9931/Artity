@@ -1,5 +1,6 @@
 ﻿namespace Artity.Web.Tests
 {
+    using ikvm.runtime;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Remote;

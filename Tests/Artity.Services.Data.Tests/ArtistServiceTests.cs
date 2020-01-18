@@ -3,13 +3,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
-    using Artity.Web.ViewModels;
+    using Artity.Tests.ServicesTests;
+    using global::TestViewModels;
     using Moq;
     using NUnit.Framework;
 
-    public class ArtistServiceTests
+    public class ArtistServiceTests : BaseServiceTests
     {
         private IArtistService artistService;
 
@@ -22,8 +24,8 @@
 
             this.artists = new List<Artist>
             {
-                new Artist() { Nikname = "aaa"},
-                new Artist() { Nikname = "bbb"},
+                new Artist() { Nikname = "aaa" },
+                new Artist() { Nikname = "bbb" },
                 new Artist() { Nikname = "ccc"},
             };
             mockArtistRepository.Setup(mr => mr.All()).Returns(this.artists.AsQueryable());
@@ -50,12 +52,21 @@
         }
 
         [Test]
-        public async Task GetAllArtistsShouldGetAllArtistsInRepository()
+        public void GetAllArtists_Count_ShouldGetAllArtistsCountInRepository()
         {
-          int actualCountOfArtists = this.artistService.GetAllArtists<AllArtistViewModel>().Count();
+            int actualCountOfArtists = this.artistService.GetAllArtists<GetArtistsTestViewModels>().Count();
 
-          int expectedCountOfArtists = this.artists.Count;
-          Assert.AreEqual(expectedCountOfArtists, actualCountOfArtists);
+            int expectedCountOfArtists = this.artists.Count;
+            Assert.AreEqual(expectedCountOfArtists, actualCountOfArtists);
+        }
+
+        [Test]
+        public void GetAllArtists_Equal_ShouldReturnSameObject()
+        {
+            var actualCountOfArtists = this.artistService.GetAllArtists<GetArtistsTestViewModels>().ToList();
+
+            var expectedCountOfArtists = this.artists;
+            Assert.IsTrue(expectedCountOfArtists.FirstOrDefault().Nikname == actualCountOfArtists.FirstOrDefault().Nikname);
         }
     }
 }

@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
+    using Artity.Services.Data.ServiceModels;
+    using Artity.Services.Mapping;
 
     public class ArtistService : IArtistService
     {
@@ -27,9 +30,22 @@
             throw new NotImplementedException();
         }
 
-        public Task<string> CreateNewArtist(string nickname, string workNumber, string description, string aboutMe, string categoryId, string profilePictureId)
+        public async Task<string> CreateNewArtist(string nickname, string workNumber, string description, string aboutMe, string categoryId, string profilePictureId)
         {
-            throw new NotImplementedException();
+            var artist = new Artist()
+            {
+                Nikname = nickname,
+                WorkNumber = workNumber,
+                Description = description,
+                AboutMe = aboutMe,
+                CategoryId = categoryId,
+                ProfilePictureId = profilePictureId,
+            };
+
+            var result = this.artistRepository.AddAsync(artist);
+            await this.artistRepository.SaveChangesAsync();
+
+            return artist.Id;
         }
 
         public Task<TViewModel> EditSocial<TViewModel>(string artistId)
@@ -39,7 +55,8 @@
 
         public IEnumerable<TViewModel> GetAllArtists<TViewModel>()
         {
-            throw new NotImplementedException();
+            var allArtistsInServiceModel = this.artistRepository.All().To<ArtistServiceModel>();
+            return allArtistsInServiceModel.To<TViewModel>();
         }
 
         public IEnumerable<TViewModel> GetAllArtists<TViewModel>(bool isApproved)

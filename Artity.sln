@@ -35,13 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Tests\Sandbox\Sa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artity.Services.Data.Tests", "Tests\Artity.Services.Data.Tests\Artity.Services.Data.Tests.csproj", "{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artity.Web.Tests", "Tests\Artity.Web.Tests\Artity.Web.Tests.csproj", "{3EE06C6E-C8F3-418A-A309-8AC81976A074}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artity.Web.ViewModels", "Web\Artity.Web.ViewModels\Artity.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artity.Web.InputModels", "Web\Artity.Web.InputModels\Artity.Web.InputModels.csproj", "{7350F453-B211-4D8D-933A-7F731BF2308C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artity.Services.Data.ServiceModels", "Services\Artity.Services.Data.ServiceModels\Artity.Services.Data.ServiceModels.csproj", "{D485BC68-694A-4F75-AA4F-482CC0EC06FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artity.Services.Data.ServiceModels", "Services\Artity.Services.Data.ServiceModels\Artity.Services.Data.ServiceModels.csproj", "{D485BC68-694A-4F75-AA4F-482CC0EC06FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artity.Services.Data.Tests.ViewModels", "TestViewModels\Artity.Services.Data.Tests.ViewModels.csproj", "{50744FD7-DA43-4CDD-B27B-D880619B147F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +97,6 @@ Global
 		{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EE06C6E-C8F3-418A-A309-8AC81976A074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EE06C6E-C8F3-418A-A309-8AC81976A074}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EE06C6E-C8F3-418A-A309-8AC81976A074}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EE06C6E-C8F3-418A-A309-8AC81976A074}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,6 +109,10 @@ Global
 		{D485BC68-694A-4F75-AA4F-482CC0EC06FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D485BC68-694A-4F75-AA4F-482CC0EC06FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D485BC68-694A-4F75-AA4F-482CC0EC06FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50744FD7-DA43-4CDD-B27B-D880619B147F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50744FD7-DA43-4CDD-B27B-D880619B147F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50744FD7-DA43-4CDD-B27B-D880619B147F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50744FD7-DA43-4CDD-B27B-D880619B147F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,10 +129,10 @@ Global
 		{415FD7FA-0453-4FE1-9A29-C6E1D8B45C3D} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
 		{8AB6B92A-0837-4BDE-B950-10BE3FF2B6A8} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
-		{3EE06C6E-C8F3-418A-A309-8AC81976A074} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 		{7350F453-B211-4D8D-933A-7F731BF2308C} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 		{D485BC68-694A-4F75-AA4F-482CC0EC06FC} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
+		{50744FD7-DA43-4CDD-B27B-D880619B147F} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}

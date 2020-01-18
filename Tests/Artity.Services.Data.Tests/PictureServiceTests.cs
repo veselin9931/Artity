@@ -52,10 +52,11 @@
         {
             return new List<Picture>()
             {
-                new Picture() { Id = "v", Title = "Vegata", Description = "Na Vegata snimkata", Link = "www.Vegata.com"},
-                new Picture() { Id = "d" ,Title = "Dena", Description = "Na Dena snimkata", Link = "www.Dena.com"},
+                new Picture() { Id = "v", Title = "Vegata", Description = "Na Vegata snimkata", Link = "www.Vegata.com" },
+                new Picture() { Id = "d" ,Title = "Dena", Description = "Na Dena snimkata", Link = "www.Dena.com" },
                 new Picture() { Id = "a", Title = "Alex", Description = "Na Alex snimkata", Link = "www.Alex.com" },
             }.AsQueryable();
         }
     }
 }
+ 
