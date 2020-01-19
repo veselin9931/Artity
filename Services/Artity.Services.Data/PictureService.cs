@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Artity.Common.ExeptionMessages;
     using Artity.Data.Common.Repositories;
     using Artity.Data.Models;
     using Artity.Services.Data.ServiceModels;
@@ -34,7 +34,7 @@
             {
                 return default;
 
-                // TODO: exeption
+                throw new ArgumentException(PictureExeptionMessages.)
             }
 
             var picture = this.pictureRepository.All().FirstOrDefault(p => p.Id == id);
@@ -43,7 +43,7 @@
             {
                 return default;
 
-                // TODO: exeption
+              // TODO: exeption
             }
 
             var mapObJ = picture.MapTo<PictureServiceModel>();
