@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Artity.Common.ExeptionMessages
+﻿namespace Artity.Common.ExeptionMessages
 {
-    class PictureExeptionMessages
+    public static class PictureExeptionMessages
     {
+       public const string GetPictureNullId = "Picture id is null!";
+
+       public const string GetPictureId = "We do not find picture with ID: {0} .";
     }
 }
