@@ -35,19 +35,6 @@
             this.socialService = socialService;
         }
 
-        public async Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel)
-        {
-            var artist = this.GetArtistById(artistId);
-
-            await this.socialService.AddSocial(socialServiceModel);
-            artist.Social = this.socialService.MapTo<Social>(); // TODO: Test map
-
-            this.artistRepository.Update(artist);
-            var result = await this.artistRepository.SaveChangesAsync();
-
-            return result > 0;
-        }
-
         public async Task<bool> ApprovedArtistAsync(string id)
         {
             var approvedArtist = this.GetArtistById(id);
@@ -156,6 +143,17 @@
               .Performences
               .AsQueryable()
               .To<TViewModel>().ToList();
+        }
+
+        public async Task<bool> UpdateSocialAsync(ArtistSocialServiceModel artist)
+        {
+            var detectedArtist = this.GetArtistById(artist.Id);
+
+            detectedArtist.Social = artist.Social;
+
+            var result = await this.artistRepository.SaveChangesAsync();
+
+            return result > 0 ? true : false;
         }
 
         private Artist GetArtistById(string artistId)

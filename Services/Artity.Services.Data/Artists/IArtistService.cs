@@ -25,8 +25,6 @@
 
         Task<bool> RefuseArtistAsync(string id, string message);
 
-        Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel);
-
         Task<SocialServiceModel> GetSocialAsync(string artistId);
 
         Task<SocialServiceModel> EditSocialAsync(string artistId, SocialServiceModel socialServiceModel);
@@ -34,5 +32,8 @@
         Task<bool> SetPerformenceAsync(string artistId, Performence performence);
 
         IEnumerable<TViewModel> GetAllPerformence<TViewModel>(string artistId);
+
+        Task<bool> UpdateSocialAsync(ArtistSocialServiceModel artist);
+
     }
 }

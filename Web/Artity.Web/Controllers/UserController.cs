@@ -1,30 +1,19 @@
 ﻿namespace Artity.Web.Controllers
 {
-    using System;
-
-    using System.Collections.Generic;
-
-    using System.Linq;
-
     using System.Threading.Tasks;
 
     using Artity.Common;
-    using Artity.Services;
-    using Artity.Web.ViewModels.Offert;
+    using Artity.Services.Data.Offert;
+    using Artity.Services.Data.Order;
+    using Artity.Services.Data.User;
     using Artity.Web.ViewModels.Order;
     using Microsoft.AspNetCore.Authorization;
-
     using Microsoft.AspNetCore.Mvc;
-
-    using Services.Data.Offert;
-    using Services.Data.Order;
-    using Services.Data.User;
 
     public class UserController : BaseController
     {
         private readonly IOrderService orderService;
         private readonly IUserService userService;
-        private IOffertService offertService;
 
         public UserController(IOrderService orderService, IUserService userService)
         {
