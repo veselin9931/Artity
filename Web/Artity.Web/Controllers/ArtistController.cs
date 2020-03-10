@@ -7,6 +7,7 @@
     using Artity.Services.Data.Artists;
     using Artity.Services.Data.Category;
     using Artity.Services.Data.Order;
+    using Artity.Services.Data.Social;
     using Artity.Services.Mapping;
     using Artity.Services.ServiceModels;
     using Artity.Web.InputModels.Social;
@@ -20,15 +21,19 @@
         private readonly IArtistService artistService;
         private readonly ICategoryService categoryService;
         private readonly IOrderService orderService;
+        private readonly ISocialService socialService;
 
         public ArtistController(
             IArtistService artistService,
             ICategoryService categoryService,
-            IOrderService orderService)
+            IOrderService orderService,
+            ISocialService socialService
+            )
         {
             this.artistService = artistService;
             this.categoryService = categoryService;
             this.orderService = orderService;
+            this.socialService = socialService;
         }
 
         [HttpGet(Name = "/All")]
@@ -114,8 +119,7 @@
         {
             try
             {
-                bool result = await this.artistService
-                     .SetSocialAsync(id, input);
+                bool result = await this.socialService.SetSocialAsync(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
             }
@@ -131,8 +135,7 @@
         [Route("Artist/AddSocial/{id}")]
         public async Task<IActionResult> EditSocial(string id, SocialServiceModel input)
         {
-                bool result = await this.artistService
-                     .SetSocialAsync(id, input);
+                bool result = await this.socialService.SetSocialAsync(id, input);
 
                 return this.Redirect(GlobalConstants.AccountMenager);
         }

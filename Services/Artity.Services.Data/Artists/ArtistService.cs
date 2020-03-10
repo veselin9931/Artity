@@ -19,20 +19,16 @@
         private readonly IDeletableEntityRepository<Artist> artistRepository;
         private readonly ISendGrid emailSender;
         private readonly IUserService userService;
-        private readonly ISocialService socialService;
 
         public ArtistService(
             IDeletableEntityRepository<Artist> artistRepository,
             ISendGrid emailSender,
-            IUserService userService,
-            ISocialService socialService
+            IUserService userService
             )
         {
             this.artistRepository = artistRepository;
             this.emailSender = emailSender;
             this.userService = userService;
-            this.socialService = socialService;
-            this.socialService = socialService;
         }
 
         public async Task<bool> ApprovedArtistAsync(string id)
@@ -99,11 +95,6 @@
         public async Task<SocialServiceModel> GetSocialAsync(string artistId)
         {
             var social = this.GetArtistById(artistId).Social;
-
-            if (social == null)
-            {
-                return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
-            }
 
             return new SocialServiceModel() { Facebook = social.Facebook, WebSite = social.WebSite, Youtube = social.Youtube };
         }

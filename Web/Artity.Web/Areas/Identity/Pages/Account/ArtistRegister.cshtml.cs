@@ -15,7 +15,6 @@ namespace Artity.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.Net.Http.Headers;
     using Artity.Web.InputModels.Picture;
 
     using Services.Data.Category;
@@ -89,15 +88,17 @@ namespace Artity.Web.Areas.Identity.Pages.Account
 
                 var user = this.userService.GetApplicationUserByName(name);
 
+                var social = new Social() { WebSite = string.Empty, Facebook = string.Empty, Youtube = string.Empty };
+
                 var artist = new Artist()
                 {
                     AboutMe = this.Input.AboutMe,
                     CategoryId = await this.categoryService.GetCategoryIdAsync(this.Input.Category),
                     Nikname = this.Input.Nikname,
                     WorkNumber = this.Input.WorkNumber,
-
+                    Social = social,
+                    SocialId = social.Id,
                 };
-
 
                 this.userService.AddArtistSettings(user, artist);
 

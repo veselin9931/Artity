@@ -8,6 +8,6 @@
     {
         Task<bool> AddSocial(SocialServiceModel socialServiceModel);
 
-        Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel)
+        Task<bool> SetSocialAsync(string artistId, SocialServiceModel socialServiceModel);
     }
 }
